@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  gallery_id: 1
+  artist: MyString
+  filename: MyString
+  caption: MyString
+
+two:
+  gallery_id: 1
+  artist: MyString
+  filename: MyString
+  caption: MyString

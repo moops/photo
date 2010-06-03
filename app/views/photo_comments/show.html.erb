@@ -1,0 +1,13 @@
+<p>
+  <b>Photo:</b>
+  <%=h @photo_comment.photo_id %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%=h @photo_comment.comment %>
+</p>
+
+
+<%= link_to 'Edit', edit_photo_comment_path(@photo_comment) %> |
+<%= link_to 'Back', photo_comments_path %>

@@ -1,0 +1,55 @@
+<div class="box" id="gallery_index_recent">
+  <div class="boxhead">recent public galleries</div>
+  <div class="boxcontent">
+    <% if @recent_galleries and !@recent_galleries.empty? %>
+      <ul>
+        <% for g in @recent_galleries %>
+          <li>
+            <%= link_to(g.name, g) %><br/>
+            <%= g.photo_count %> photos :: 
+            <%= g.gallery_on.strftime("%b %d, %Y") %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      none
+    <% end %>
+  </div>
+</div>
+
+<div class="box" id="gallery_index_private">
+  <div class="boxhead">view a private gallery</div>
+  <div class="boxcontent">
+    <% form_tag({:action => 'search_private'}) do %>
+      key <%= text_field('gallery','private_key',:size => 25) %>
+      <%= submit_tag('view') %>
+    <% end %>
+  </div>
+</div>
+
+<div class="box" id="gallery_index_search">
+  <div class="boxhead">find a public gallery</div>
+  <div class="boxcontent">
+    <% form_tag({:action => 'search_public'}) do %>
+      <table cellspacing="0" cellpadding="2" border="0">
+        <tr>
+          <td>name</td>
+          <td><%= text_field('gallery','name',:size => 25) %></td></tr>
+        <tr>
+          <td>date</td>
+          <td><%= calendar('gallery','gallery_on',false)%></td></tr>
+      </table>
+      <%= submit_tag('find') %>
+    <% end %>
+    <% if @search_results and !@search_results.empty? %>
+      <ul>
+        <% for r in @search_results %>
+          <li><%= link_to(r.name, r) %> 
+             (<%= r.code %>) :: 
+              <%= r.gallery_on.strftime("%b %d, %Y") %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>
+
+<br class="clear"/>

@@ -1,0 +1,254 @@
+body {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 76%;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-style: normal;
+  text-decoration: none;  
+  font-weight: normal;
+  color: #555;
+}
+
+a           { color: #33f; text-decoration: none; font-family: verdana; }
+a:visited   { color: #33f; text-decoration: none; font-family: verdana; }
+a:active    { color: #33f; text-decoration: none; font-family: verdana; }
+a:hover     { color: #33f; text-decoration: underline; font-family: verdana; }
+
+textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
+label       { text-align: right; }
+
+/************************************************
+ all pages
+ ************************************************
+ */
+ 
+#container { 
+  width:90%;  
+  margin-left:auto; 
+  margin-right:auto;
+  margin-bottom:20px; 
+} 
+ 
+#header {
+}
+ 
+#content {
+}
+
+/************************************************
+ index
+ ************************************************
+ */
+#gallery_index_recent {
+  margin:20px 20px 0px 0px;
+  float:left;
+  width:40%;
+}
+
+#gallery_index_search {
+  margin:20px 0px 0px 0px;
+  float:left;
+  width:40%;
+}
+
+#gallery_index_private {
+  margin:20px 20px 0px 0px;
+  float:left;
+  width:40%;
+}
+
+/************************************************
+ gallery
+ ************************************************
+ */
+#gallery_info {
+  margin:0px 0px 30px 0px;
+  float:left;
+}
+
+#gallery_info .name {
+  color:#333;
+  font-weight:bold;
+  font-size:2em;
+}
+
+#gallery_info .info {
+  color:#666;
+  font-weight:bold;
+  font-size:1.5em;
+}
+
+#gallery_options {
+  float:right;
+}
+
+#photo_container {
+}
+
+#photo {
+  float:left;
+}
+
+#photo img {
+  border:2px solid #666;
+  margin-bottom:8px;
+}
+
+#photo_nav {
+	text-align:center;
+}
+
+#previous {
+	float:left;
+}
+
+#photo_info_container {
+  padding-left:20px;
+  float:left;
+}
+
+#exif_details {
+}
+
+#comments {
+  padding-top:15px;
+  width:240px;
+  text-align:left;
+}
+
+#next {
+	float:right;
+}
+
+#thumbnails {
+  height:165px;
+  width:100%;
+  float:left;
+  overflow:auto;
+}
+
+#thumbnails td {
+  vertical-align:bottom;
+}
+
+.thumbnail img {
+  padding:0px 2px 0px 2px;
+}
+
+.thumbnail {
+  
+}
+
+#google {
+}
+ 
+#footer {
+  padding-top:25px;
+  clear:both;
+  color:#999;
+}
+
+#footer .left {
+  float:left;
+}
+
+#footer .right {
+  float: right;
+}
+
+
+/************************************************
+ boxes
+ ************************************************
+ */
+
+.box {
+  border: 1px solid #666;
+}
+
+.boxhead {
+  border-bottom: 1px solid #666;
+  background-color: #ddd;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.boxcontent {
+  padding: 10px;
+}
+
+/************************************************
+ miscellaneous
+ ************************************************
+ */
+ 
+ a img {
+	border-width: 0px;
+}
+
+.errorText {
+  font-style: italic;
+  font-weight: bold;
+  color: #a00;
+}
+
+.errorSmallText {
+  font-style: italic;
+  font-weight: bold;
+  font-size: .75em;
+  color: #a00;
+}
+
+.messageText {
+  font-style: italic;
+  font-weight: bold;
+  color: #090;
+}
+
+.clear {
+  clear:both;
+}
+
+td.label {
+  text-align:right;
+}
+
+td.exif_label {
+  text-align:right;
+  font-weight:bold;
+  color:#999;
+}
+
+td.exif_data {
+  text-align:left;
+}
+
+.caption {
+  font-weight:bold;
+  padding-bottom:10px;
+}
+
+.comment {
+}
+
+.comment .date {
+  font-style:italic;
+}
+
+/************************************************
+  forms
+ ************************************************
+ */
+
+img.calIcon {
+	position: absolute;
+	cursor: pointer;
+}
+
+form.main textarea { 
+	width: 300px; 
+}
+
+.label {
+  text-align: right;
+}

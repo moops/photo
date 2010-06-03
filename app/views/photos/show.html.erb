@@ -1,0 +1,23 @@
+<p>
+  <b>Gallery:</b>
+  <%=h @photo.gallery_id %>
+</p>
+
+<p>
+  <b>Artist:</b>
+  <%=h @photo.artist %>
+</p>
+
+<p>
+  <b>Filename:</b>
+  <%=h @photo.filename %>
+</p>
+
+<p>
+  <b>Caption:</b>
+  <%=h @photo.caption %>
+</p>
+
+
+<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Back', photos_path %>

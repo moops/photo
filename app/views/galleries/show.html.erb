@@ -1,0 +1,43 @@
+<div id="gallery_info">
+  <span class="name"><%= @gallery.name %></span>
+  <span class="info">
+    <%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %>
+  </span><br/>
+    <%= link_to('find another gallery', :action => 'index') %>
+</div>
+
+<div id="gallery_options">
+  <% form_tag(:action => 'options') do %>
+    <%= hidden_field_tag('id',@gallery.id) %>
+      <% view_options = "<option value='sequence' #{(session[:gallery_view_mode] == 'sequence' ? 'selected=selected' : '')}>sequence</option><option value='views desc' #{(session[:gallery_view_mode] == 'views desc' ? 'selected=selected' : '')}>most viewed</option><option value='filename' #{(session[:gallery_view_mode] == 'filename' ? 'selected=selected' : '')}>file name</option>" %>
+    <table border="0" cellpadding="0" cellspacing="2">
+          <tr>
+              <td class="label">order by</td>
+              <td><%= select_tag('view_mode',view_options) %>
+              <%= submit_tag('set') %></td></tr>
+      </table>
+  <% end %><br/>
+</div> <!-- end gallery_options -->
+
+<p class="clear"/>
+
+<%= render(:partial => 'photo/show') %>
+
+<p class="clear"/>
+
+<div id="thumbnails">
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <% for p in @photos %>
+        <td>
+        <div class="thumbnail">
+          <%= link_to_remote(image_tag("/photos/#{@gallery.code}/thumbnails/#{p.filename}",
+                                       :title => p.filename),
+                             :url => {:controller => 'gallery', :action => 'show_photo', :id => p}, 
+                             :update => 'photo_container',
+                             :method => :get) %>
+        </div></td>
+      <% end %>
+    </tr>
+  </table>
+</div>

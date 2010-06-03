@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>raceweb - photo</title>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <%= stylesheet_link_tag('photo.css','calendar.css') %>
+    <%= javascript_include_tag :defaults, 'photo', 'calendar', 'calendar_setup' %>
+    <link rel="shortcut icon" href="/favicon.ico" />
+  </head>
+
+<body>
+
+<div id="container">
+  <div id="header"></div>
+  <div id="content" >
+    <div class="errorText"><%= flash[:notice] %></div>
+    <!-- MAIN CONTENT -->
+      <%= yield %>
+    <!-- END MAIN CONTENT -->
+  </div> <!-- end content -->
+    
+  <div id="footer">
+    <div class="left">
+      &copy; <%= Date.today.year %> raceweb.ca victoria bc<br/>
+      all rights reserved<br/>
+      email: <a href="mailto:info@raceweb.ca">info@raceweb.ca</a>
+    </div>
+    <div class="right">
+        <script type="text/javascript">
+          <!--
+          google_ad_client = "pub-2435759852249095";
+          google_ad_width = 468;
+          google_ad_height = 15;
+          google_ad_format = "468x15_0ads_al_s";
+          google_ad_channel ="";
+          google_color_border = "FFFFFF";
+          google_color_bg = "FFFFFF";
+          google_color_link = "3333FF";
+          google_color_url = "008000";
+          google_color_text = "333333";
+          //-->
+        </script>
+        <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+    </div>
+    <div class="clear"/>
+  </div> <!-- end footer -->
+
+</div> <!-- end container -->
+
+</body>
+</html>
