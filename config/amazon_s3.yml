@@ -1,0 +1,14 @@
+development:
+  bucket_name: raceweb_photo_dev
+  access_key_id: AKIAJXI3Y2RMZJL3WOLA
+  secret_access_key: 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
+
+test:
+  bucket_name: raceweb_photo_test
+  access_key_id: AKIAJXI3Y2RMZJL3WOLA
+  secret_access_key: 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
+
+production:
+  bucket_name: raceweb_photo
+  access_key_id: AKIAJXI3Y2RMZJL3WOLA
+  secret_access_key: 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

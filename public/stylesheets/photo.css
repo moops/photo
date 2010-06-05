@@ -7,6 +7,7 @@ body {
   text-decoration: none;  
   font-weight: normal;
   color: #555;
+  background: #fff url(/images/grgrad.gif) repeat-x;
 }
 
 a           { color: #33f; text-decoration: none; font-family: verdana; }
@@ -95,11 +96,11 @@ label       { text-align: right; }
 }
 
 #photo_nav {
-	text-align:center;
+    text-align:center;
 }
 
 #previous {
-	float:left;
+    float:left;
 }
 
 #photo_info_container {
@@ -117,7 +118,7 @@ label       { text-align: right; }
 }
 
 #next {
-	float:right;
+    float:right;
 }
 
 #thumbnails {
@@ -183,7 +184,7 @@ label       { text-align: right; }
  */
  
  a img {
-	border-width: 0px;
+    border-width: 0px;
 }
 
 .errorText {
@@ -241,12 +242,12 @@ td.exif_data {
  */
 
 img.calIcon {
-	position: absolute;
-	cursor: pointer;
+    position: absolute;
+    cursor: pointer;
 }
 
 form.main textarea { 
-	width: 300px; 
+    width: 300px; 
 }
 
 .label {

@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(:version => 20100603194740) do
     t.string   "artist"
     t.string   "filename"
     t.string   "caption"
+    t.string   "src_file_name"
+    t.string   "src_content_type"
+    t.integer  "src_file_size"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

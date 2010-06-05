@@ -5,6 +5,10 @@ class CreatePhotos < ActiveRecord::Migration
       t.string :artist
       t.string :filename
       t.string :caption
+      # attachment_fu fields
+      t.string :src_file_name
+      t.string :src_content_type
+      t.integer :src_file_size
 
       t.timestamps
     end

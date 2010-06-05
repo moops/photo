@@ -1,26 +1,23 @@
-<h1>Listing photos</h1>
+<% if (@photos and @photos.size > 0) %>
+<table width="100% cellpadding="2" cellspacing="0" class="searchResult">
+    <tr>
+        <th>artist</th>
+        <th>file</th></tr>
 
-<table>
-  <tr>
-    <th>Gallery</th>
-    <th>Artist</th>
-    <th>Filename</th>
-    <th>Caption</th>
-  </tr>
-
-<% @photos.each do |photo| %>
-  <tr>
-    <td><%=h photo.gallery_id %></td>
-    <td><%=h photo.artist %></td>
-    <td><%=h photo.filename %></td>
-    <td><%=h photo.caption %></td>
-    <td><%= link_to 'Show', photo %></td>
-    <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-    <td><%= link_to 'Destroy', photo, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
+    <% @photos.each do |photo| %>
+    <tr>
+        <td><%=h photo.gallery_id %></td>
+        <td><%=h photo.artist %></td>
+        <td><%=h photo.filename %></td>
+        <td><%=h photo.caption %></td>
+        <td><%= link_to 'Show', photo %></td>
+        <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
+        <td><%= link_to 'Destroy', photo, :confirm => 'Are you sure?', :method => :delete %></td></tr>
+    <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New photo', new_photo_path %>
+<%= will_paginate @photos %>
+<% end %>
+ 
+<div id="form" class="form">
+    <%= render(:partial => 'form') %>
+</div>
