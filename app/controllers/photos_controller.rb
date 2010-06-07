@@ -2,7 +2,8 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.xml
   def index
-    @photos = Photo.all
+    @photo = Photo.new
+    @photos = Photo.paginate :page => params[:page], :conditions => "gallery_id = 2", :per_page => 10
 
     respond_to do |format|
       format.html # index.html.erb

@@ -3,6 +3,8 @@ class Photo < ActiveRecord::Base
   belongs_to :gallery
   has_many :photo_comments
   attr_accessor :exif
+  
+  has_attached_file :source, :styles => { :medium => "300x300>", :thumb => "100x100>" }
     
   def photo_on
     #TODO change to exif info
