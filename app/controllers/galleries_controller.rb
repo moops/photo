@@ -102,6 +102,6 @@ class GalleriesController < ApplicationController
       index = @photos.index(@photo)
       @next = @photos[index + 1].id if index < @photos.length - 1
       @prev = @photos[index - 1].id if index > 0
-      @photo.set_exif
+      # @photo.set_exif
     end
 end

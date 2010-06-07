@@ -3,8 +3,17 @@ class Photo < ActiveRecord::Base
   belongs_to :gallery
   has_many :photo_comments
   attr_accessor :exif
-  
-  has_attached_file :source, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+    
+  has_attached_file :source, :storage => :s3, 
+                             :styles => { :original => '550x550>', :thumb => '130x130' }, 
+                             :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
+                             :path => ":attachment/:id/:style.:extension"
+    
+    validates_attachment_presence :source
+    validates_attachment_size :source, :less_than => 3.megabytes
+    validates_attachment_content_type :source, :content_type => ['image/jpeg', 'image/png']
+    
+  attr_protected :source_file_name, :source_content_type, :source_size
     
   def photo_on
     #TODO change to exif info
@@ -39,7 +48,7 @@ end
 
 class Exif
   require 'rubygems'
-  require 'mini_exiftool'
+  require 'exifr'
   attr_accessor :photo_id, :shutter_speed, :iso, :aperture, :focal_length, :exp_mode, 
                 :date, :time, :flash, :exp_compensation, :camera_model
   
