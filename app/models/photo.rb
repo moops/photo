@@ -4,17 +4,11 @@ class Photo < ActiveRecord::Base
   has_many :photo_comments
   attr_accessor :exif
     
-  has_attached_file :source, :storage => :s3, 
-                             :styles => { :original => '550x550>', :thumb => '130x130' }, 
-                             :s3_credentials => "#{RAILS_ROOT}/config/amazon_s3.yml",
-                             :path => ":attachment/:id/:style.:extension"
-    
-    validates_attachment_presence :source
-    validates_attachment_size :source, :less_than => 3.megabytes
-    validates_attachment_content_type :source, :content_type => ['image/jpeg', 'image/png']
-    
-  attr_protected :source_file_name, :source_content_type, :source_size
-    
+  has_attachment :storage => :s3, 
+                 :resize_to => [550,550], 
+                 :thumbnails => { :thumb => [130, 130] },
+                 :content_type => :image,
+                 :max_size => 3.megabyte    
   def photo_on
     #TODO change to exif info
     created_at

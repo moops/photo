@@ -18,9 +18,8 @@
   <%=h @photo.caption %>
 </p>
 
-<%= image_tag @photo.source.url %>
-  <%= image_tag @photo.source.url(:medium) %>
-  <%= image_tag @photo.source.url(:thumb) %>
+<%= image_tag @photo.public_filename %>
+<%= image_tag @photo.public_filename(:thumb) %>
 
 
 <%= link_to 'Edit', edit_photo_path(@photo) %> |

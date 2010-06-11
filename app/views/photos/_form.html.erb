@@ -7,7 +7,7 @@
         <td><%= f.text_field(:artist) %></td></tr>
     <tr>
         <td><%= f.label(:source, 'File') %></td>
-        <td><%= f.file_field(:source) %></td></tr>
+        <td><%= f.file_field(:uploaded_data) %></td></tr>
     <tr>
         <td>&nbsp;</td>
         <td class="submit"><%= f.submit(@photo.id ? 'update' : 'create') %></td></tr>
