@@ -36,7 +36,9 @@
           <td><%= text_field('gallery','name',:size => 25) %></td></tr>
         <tr>
           <td>date</td>
-          <td><%= calendar('gallery','gallery_on',false)%></td></tr>
+          <td>
+            <%= text_field('gallery', :gallery_on, :maxlength => 19, :size => 12, :class => 'text') %>
+            <%= calendar('gallery','gallery_on')%></td></tr>
       </table>
       <%= submit_tag('find') %>
     <% end %>

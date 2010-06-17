@@ -28,7 +28,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/new.xml
   def new
     @gallery = Gallery.new
-
+    1.upto(3) { @gallery.photos.build }
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @gallery }

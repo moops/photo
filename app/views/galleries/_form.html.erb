@@ -1,0 +1,26 @@
+<%= f.error_messages %>
+<p>
+<%= f.label :name %><br />
+<%= f.text_field :name %>
+</p>
+<p>
+<%= f.label :code %><br />
+<%= f.text_field :code %>
+</p>
+<p>
+<%= f.label :gallery_on %><br />
+<%= f.text_field(:gallery_on, :maxlength => 19, :size => 12, :class => 'text') %>
+<%= calendar('gallery','gallery_on') %>
+</p>
+<p>
+<%= f.label :dafault_photo %><br />
+<%= f.text_field :dafault_photo %>
+</p>
+
+<div id="photos">
+  <%= render :partial => 'photo', :collection => @gallery.photos %>
+</div>
+ 
+<%= link_to_function "Add Photo" do |page|
+  page.insert_html :bottom, :photos, :partial => 'photo', :object => Photo.new
+end %>

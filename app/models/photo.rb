@@ -4,7 +4,7 @@ class Photo < ActiveRecord::Base
   has_many :photo_comments
   attr_accessor :exif
     
-  has_attachment :storage => :s3, 
+  has_attachment :storage => :file_system, 
                  :resize_to => [550,550], 
                  :thumbnails => { :thumb => [130, 130] },
                  :content_type => :image,

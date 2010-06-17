@@ -31,4 +31,10 @@ class Gallery < ActiveRecord::Base
     photos.size
   end
   
+  def photo_attributes=(photo_attributes)
+    photo_attributes.each do |attributes|
+      photos.build(attributes)
+    end
+  end
+  
 end
