@@ -41,7 +41,13 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.xml
   def create
-    @photo = Photo.new(params[:photo])
+    @photo = Photo.new
+    @photo.artist=(params[:photo]['artist'])
+    @photo.gallery=(Gallery.find(params[:photo]['gallery_id']))
+    source = params[:photo]['source']
+    Photo.save_source(source)
+    @photo.filename=(source.original_filename)
+    @photo.content_type=(source.content_type)
 
     respond_to do |format|
       if @photo.save

@@ -1,18 +1,45 @@
+require 'rubygems'
+require 'mini_magick'
+ 
 class Photo < ActiveRecord::Base
 
   belongs_to :gallery
   has_many :photo_comments
   attr_accessor :exif
-    
-  has_attachment :storage => :file_system, 
-                 :resize_to => [550,550], 
-                 :thumbnails => { :thumb => [130, 130] },
-                 :content_type => :image,
-                 :max_size => 3.megabyte    
+      
   def photo_on
     #TODO change to exif info
     created_at
   end
+  
+  def self.save_source(upload)
+    path = File.join('tmp', upload.original_filename)
+    File.open(path, 'wb') { |f| f.write(upload.read) }
+    filename = 'tmp/upload.original_filename'
+    image = MiniMagick::Image.from_file("tmp/#{upload.original_filename}")
+    image.resize '150x150'
+    image.write("tmp/thumb_#{upload.original_filename}")
+  end
+
+
+  def self.resize_and_crop(image, square_size)
+    geometry = to_geometry(
+      square_size, square_size)
+    if image[:width] < image[:height]
+      shave_off = ((
+        image[:height]-
+        image[:width])/2).round
+      image.shave("0x#{shave_off}")
+    elsif image[:width] > image[:height]
+      shave_off = ((
+        image[:width]-
+        image[:height])/2).round
+      image.shave("#{shave_off}x0")
+    end
+    image.resize(geometry)
+    return image
+  end
+
 
   def next
     n = nil

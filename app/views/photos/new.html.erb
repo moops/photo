@@ -1,27 +1,5 @@
 <h1>New photo</h1>
 
-<% form_for(@photo) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :gallery_id %><br />
-    <%= f.text_field :gallery_id %>
-  </p>
-  <p>
-    <%= f.label :artist %><br />
-    <%= f.text_field :artist %>
-  </p>
-  <p>
-    <%= f.label :filename %><br />
-    <%= f.text_field :filename %>
-  </p>
-  <p>
-    <%= f.label :caption %><br />
-    <%= f.text_field :caption %>
-  </p>
-  <p>
-    <%= f.submit 'Create' %>
-  </p>
-<% end %>
+<%= render :partial => 'form'%>
 
 <%= link_to 'Back', photos_path %>
