@@ -39,12 +39,10 @@ class Photo < ActiveRecord::Base
     thumb.resize '150x150'
     thumb.write("tmp/thumb_#{upload.original_filename}")
     
-    key = "#{gallery.code}_#{upload.original_filename}"
-    logger.info("key[#{key}]")
-    logger.info("size[#{bucket.objects.size}]")
-    AWS::S3::S3Object.store(key, open("tmp/web_#{upload.original_filename}"), bucket_name)
-    
-    logger.info("size[#{bucket.objects.size}]")
+    file_key = "#{gallery.code}_#{upload.original_filename}"
+    AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name)
+    thumb_key = "thumb_#{gallery.code}_#{upload.original_filename}"
+    AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name)
   end
 
 
