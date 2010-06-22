@@ -45,7 +45,7 @@ class PhotosController < ApplicationController
     @photo.artist=(params[:photo]['artist'])
     @photo.gallery=(Gallery.find(params[:photo]['gallery_id']))
     source = params[:photo]['source']
-    Photo.save_source(source)
+    @photo.save_source(source)
     @photo.filename=(source.original_filename)
     @photo.content_type=(source.content_type)
 

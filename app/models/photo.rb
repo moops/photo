@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'mini_magick'
+require 'aws/s3'
  
 class Photo < ActiveRecord::Base
 
@@ -12,13 +13,38 @@ class Photo < ActiveRecord::Base
     created_at
   end
   
-  def self.save_source(upload)
+  def save_source(upload)
+  
+    AWS::S3::Base.establish_connection!(
+        :access_key_id     => 'AKIAJXI3Y2RMZJL3WOLA',
+        :secret_access_key => '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'
+    )
+    
+    bucket_name = 'raceweb_photo'
+    unless Rails.env.production?
+      bucket_name << '_' << Rails.env
+    end
+    logger.info("bucket name [#{bucket_name}]")
+    bucket = AWS::S3::Bucket.find(bucket_name)
+    logger.info("bucket [#{bucket.inspect}]")
+    
     path = File.join('tmp', upload.original_filename)
     File.open(path, 'wb') { |f| f.write(upload.read) }
-    filename = 'tmp/upload.original_filename'
-    image = MiniMagick::Image.from_file("tmp/#{upload.original_filename}")
-    image.resize '150x150'
-    image.write("tmp/thumb_#{upload.original_filename}")
+    filename = "tmp/#{upload.original_filename}"
+    original = MiniMagick::Image.from_file(filename)
+    web = MiniMagick::Image.from_file(filename)
+    web.resize '550x550'
+    web.write("tmp/web_#{upload.original_filename}")
+    thumb = MiniMagick::Image.from_file(filename)
+    thumb.resize '150x150'
+    thumb.write("tmp/thumb_#{upload.original_filename}")
+    
+    key = "#{gallery.code}_#{upload.original_filename}"
+    logger.info("key[#{key}]")
+    logger.info("size[#{bucket.objects.size}]")
+    AWS::S3::S3Object.store(key, open("tmp/web_#{upload.original_filename}"), bucket_name)
+    
+    logger.info("size[#{bucket.objects.size}]")
   end
 
 
