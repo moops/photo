@@ -6,6 +6,15 @@ one:
   sequence: 1
   views: 10
   caption: else on the beach
+  photo_at: 2010-05-01 10:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
 
 two:
   id: 2
@@ -15,6 +24,15 @@ two:
   sequence: 2
   views: 12
   caption: quinn riding through a swamp
+  photo_at: 2010-05-01 10:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
 
 three:
   id: 3
@@ -24,6 +42,15 @@ three:
   sequence: 3
   views: 3
   caption: else at bastion square
+  photo_at: 2010-05-01 10:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
   
 four:
   id: 4
@@ -32,7 +59,16 @@ four:
   filename: 20100606_9.jpg
   sequence: 4
   views: 3
-  caption: else at bastion square
+  caption: quinn's new guitar
+  photo_at: 2010-06-06 10:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 10.5mm
+  iso: 400
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
   
 five:
   id: 5
@@ -41,22 +77,49 @@ five:
   filename: 20100606_11.jpg
   sequence: 5
   views: 0
-  caption: else at bastion square
+  caption: market square
+  photo_at: 2010-06-06 18:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80 
   
 six:
   id: 6
   gallery_id: 1
   artist: adam
-  filename: 20100530_9.jpg
+  filename: 20100611_12.jpg
   sequence: 6
   views: 
-  caption: else at bastion square
+  caption: fireworks
+  photo_at: 2010-06-11 22:30
+  shutter_speed: 1/20
+  aperture: 1.8
+  focal_length: 150mm
+  iso: 1600
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
   
 seven:
   id: 7
   gallery_id: 1
   artist: adam
-  filename: 20100611_12.jpg
+  filename: 20100612_15.jpg
   sequence: 7
   views: 88
-  caption: else at bastion square
+  caption: snow birds
+  photo_at: 2010-06-12 13:30
+  shutter_speed: 1/200
+  aperture: 3.5
+  focal_length: 400mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80 

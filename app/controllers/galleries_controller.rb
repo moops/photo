@@ -17,6 +17,16 @@ class GalleriesController < ApplicationController
   # GET /galleries/1.xml
   def show
     @gallery = Gallery.find(params[:id])
+    logger.info("gallery found [#{@gallery.inspect}]")
+    @photos = @gallery.photos
+    if false # @gallery.default_photo 
+      @photo = Photo.find_by_filename(@gallery.default_photo)
+    else
+      @photo = @photos.to_a[0]
+    end
+    index = @photos.index(@photo)
+    @next = @photos[index + 1].id if index < @photos.length - 1
+    @prev = @photos[index - 1].id if index > 0
 
     respond_to do |format|
       format.html # show.html.erb

@@ -1,0 +1,18 @@
+<div class="errorText"><%= flash[:error] %></div>
+<% form_remote_tag(:url => {:controller => 'photo_comment', :action => 'create', :photo_id => @photo.id},
+                   :update => 'comments') do %>
+    <%= text_area('comment','comment',:rows => 4, :cols => 30) %><br/>
+    are you a real human? please enter the date of this gallery<br/>
+    <%= text_field_tag('captcha') %><br/>
+    <%= submit_tag "add" %>
+<% end %>
+
+<% unless @photo.photo_comments.empty? %> 
+    <% for c in @photo.photo_comments %>
+        <div class="comment">
+            <div class="date"><%= c.created_at.strftime('%b %d, %Y %H:%M:%S') %></div>
+            &nbsp;&nbsp;
+            <%= sanitize c.comment %><p/>
+        </div>            
+    <% end %>
+<% end %>

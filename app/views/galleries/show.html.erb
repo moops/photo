@@ -21,7 +21,7 @@
 
 <p class="clear"/>
 
-<%= render(:partial => 'photo/show') %>
+<%= render(:partial => 'photos/show') %>
 
 <p class="clear"/>
 
@@ -31,7 +31,7 @@
       <% for p in @gallery.photos %>
         <td>
         <div class="thumbnail">
-          <%= link_to_remote(image_tag(p.public_filename(:thumb), :title => p.filename),
+          <%= link_to_remote(image_tag(p.source_thumb_url, :title => p.filename),
                              :url => {:controller => 'gallery', :action => 'show_photo', :id => p}, 
                              :update => 'photo_container',
                              :method => :get) %>
