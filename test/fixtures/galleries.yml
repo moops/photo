@@ -1,13 +1,15 @@
 one:
+  id: 1
   name: first gallery (private)
-  code: 20100525
+  code: 20100501
   private_key: 123123123
   gallery_on: 2010-06-03
   dafault_photo: 1
 
 two:
+  id: 2
   name: second gallery (public)
-  code: 2010
+  code: 20100526
   private_key: 
   gallery_on: 2010-06-02
   dafault_photo: 5

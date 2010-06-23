@@ -6,14 +6,17 @@ class CreatePhotos < ActiveRecord::Migration
       t.string :caption
       t.integer :sequence
       t.integer :views
-      # attachment_fu fields
-      t.integer :size
-      t.string :content_type
       t.string :filename
-      t.integer :height
-      t.integer :width
-      t.integer :parent_id
-      t.string :thumbnail
+      #exif details
+      t.datetime :photo_at
+      t.string :shutter_speed
+      t.string :aperture
+      t.string :focal_length
+      t.string :iso
+      t.string :exposure_mode
+      t.string :flash
+      t.string :exposure_compensation
+      t.string :camera_model
 
       t.timestamps
     end

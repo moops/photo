@@ -1,15 +1,62 @@
 one:
-  gallery_id: 2
+  id: 1
+  gallery_id: 1
   artist: adam
-  filename: 080113_030.jpg
+  filename: 20100501_25.jpg
   sequence: 1
   views: 10
-  caption: first caption
+  caption: else on the beach
 
 two:
-  gallery_id: 2
+  id: 2
+  gallery_id: 1
   artist: adam
-  filename: 080113_031.jpg
+  filename: 20100516_7.jpg
   sequence: 2
   views: 12
-  caption: second caption
+  caption: quinn riding through a swamp
+
+three:
+  id: 3
+  gallery_id: 1
+  artist: adam
+  filename: 20100530_9.jpg
+  sequence: 3
+  views: 3
+  caption: else at bastion square
+  
+four:
+  id: 4
+  gallery_id: 1
+  artist: adam
+  filename: 20100606_9.jpg
+  sequence: 4
+  views: 3
+  caption: else at bastion square
+  
+five:
+  id: 5
+  gallery_id: 1
+  artist: adam
+  filename: 20100606_11.jpg
+  sequence: 5
+  views: 0
+  caption: else at bastion square
+  
+six:
+  id: 6
+  gallery_id: 1
+  artist: adam
+  filename: 20100530_9.jpg
+  sequence: 6
+  views: 
+  caption: else at bastion square
+  
+seven:
+  id: 7
+  gallery_id: 1
+  artist: adam
+  filename: 20100611_12.jpg
+  sequence: 7
+  views: 88
+  caption: else at bastion square

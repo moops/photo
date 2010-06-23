@@ -6,70 +6,45 @@ class Photo < ActiveRecord::Base
 
   belongs_to :gallery
   has_many :photo_comments
-  attr_accessor :exif
-      
-  def photo_on
-    #TODO change to exif info
-    created_at
-  end
   
   def save_source(upload)
   
     AWS::S3::Base.establish_connection!(
-        :access_key_id     => 'AKIAJXI3Y2RMZJL3WOLA',
-        :secret_access_key => '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'
+        :access_key_id     => S3_CONFIG[Rails.env]['access_key_id'],
+        :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
     )
-    
-    bucket_name = 'raceweb_photo'
-    unless Rails.env.production?
-      bucket_name << '_' << Rails.env
-    end
-    logger.info("bucket name [#{bucket_name}]")
-    bucket = AWS::S3::Bucket.find(bucket_name)
-    logger.info("bucket [#{bucket.inspect}]")
     
     path = File.join('tmp', upload.original_filename)
     File.open(path, 'wb') { |f| f.write(upload.read) }
     filename = "tmp/#{upload.original_filename}"
     original = MiniMagick::Image.from_file(filename)
-    web = MiniMagick::Image.from_file(filename)
-    web.resize '550x550'
+    set_exif(original)
+    web = original
+    web.resize '640x640'
     web.write("tmp/web_#{upload.original_filename}")
-    thumb = MiniMagick::Image.from_file(filename)
-    thumb.resize '150x150'
+    thumb = original
+    thumb.resize '130x130'
     thumb.write("tmp/thumb_#{upload.original_filename}")
     
-    file_key = "#{gallery.code}_#{upload.original_filename}"
-    AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name)
-    thumb_key = "thumb_#{gallery.code}_#{upload.original_filename}"
-    AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name)
+    file_key = "#{gallery.code}/#{upload.original_filename}"
+    AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
+    thumb_key = "#{gallery.code}/thumbnails/#{upload.original_filename}"
+    AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
   end
-
-
-  def self.resize_and_crop(image, square_size)
-    geometry = to_geometry(
-      square_size, square_size)
-    if image[:width] < image[:height]
-      shave_off = ((
-        image[:height]-
-        image[:width])/2).round
-      image.shave("0x#{shave_off}")
-    elsif image[:width] > image[:height]
-      shave_off = ((
-        image[:width]-
-        image[:height])/2).round
-      image.shave("#{shave_off}x0")
-    end
-    image.resize(geometry)
-    return image
+  
+  def source_url
+    "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/#{filename}"
   end
-
+  
+  def source_thumb_url
+    "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/thumbnails/#{filename}"
+  end
 
   def next
     n = nil
-      if self.sequence
-        n = Photo.find(:first, :conditions => ["gallery_id = ? and sequence = ?",self.gallery_id,self.sequence + 1])
-      end
+    if self.sequence
+      n = Photo.find(:first, :conditions => ["gallery_id = ? and sequence = ?",self.gallery_id,self.sequence + 1])
+    end
     n
   end
 
@@ -81,12 +56,23 @@ class Photo < ActiveRecord::Base
     p
   end
 
-  def set_exif
-    begin
-      @exif = Exif.new(self.id,"#{RAILS_ROOT}/public/photos/#{self.gallery.code}/#{self.filename}")
-    rescue
-      nil
-    end
+  def set_exif(img)
+    self.photo_at= img['EXIF:DateTimeOriginal']
+    self.shutter_speed= ['EXIF:ExposureTime']
+    self.aperture= ['EXIF:ApertureValue']
+    self.focal_length= ['EXIF:FocalLength']
+    self.iso= ['EXIF:ISOSpeedRatings']
+    self.exposure_mode= ['EXIF:ExposureProgram']
+    self.flash= ['EXIF:Flash']
+    self.exposure_compensation= ['EXIF:ExposureBiasValue']
+    self.camera_model= ['EXIF:Model']
+    self.save
+  end
+  
+  private
+  
+  def bucket_name
+    'raceweb_photo' << (Rails.env.production? ? '' : '_' << Rails.env)
   end
   
 end
