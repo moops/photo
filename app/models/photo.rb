@@ -76,26 +76,3 @@ class Photo < ActiveRecord::Base
   end
   
 end
-
-class Exif
-  require 'rubygems'
-  require 'exifr'
-  attr_accessor :photo_id, :shutter_speed, :iso, :aperture, :focal_length, :exp_mode, 
-                :date, :time, :flash, :exp_compensation, :camera_model
-  
-  def initialize(id,path)
-    exif_details = MiniExiftool.new(path)
-    @photo_id = id
-    @date = exif_details['DateTimeOriginal'].strftime("%b %d, %Y")
-    @time = exif_details['DateTimeOriginal'].strftime("%H:%M:%S")
-    @shutter_speed = exif_details['ExposureTime']
-    @aperture = exif_details['fnumber']
-    @focal_length = exif_details['FocalLength']
-    @iso = exif_details['ISO']
-    @exp_mode = exif_details['exposureprogram']   
-    @flash = exif_details['Flash']
-    @exp_compensation = exif_details['exposurecompensation']
-    @camera_model = exif_details['Model']
-  end
-
-end
