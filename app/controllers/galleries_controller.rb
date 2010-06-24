@@ -1,6 +1,6 @@
 class GalleriesController < ApplicationController
 
-  layout 'standard', :except => {:show_photo, :thumbnails}
+  layout 'standard', :except => :create
 
   # GET /galleries
   # GET /galleries.xml
@@ -38,7 +38,8 @@ class GalleriesController < ApplicationController
   # GET /galleries/new.xml
   def new
     @gallery = Gallery.new
-    1.upto(3) { @gallery.photos.build }
+
+    #1.upto(3) { @gallery.photos.build }
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @gallery }
@@ -58,7 +59,7 @@ class GalleriesController < ApplicationController
     respond_to do |format|
       if @gallery.save
         flash[:notice] = 'Gallery was successfully created.'
-        format.html { redirect_to(@gallery) }
+        format.html { redirect_to(new_gallery_photo_path(@gallery)) }
         format.xml  { render :xml => @gallery, :status => :created, :location => @gallery }
       else
         format.html { render :action => "new" }

@@ -16,11 +16,3 @@
 <%= f.label :dafault_photo %><br />
 <%= f.text_field :dafault_photo %>
 </p>
-
-<div id="photos">
-  <%= render :partial => 'photo', :collection => @gallery.photos %>
-</div>
- 
-<%= link_to_function "Add Photo" do |page|
-  page.insert_html :bottom, :photos, :partial => 'photo', :object => Photo.new
-end %>

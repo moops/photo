@@ -1,6 +1,8 @@
 class Gallery < ActiveRecord::Base
 
   has_many :photos
+  
+  validates_uniqueness_of :code
 
   def self.recent_galleries
     Gallery.find(:all,

@@ -5,3 +5,10 @@
 function remove_field(element, item) {
   element.up(item).remove();
 }
+
+function showAddPhotos(id) {
+    var el = $(id);
+    if (!el.visible()) {
+        Effect.BlindDown(id, { duration: 0.5 });
+    }
+}

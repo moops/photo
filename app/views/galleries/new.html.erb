@@ -8,4 +8,21 @@
   </p>
 <% end %>
 
-<%= link_to 'Back', galleries_path %>
+<%= link_to('Add Photo', '#', {:onclick => "showAddPhotos('photos'); return false;"} ) %>, <%= link_to 'Back', galleries_path %>
+
+<div id="photos" style="display:none;">
+
+  <div class="photo">
+    <% fields_for @photo do |p| %>
+      <p>
+        <%= p.label :Photo %><br />
+        <%= p.file_field :uploaded_data, :index => nil %>
+        <%= link_to_function "delete", "remove_field($(this), ('.photo'))" %>
+      </p>
+    <% end %>
+  </div>
+</div>
+ 
+<%= link_to_function "Add Photo" do |page|
+  page.insert_html :bottom, :photos, :partial => 'photo', :object => Photo.new
+end %>

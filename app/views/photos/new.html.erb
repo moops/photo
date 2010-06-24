@@ -1,5 +1,12 @@
-<h1>New photo</h1>
+<div id="gallery_info">
+  <span class="name"><%= @gallery.name %></span>
+  <span class="info">
+    <%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %>
+  </span>
+</div>
+
+<h1>add photos</h1>
 
 <%= render :partial => 'form'%>
 
-<%= link_to 'Back', photos_path %>
+<%= link_to 'Back', gallery_photos_path(@gallery) %>

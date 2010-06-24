@@ -1,4 +1,11 @@
 class PhotosController < ApplicationController
+
+  before_filter :get_gallery
+  
+  def get_gallery
+    @gallery = Gallery.find(params[:gallery_id])
+  end
+  
   # GET /photos
   # GET /photos.xml
   def index
@@ -26,7 +33,8 @@ class PhotosController < ApplicationController
   # GET /photos/new.xml
   def new
     @photo = Photo.new
-
+    @photo.gallery = @gallery
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @photo }
@@ -43,16 +51,16 @@ class PhotosController < ApplicationController
   def create
     @photo = Photo.new
     @photo.artist=(params[:photo]['artist'])
+    @photo.caption=(params[:photo]['caption'])
     @photo.gallery=(Gallery.find(params[:photo]['gallery_id']))
     source = params[:photo]['source']
     @photo.save_source(source)
     @photo.filename=(source.original_filename)
-    @photo.content_type=(source.content_type)
 
     respond_to do |format|
       if @photo.save
         flash[:notice] = 'Photo was successfully created.'
-        format.html { redirect_to(@photo) }
+        format.html { redirect_to(@gallphoto) }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
       else
         format.html { render :action => "new" }
