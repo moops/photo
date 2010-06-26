@@ -39,7 +39,6 @@ class GalleriesController < ApplicationController
   def new
     @gallery = Gallery.new
 
-    #1.upto(3) { @gallery.photos.build }
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @gallery }
@@ -58,7 +57,7 @@ class GalleriesController < ApplicationController
 
     respond_to do |format|
       if @gallery.save
-        flash[:notice] = 'Gallery was successfully created.'
+        flash[:notice] = "#{@gallery.name} was successfully created."
         format.html { redirect_to(new_gallery_photo_path(@gallery)) }
         format.xml  { render :xml => @gallery, :status => :created, :location => @gallery }
       else
@@ -76,7 +75,7 @@ class GalleriesController < ApplicationController
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
         flash[:notice] = 'Gallery was successfully updated.'
-        format.html { redirect_to(@gallery) }
+        format.html { redirect_to(edit_gallery_path(@gallery)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }

@@ -1,11 +1,26 @@
 <h1>Editing gallery</h1>
 
-<% form_for(@gallery, :html => { :multipart => true }) do |f| %>
-
-  <%= render :partial => 'form', :locals => {:f => f} %>
-  <p>
-    <%= f.submit 'Update' %>
-  </p>
+<% form_for(@gallery) do |f| %>
+  <%= render(:partial => 'form', :locals => {:f => f}) %>
+  <p/>
+  <%= f.submit 'Update' %>
 <% end %>
 
-<%= link_to 'Back', galleries_path %>
+<% form_tag(remove_gallery_photos_path(@gallery)) do %>
+
+<div id="thumbnails">
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <% for p in @gallery.photos %>
+        <td>
+        <div class="thumbnail">
+          <%= image_tag(p.source_thumb_url, :title => p.filename) %><br/>
+          <%= check_box_tag("remove[#{p.id.to_s}]") %>
+        </div></td>
+      <% end %>
+    </tr>
+  </table>
+</div>
+
+<%= submit_tag('remove selected') %>
+<% end %>

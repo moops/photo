@@ -2,6 +2,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :photo_comments
 
   map.resources :galleries, :has_many => :photos
+  
+  map.resources :galleries do |gallery|
+    gallery.resources :photos, :collection => { :remove => :post }
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
 

@@ -1,8 +1,5 @@
-<% form_for([@gallery,@photo], :html => { :multipart => true }) do |f| %>
-
 <%= f.error_messages %>
 <p/>
-<%= f.text_field(:gallery_id) %>
 <table cellspacing="0" cellpadding="3" border="0">
     <tr>
         <td><%= f.label(:artist) %></td>
@@ -17,5 +14,3 @@
         <td>&nbsp;</td>
         <td class="submit"><%= f.submit(@photo.id ? 'update' : 'create') %></td></tr>
 </table>
-
-<% end %>

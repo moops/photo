@@ -1,13 +1,14 @@
 class PhotosController < ApplicationController
 
+  layout 'standard'
   before_filter :get_gallery
   
   def get_gallery
     @gallery = Gallery.find(params[:gallery_id])
   end
   
-  # GET /photos
-  # GET /photos.xml
+  # GET /galleries/1/photos
+  # GET /galleries/1/photos.xml
   def index
     @photo = Photo.new
     @photos = Photo.paginate :page => params[:page], :conditions => "gallery_id = 2", :per_page => 10
@@ -18,8 +19,8 @@ class PhotosController < ApplicationController
     end
   end
 
-  # GET /photos/1
-  # GET /photos/1.xml
+  # GET /galleries/1/photos/1
+  # GET /galleries/1/photos/1.xml
   def show
     @photo = Photo.find(params[:id])
 
@@ -29,11 +30,11 @@ class PhotosController < ApplicationController
     end
   end
 
-  # GET /photos/new
-  # GET /photos/new.xml
+  # GET /galleries/1/photos/new
+  # GET /galleries/1/photos/new.xml
   def new
-    @photo = Photo.new
-    @photo.gallery = @gallery
+    @photo = @gallery.photos.new
+    logger.info("creating photo #{@photo.inspect}")
     
     respond_to do |format|
       format.html # new.html.erb
@@ -41,26 +42,27 @@ class PhotosController < ApplicationController
     end
   end
 
-  # GET /photos/1/edit
+  # GET /galleries/1/photos/1/edit
   def edit
     @photo = Photo.find(params[:id])
   end
 
-  # POST /photos
-  # POST /photos.xml
+  # POST /galleries/1/photos
+  # POST /galleries/1/photos.xml
   def create
-    @photo = Photo.new
+    @photo = @gallery.photos.new
     @photo.artist=(params[:photo]['artist'])
     @photo.caption=(params[:photo]['caption'])
-    @photo.gallery=(Gallery.find(params[:photo]['gallery_id']))
     source = params[:photo]['source']
+    logger.info("creating photo: #{@photo.inspect}")
+    logger.info("with file: #{source.inspect}")
     @photo.save_source(source)
     @photo.filename=(source.original_filename)
-
+    
     respond_to do |format|
       if @photo.save
-        flash[:notice] = 'Photo was successfully created.'
-        format.html { redirect_to(@gallphoto) }
+        flash[:notice] = "#{@photo.filename} was successfully created."
+        format.html { redirect_to([@gallery,@photo]) }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
       else
         format.html { render :action => "new" }
@@ -69,8 +71,8 @@ class PhotosController < ApplicationController
     end
   end
 
-  # PUT /photos/1
-  # PUT /photos/1.xml
+  # PUT /galleries/1/photos/1
+  # PUT /galleries/1/photos/1.xml
   def update
     @photo = Photo.find(params[:id])
 
@@ -85,16 +87,24 @@ class PhotosController < ApplicationController
       end
     end
   end
-
-  # DELETE /photos/1
-  # DELETE /photos/1.xml
-  def destroy
-    @photo = Photo.find(params[:id])
-    @photo.destroy
-
+  
+  # POST /galleries/1/photos/remove
+  # POST /galleries/1/photos/remove.xml
+  def remove
+  
+    if params[:remove]
+      params[:remove].each do |key,val| 
+        @photo = Photo.find(key)
+        @photo.remove_source
+        @photo.destroy
+      end
+    end
+    
     respond_to do |format|
-      format.html { redirect_to(photos_url) }
+      format.html { redirect_to(edit_gallery_path(@gallery)) }
       format.xml  { head :ok }
     end
+    
   end
+  
 end

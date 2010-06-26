@@ -25,18 +25,4 @@
 
 <p class="clear"/>
 
-<div id="thumbnails">
-  <table cellpadding="0" cellspacing="0">
-    <tr>
-      <% for p in @gallery.photos %>
-        <td>
-        <div class="thumbnail">
-          <%= link_to_remote(image_tag(p.source_thumb_url, :title => p.filename),
-                             :url => {:controller => 'gallery', :action => 'show_photo', :id => p}, 
-                             :update => 'photo_container',
-                             :method => :get) %>
-        </div></td>
-      <% end %>
-    </tr>
-  </table>
-</div>
+<%= render(:partial => 'thumbnails') %>

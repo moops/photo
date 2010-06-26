@@ -32,6 +32,17 @@ class Photo < ActiveRecord::Base
     AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
   end
   
+  def remove_source
+    
+      AWS::S3::Base.establish_connection!(
+          :access_key_id     => S3_CONFIG[Rails.env]['access_key_id'],
+          :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
+      )
+      
+      AWS::S3::S3Object.delete("#{gallery.code}/thumbnails/#{self.filename}", bucket_name)
+      AWS::S3::S3Object.delete("#{gallery.code}/#{self.filename}", bucket_name)
+  end
+  
   def source_url
     "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/#{filename}"
   end
