@@ -20,5 +20,5 @@
 
 <%= image_tag "tmp/#{@photo.filename}" %>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Edit', edit_gallery_photo_path(@gallery, @photo) %> |
 <%= link_to 'Back', photos_path %>

@@ -12,3 +12,15 @@ function showAddPhotos(id) {
         Effect.BlindDown(id, { duration: 0.5 });
     }
 }
+
+function toggle_photo_form() {
+    var one = $('one_photo');
+    var bunch = $('bunch_photo');
+    if (one.visible()) {
+        Effect.BlindDown('bunch_photo', { duration: 0.5 });
+        Effect.BlindUp('one_photo', { duration: 0.5 });
+    } else {
+        Effect.BlindDown('one_photo', { duration: 0.5 });
+        Effect.BlindUp('bunch_photo', { duration: 0.5 });
+    }
+}

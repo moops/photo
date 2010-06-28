@@ -8,11 +8,45 @@
 
 <h1>add photos</h1>
 
-<% form_for([@gallery,@photo], :html => { :multipart => true }) do |f| %>
-    <%= render(:partial => 'form',  :locals => {:f => f}) %>
-<% end %>
+<%= link_to_function('toggle', 'toggle_photo_form()') %>
 
-<%= render(:partial => 'galleries/thumbnails') %>
+<div id="one_photo" style="display:none">
+  <% form_for([@gallery,@photo], :html => { :multipart => true }) do |f| %>
+    <%= f.error_messages %>
+    <p/>
+    <table cellspacing="0" cellpadding="3" border="0">
+        <tr>
+            <td><%= f.label(:artist) %></td>
+            <td><%= f.text_field(:artist) %></td></tr>
+        <tr>
+            <td><%= f.label(:caption) %></td>
+            <td><%= f.text_field(:caption) %></td></tr>
+        <tr>
+            <td><%= f.label(:source, 'File2') %></td>
+            <td><%= f.file_field(:source) %></td></tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td class="submit"><%= f.submit('add') %></td></tr>
+    </table>
+  <% end %>
 
-<%= link_to('more', new_gallery_photo_path(@gallery)) %> |
-<%= link_to('done', gallery_path(@gallery)) %>
+  <div id="thumbnails">
+  <table cellpadding="0" cellspacing="0">
+    <tr>
+      <% for p in @gallery.photos %>
+        <td>
+        <div class="thumbnail">
+          <%= image_tag(p.source_thumb_url, :title => p.filename) %>
+        </div></td>
+      <% end %>
+    </tr>
+  </table>
+  </div>
+</div>
+
+<div id="bunch_photo">
+  <% form_tag('/galleries/2/add_photos') do -%>
+    <%= label_tag('file names') %>
+    <%= text_area_tag(:file_names, nil, :size => '30x20') %>
+  <% end -%>
+</div>

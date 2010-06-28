@@ -11,7 +11,7 @@ class PhotosController < ApplicationController
   # GET /galleries/1/photos.xml
   def index
     @photo = Photo.new
-    @photos = Photo.paginate :page => params[:page], :conditions => "gallery_id = 2", :per_page => 10
+    @photos = @gallery.photos
 
     respond_to do |format|
       format.html # index.html.erb
@@ -62,7 +62,7 @@ class PhotosController < ApplicationController
     respond_to do |format|
       if @photo.save
         flash[:notice] = "#{@photo.filename} was successfully created."
-        format.html { redirect_to([@gallery,@photo]) }
+        format.html { redirect_to(new_gallery_photo_path(@gallery)) }
         format.xml  { render :xml => @photo, :status => :created, :location => @photo }
       else
         format.html { render :action => "new" }
