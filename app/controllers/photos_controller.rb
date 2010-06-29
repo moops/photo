@@ -104,7 +104,24 @@ class PhotosController < ApplicationController
       format.html { redirect_to(edit_gallery_path(@gallery)) }
       format.xml  { head :ok }
     end
-    
+  end
+  
+  # POST /galleries/1/photos/add
+  # POST /galleries/1/photos/add.xml
+  def add
+
+    if params[:file_names]
+      params[:file_names].each do |val| 
+        @photo = @gallery.photos.new
+        @photo.filename= val
+        @photo.save
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to(new_gallery_photo_path(@gallery)) }
+      format.xml  { head :ok }
+    end
   end
   
 end
