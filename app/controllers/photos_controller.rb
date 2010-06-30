@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
   layout 'standard'
-  before_filter :get_gallery
+  before_filter :get_gallery, :except => :update_field
   
   def get_gallery
     @gallery = Gallery.find(params[:gallery_id])
@@ -123,5 +123,13 @@ class PhotosController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  # non-restfull inline editors
+  def update_field
+    photo = Photo.find(params[:id])
+    photo.update_attribute(params[:field], params[:value])
+    render(:text => params[:value])
+  end
+  # end non-restfull inline editors
   
 end
