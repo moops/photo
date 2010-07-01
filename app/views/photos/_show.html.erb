@@ -1,10 +1,10 @@
-<% if @photo.caption %>
-  <div class="caption">
-    <%= inline_edit('caption', @photo.caption, "/photos/update_field/#{@photo.id}", 35, "#dddddd", 'caption') %>
-  </div>
-<% end %>
-
 <div id="photo_container">
+
+  <% if @photo.caption %>
+    <div class="caption">
+      <%= inline_edit('caption', @photo.caption, "/photos/update_field/#{@photo.id}", 35, "#dddddd", 'caption') %>
+    </div>
+  <% end %>
     
   <div id="photo">
     <%= image_tag(@photo.source_url,

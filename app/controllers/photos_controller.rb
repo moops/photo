@@ -23,11 +23,11 @@ class PhotosController < ApplicationController
   # GET /galleries/1/photos/1.xml
   def show
     @photo = Photo.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @photo }
-    end
+    render :partial => 'show'
+    # respond_to do |format|
+    #  format.html # show.html.erb
+    #  format.xml  { render :xml => @photo }
+    # end
   end
 
   # GET /galleries/1/photos/new

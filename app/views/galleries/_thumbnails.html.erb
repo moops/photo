@@ -5,7 +5,7 @@
         <td>
         <div class="thumbnail">
           <%= link_to_remote(image_tag(p.source_thumb_url, :title => p.filename),
-                             :url => {:controller => 'gallery', :action => 'show_photo', :id => p}, 
+                             :url => gallery_photo_path(@gallery, p), 
                              :update => 'photo_container',
                              :method => :get) %>
         </div></td>
