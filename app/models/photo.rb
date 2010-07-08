@@ -14,11 +14,14 @@ class Photo < ActiveRecord::Base
         :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
     )
     
+    # write the original to the temp dir
     path = File.join('tmp', upload.original_filename)
     File.open(path, 'wb') { |f| f.write(upload.read) }
     filename = "tmp/#{upload.original_filename}"
     original = MiniMagick::Image.from_file(filename)
     set_exif(original)
+    
+    # write the web and thumb version to the temp dir
     web = original
     web.resize '640x640'
     web.write("tmp/web_#{upload.original_filename}")
@@ -26,6 +29,7 @@ class Photo < ActiveRecord::Base
     thumb.resize '130x130'
     thumb.write("tmp/thumb_#{upload.original_filename}")
     
+    # write to s3
     file_key = "#{gallery.code}/#{upload.original_filename}"
     AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
     thumb_key = "#{gallery.code}/thumbnails/#{upload.original_filename}"
@@ -68,15 +72,15 @@ class Photo < ActiveRecord::Base
   end
 
   def set_exif(img)
-    self.photo_at= img['EXIF:DateTimeOriginal']
-    self.shutter_speed= ['EXIF:ExposureTime']
-    self.aperture= ['EXIF:ApertureValue']
-    self.focal_length= ['EXIF:FocalLength']
-    self.iso= ['EXIF:ISOSpeedRatings']
-    self.exposure_mode= ['EXIF:ExposureProgram']
-    self.flash= ['EXIF:Flash']
-    self.exposure_compensation= ['EXIF:ExposureBiasValue']
-    self.camera_model= ['EXIF:Model']
+    self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'], '%Y:%m:%d %H:%M:%S')
+    self.shutter_speed= img['EXIF:ExposureTime']
+    self.aperture= img['EXIF:FNumber']
+    self.focal_length= img['EXIF:FocalLengthIn35mmFilm'] + 'mm'
+    self.iso= img['EXIF:ISOSpeedRatings']
+    self.exposure_mode= img['EXIF:ExposureProgram']
+    self.flash= img['EXIF:Flash']
+    self.exposure_compensation= img['EXIF:ExposureBiasValue']
+    self.camera_model= img['EXIF:Model']
     self.save
   end
   
@@ -87,3 +91,5 @@ class Photo < ActiveRecord::Base
   end
   
 end
+
+
