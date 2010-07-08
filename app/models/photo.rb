@@ -31,9 +31,9 @@ class Photo < ActiveRecord::Base
     
     # write to s3
     file_key = "#{gallery.code}/#{upload.original_filename}"
-    AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
+    # AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
     thumb_key = "#{gallery.code}/thumbnails/#{upload.original_filename}"
-    AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
+    # AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
   end
   
   def remove_source
@@ -72,15 +72,15 @@ class Photo < ActiveRecord::Base
   end
 
   def set_exif(img)
-    self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'], '%Y:%m:%d %H:%M:%S')
-    self.shutter_speed= img['EXIF:ExposureTime']
-    self.aperture= img['EXIF:FNumber']
-    self.focal_length= img['EXIF:FocalLengthIn35mmFilm'] + 'mm'
-    self.iso= img['EXIF:ISOSpeedRatings']
-    self.exposure_mode= img['EXIF:ExposureProgram']
-    self.flash= img['EXIF:Flash']
-    self.exposure_compensation= img['EXIF:ExposureBiasValue']
-    self.camera_model= img['EXIF:Model']
+    self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
+    self.shutter_speed= img['EXIF:ExposureTime'].strip
+    self.aperture= img['EXIF:FNumber'].strip
+    self.focal_length= img['EXIF:FocalLengthIn35mmFilm'].strip + 'mm'
+    self.iso= img['EXIF:ISOSpeedRatings'].strip
+    self.exposure_mode= img['EXIF:ExposureProgram'].strip
+    self.flash= img['EXIF:Flash'].strip
+    self.exposure_compensation= img['EXIF:ExposureBiasValue'].strip
+    self.camera_model= img['EXIF:Make'].strip + ' ' + img['EXIF:Model'].strip
     self.save
   end
   
