@@ -25,29 +25,23 @@
 
 <div id="one_photo" style="display:none">
   <% form_for([@gallery,@photo], :html => { :multipart => true }) do |f| %>
-    <%= f.error_messages %>
-    <p/>
-    <table cellspacing="0" cellpadding="3" border="0">
-        <tr>
-            <td><%= f.label(:artist) %></td>
-            <td><%= f.text_field(:artist) %></td></tr>
-        <tr>
-            <td><%= f.label(:caption) %></td>
-            <td><%= f.text_field(:caption) %></td></tr>
-        <tr>
-            <td><%= f.label(:source, 'File2') %></td>
-            <td><%= f.file_field(:source) %></td></tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td class="submit"><%= f.submit('add') %></td></tr>
-    </table>
+    <%= f.error_messages %><br />
+    <%= f.label(:artist) %>
+    <%= f.text_field(:artist) %><br />
+    <%= f.label(:caption) %>
+    <%= f.text_field(:caption) %><br />
+    <%= f.label(:source, 'File2') %>
+    <%= f.file_field(:source) %><br />
+    <%= f.submit('add') %>
   <% end %>
 </div>
 
 <div id="bunch_photo">
   <% form_tag(add_gallery_photos_path(@gallery)) do -%>
+    <%= label_tag(:artist) %>
+    <%= text_field_tag(:artist) %><br />
     <%= label_tag('file names') %>
-    <%= text_area_tag(:file_names, nil, :size => '35x15') %>
+    <%= text_area_tag(:file_names, nil, :size => '35x15') %><br />
     <%= submit_tag('add') %>
   <% end -%>
 </div>

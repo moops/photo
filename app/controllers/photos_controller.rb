@@ -58,6 +58,7 @@ class PhotosController < ApplicationController
     logger.info("with file: #{source.inspect}")
     @photo.save_source(source)
     @photo.filename=(source.original_filename)
+    @photo.views s= 0
     
     respond_to do |format|
       if @photo.save
@@ -114,6 +115,8 @@ class PhotosController < ApplicationController
       params[:file_names].each do |val| 
         @photo = @gallery.photos.new
         @photo.filename= val
+        @photo.caption= val
+        @photo.views = 0
         @photo.save
       end
     end
