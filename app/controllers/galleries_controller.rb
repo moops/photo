@@ -16,8 +16,17 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.xml
   def show
-    @gallery = Gallery.find(params[:id])
-    logger.info("gallery found [#{@gallery.inspect}]")
+    if params[:private_key]
+      @gallery = Gallery.find_by_private_key(params[:private_key])
+      unless @gallery
+        flash[:notice] = "no gallery found"
+        redirect_to(galleries_path)
+        return
+      end
+    else 
+      @gallery = Gallery.find(params[:id])
+    end
+
     @photos = @gallery.photos
     if false # @gallery.default_photo 
       @photo = Photo.find_by_filename(@gallery.default_photo)

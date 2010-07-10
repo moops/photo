@@ -19,8 +19,8 @@
 <div class="box" id="gallery_index_private">
   <div class="boxhead">view a private gallery</div>
   <div class="boxcontent">
-    <% form_tag({:action => 'search_private'}) do %>
-      key <%= text_field('gallery','private_key',:size => 25) %>
+    <% form_tag({:action => 'show'}) do %>
+      key <%= text_field_tag('private_key') %>
       <%= submit_tag('view') %>
     <% end %>
   </div>
