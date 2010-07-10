@@ -17,12 +17,18 @@ class GalleriesController < ApplicationController
   # GET /galleries/1.xml
   def show
     if params[:private_key]
+      # searching for a private gallery
       @gallery = Gallery.find_by_private_key(params[:private_key])
       unless @gallery
         flash[:notice] = "no gallery found"
         redirect_to(galleries_path)
         return
       end
+    elsif params[:name] or params[:gallery_on]
+      #searching for public galleries
+      @search_results = Gallery.find_public(params[:name],params[:gallery_on])
+      redirect_to(galleries_path)
+      return
     else 
       @gallery = Gallery.find(params[:id])
     end
