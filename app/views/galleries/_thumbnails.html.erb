@@ -4,10 +4,17 @@
       <% for p in @gallery.photos %>
         <td>
         <div class="thumbnail">
-          <%= link_to_remote(image_tag(p.source_thumb_url, :title => p.filename),
+          <% if link %>
+            <%= link_to_remote(image_tag(p.source_thumb_url, :title => p.filename),
                              :url => gallery_photo_path(@gallery, p), 
                              :update => 'photo_container',
                              :method => :get) %>
+          <% else %>
+            <%= image_tag(p.source_thumb_url, :title => p.filename) %>
+          <% end %>
+          <% if edit %>
+            <%= check_box_tag("remove[#{p.id.to_s}]") %>
+          <% end %>
         </div></td>
       <% end %>
     </tr>
