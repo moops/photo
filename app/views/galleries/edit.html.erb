@@ -8,7 +8,7 @@
 
 <% form_tag(remove_gallery_photos_path(@gallery)) do %>
 
-<%= render(:partial => 'thumbnails', :locals => { :edit => true }) %>
+<%= render(:partial => 'thumbnails', :locals => { :edit => true, :link => false }) %>
 
 <%= submit_tag('remove selected') %>
 <% end %>

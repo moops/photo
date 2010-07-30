@@ -23,6 +23,13 @@ class PhotosController < ApplicationController
   # GET /galleries/1/photos/1.xml
   def show
     @photo = Photo.find(params[:id])
+    index = @gallery.photos.index(@photo)
+    @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
+    @prev = @gallery.photos[index - 1].id if index > 0
+    
+    @photo.views += 1
+    @photo.save
+    
     render :partial => 'show'
     # respond_to do |format|
     #  format.html # show.html.erb
@@ -110,14 +117,17 @@ class PhotosController < ApplicationController
   # POST /galleries/1/photos/add
   # POST /galleries/1/photos/add.xml
   def add
-
+    sequence = 0
     if params[:file_names]
       params[:file_names].each do |val| 
-        @photo = @gallery.photos.new
-        @photo.filename= val
-        @photo.caption= val
-        @photo.views = 0
-        @photo.save
+        p = @gallery.photos.new
+        p.filename= val.strip
+        p.caption= val.strip
+        p.views = 0
+        p.set_exif_from_s3()
+        p.artist= params[:artist] if (params[:artist])
+        p.sequence= sequence += 1
+        p.save
       end
     end
 

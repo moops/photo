@@ -31,9 +31,23 @@ class Photo < ActiveRecord::Base
     
     # write to s3
     file_key = "#{gallery.code}/#{upload.original_filename}"
-    # AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
+    AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
     thumb_key = "#{gallery.code}/thumbnails/#{upload.original_filename}"
-    # AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
+    AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
+  end
+  
+  def set_exif_from_s3()
+      AWS::S3::Base.establish_connection!(
+          :access_key_id     => S3_CONFIG[Rails.env]['access_key_id'],
+          :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
+      )
+      
+      path = File.join('tmp', self.filename)
+      # get from s3
+      file_key = "#{gallery.code}/#{self.filename}"
+      File.open("tmp/#{self.filename}", 'wb') { |f| f.write(AWS::S3::S3Object.value(file_key, bucket_name)) }
+      tmp_file = MiniMagick::Image.from_file("tmp/#{self.filename}")
+      set_exif(tmp_file)
   end
   
   def remove_source
@@ -72,7 +86,9 @@ class Photo < ActiveRecord::Base
   end
 
   def set_exif(img)
-    self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
+    if (img['EXIF:DateTimeOriginal']) 
+      self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
+    end
     self.shutter_speed= img['EXIF:ExposureTime'].strip
     self.aperture= img['EXIF:FNumber'].strip
     self.focal_length= img['EXIF:FocalLengthIn35mmFilm'].strip + 'mm'
@@ -80,7 +96,7 @@ class Photo < ActiveRecord::Base
     self.exposure_mode= img['EXIF:ExposureProgram'].strip
     self.flash= img['EXIF:Flash'].strip
     self.exposure_compensation= img['EXIF:ExposureBiasValue'].strip
-    self.camera_model= img['EXIF:Make'].strip + ' ' + img['EXIF:Model'].strip
+    self.camera_model= img['EXIF:Model'].strip
     self.save
   end
   

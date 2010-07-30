@@ -69,6 +69,13 @@ class GalleriesController < ApplicationController
   # POST /galleries.xml
   def create
     @gallery = Gallery.new(params[:gallery])
+    
+    #generate private key
+    if 'private'.eql?(params[:gallery_access])
+      chars = ("a".."z").to_a + ("1".."9").to_a
+      key = Array.new(20, '').collect{chars[rand(chars.size)]}.join
+      @gallery.private_key=(key)
+    end
 
     respond_to do |format|
       if @gallery.save
