@@ -41,7 +41,7 @@ production:
   adapter: mysql
   encoding: utf8
   reconnect: false
-  database: photo_production
+  database: photo
   pool: 5
   username: root
   password: 1mp0nab1k3

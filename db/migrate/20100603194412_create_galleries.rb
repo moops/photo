@@ -5,7 +5,7 @@ class CreateGalleries < ActiveRecord::Migration
       t.string :code
       t.string :private_key
       t.date :gallery_on
-      t.integer :dafault_photo
+      t.string :default_photo
 
       t.timestamps
     end

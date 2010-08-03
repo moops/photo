@@ -1,3 +1,4 @@
+rails --version 2.3.8
 will_paginate --version 2.3.11
-exifr
-aws-s3
+exifr --version 1.0.1
+aws-s3 --version 0.6.2
