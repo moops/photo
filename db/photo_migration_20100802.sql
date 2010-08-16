@@ -3229,7 +3229,7 @@ INSERT INTO `photo_development`.`photo_comments` (`id`,`photo_id`,`comment`,`cre
 ,('14936','1664','Wow... that girl is damn sexy!','2008-10-02 00:23:37','2008-10-02 00:23:37')
 ,('15047','1664','Ya Baby!  You can pound my pavement any time!!','2008-10-02 06:12:16','2008-10-02 06:12:16')
 ,('41149','1942','Why do I always get my picture taken when my mouth is full? ','2008-11-11 22:17:40','2008-11-11 22:17:40')
-,('49166','1941','Nov 11, 2008','2008-11-16 22:47:39','2008-11-16 22:47:39');
+,('49166','1941','Nov 11, 2008','2008-11-16 22:47:39','2008-11-16 22:47:39')
 ,('49167','2184','love this fish eye shot, very cool....thanks for taking all these great photos.','2009-01-11 20:50:18','2009-01-11 20:50:18')
 ,('49168','2971','Cool','2009-03-08 17:49:46','2009-03-08 17:49:46');
 

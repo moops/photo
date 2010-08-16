@@ -103,7 +103,7 @@ class Photo < ActiveRecord::Base
   private
   
   def bucket_name
-    'raceweb_photo' << (Rails.env.production? ? '' : '_' << Rails.env)
+    'raceweb_photo' # << (Rails.env.production? ? '' : '_' << Rails.env)
   end
   
 end
