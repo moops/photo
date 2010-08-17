@@ -87,11 +87,14 @@ class Photo < ActiveRecord::Base
 
   def set_exif(img)
     if (img['EXIF:DateTimeOriginal']) 
-      self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
+      begin
+        self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
+      rescue
+      end
     end
     self.shutter_speed= img['EXIF:ExposureTime'].strip
     self.aperture= img['EXIF:FNumber'].strip
-    self.focal_length= img['EXIF:FocalLengthIn35mmFilm'].strip + 'mm'
+    self.focal_length= img['EXIF:FocalLengthIn35mmFilm'].strip + (img['EXIF:FocalLengthIn35mmFilm'].strip.length > 0 ? 'mm' : '')
     self.iso= img['EXIF:ISOSpeedRatings'].strip
     self.exposure_mode= img['EXIF:ExposureProgram'].strip
     self.flash= img['EXIF:Flash'].strip
