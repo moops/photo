@@ -11,7 +11,7 @@ class Gallery < ActiveRecord::Base
                  :limit => 6)
   end
                
-  def find_public(name,on)
+  def self.find_public(name,on)
     findSql = 'private_key is null and name like ?'
     find_conditions = [findSql,"%#{name}%"]
     if on
@@ -25,7 +25,7 @@ class Gallery < ActiveRecord::Base
                  :page => {:size => 10})
   end
 
-  def find_private
+  def self.find_private
     Gallery.find(:first, :conditions => ['private_key = ?',private_key])
   end
 
