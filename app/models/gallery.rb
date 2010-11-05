@@ -19,10 +19,7 @@ class Gallery < ActiveRecord::Base
       find_conditions[0] = findSql
       find_conditions << gallery_on
     end
-    Gallery.find(:all, 
-                 :conditions => find_conditions, 
-                 :order => 'name',
-                 :page => {:size => 10})
+    Gallery.paginate :page => 1, :conditions => find_conditions, :order => 'name', :per_page => 10
   end
 
   def self.find_private
