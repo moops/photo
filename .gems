@@ -1,5 +1,5 @@
 rails --version 2.3.8
 will_paginate --version 2.3.11
 exifr --version 1.0.3
-mini_magick --version 1.2.5
+mini_magick --version 3.0
 aws-s3 --version 0.6.2
