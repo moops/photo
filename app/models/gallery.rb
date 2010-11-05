@@ -11,10 +11,10 @@ class Gallery < ActiveRecord::Base
                  :limit => 6)
   end
                
-  def self.find_public(name,on)
+  def self.find_public(name,gallery_on)
     findSql = 'private_key is null and name like ?'
     find_conditions = [findSql,"%#{name}%"]
-    if on
+    if gallery_on
       findSql += ' and gallery_on = ?'
       find_conditions[0] = findSql
       find_conditions << gallery_on
