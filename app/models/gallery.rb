@@ -14,11 +14,12 @@ class Gallery < ActiveRecord::Base
   def self.find_public(name,gallery_on)
     findSql = 'private_key is null and name like ?'
     find_conditions = [findSql,"%#{name}%"]
-    if gallery_on
+    unless gallery_on.empty?
       findSql += ' and gallery_on = ?'
       find_conditions[0] = findSql
       find_conditions << gallery_on
     end
+    logger.debug("find conditions[#{find_conditions.inspect}]")
     Gallery.paginate :page => 1, :conditions => find_conditions, :order => 'name', :per_page => 10
   end
 

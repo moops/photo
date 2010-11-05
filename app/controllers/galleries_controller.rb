@@ -27,7 +27,9 @@ class GalleriesController < ApplicationController
     elsif params[:name] or params[:gallery_on]
       #searching for public galleries
       @search_results = Gallery.find_public(params[:name],params[:gallery_on])
-      redirect_to(galleries_path)
+      logger.debug("search results[#{@search_results.inspect}]")
+      @recent_galleries = Gallery.recent_galleries
+      render 'index'
       return
     else 
       @gallery = Gallery.find(params[:id])
