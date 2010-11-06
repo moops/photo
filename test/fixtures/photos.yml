@@ -72,7 +72,7 @@ four:
   
 five:
   id: 5
-  gallery_id: 1
+  gallery_id: 2
   artist: adam
   filename: 20100606_11.jpg
   sequence: 5
@@ -90,7 +90,7 @@ five:
   
 six:
   id: 6
-  gallery_id: 1
+  gallery_id: 2
   artist: adam
   filename: 20100611_12.jpg
   sequence: 6
@@ -108,7 +108,7 @@ six:
   
 seven:
   id: 7
-  gallery_id: 1
+  gallery_id: 2
   artist: adam
   filename: 20100612_15.jpg
   sequence: 7

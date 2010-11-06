@@ -42,6 +42,8 @@ class GalleriesController < ApplicationController
       @photo = @photos.to_a[0]
     end
     index = @photos.index(@photo)
+    logger.debug("gallery[#{@gallery.inspect}]")
+    logger.debug("index[#{index.inspect}], @photos[#{@photos.inspect}]")
     @next = @photos[index + 1].id if index < @photos.length - 1
     @prev = @photos[index - 1].id if index > 0
 
