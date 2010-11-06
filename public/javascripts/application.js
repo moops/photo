@@ -1,5 +1,9 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+jQuery(document).ready(function() { 
+
+    $("input.calendar").datepicker();
+    $("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
+    $("input.today").datepicker('setDate', new Date());
+});
 
 
 function remove_field(element, item) {
