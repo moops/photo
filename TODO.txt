@@ -1,0 +1,6 @@
+2010
+x Nov 01 - move to heroku bamboo stack - Nov 01
+x Nov 07 - replace prototype with jquery - Nov 08
+- Nov 10 - replace prototype inline editing with jquery
+- Nov 10 - replace prototype show photo link with jquery
+- Nov 10 - rebuild and upload standard test data and upload to raceweb-photo-development aws s3 bucket
