@@ -20,7 +20,7 @@
   <div class="boxhead">view a private gallery</div>
   <div class="boxcontent">
     <% form_tag({:action => 'show'}) do %>
-      key <%= text_field_tag('private_key') %>
+      key <%= text_field_tag('id') %>
       <%= submit_tag('view') %>
     <% end %>
   </div>

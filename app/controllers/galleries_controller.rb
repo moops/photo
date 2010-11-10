@@ -16,9 +16,9 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.xml
   def show
-    if params[:private_key]
-      # searching for a private gallery
-      @gallery = Gallery.find_by_private_key(params[:private_key])
+    if params[:id] =~ /[^1-9]/
+      # params[:id] is a key, searching for a private gallery
+      @gallery = Gallery.find_by_private_key(params[:id])
       unless @gallery
         flash[:notice] = "no gallery found"
         redirect_to(galleries_path)
