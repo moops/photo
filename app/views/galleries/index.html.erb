@@ -19,7 +19,7 @@
 <div class="box" id="gallery_index_private">
   <div class="boxhead">view a private gallery</div>
   <div class="boxcontent">
-    <% form_tag({:action => 'show'}) do %>
+    <%= form_tag(galleries_path, :method => :get) do %>
       key <%= text_field_tag('id') %>
       <%= submit_tag('view') %>
     <% end %>
@@ -29,7 +29,7 @@
 <div class="box" id="gallery_index_search">
   <div class="boxhead">find a public gallery</div>
   <div class="boxcontent">
-    <% form_tag({:action => 'show'}) do %>
+    <%= form_tag(galleries_path, :method => :get) do %>
       <table cellspacing="0" cellpadding="2" border="0">
         <tr>
           <td>name</td>

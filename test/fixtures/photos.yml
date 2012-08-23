@@ -1,12 +1,88 @@
-one:
-  id: 1
-  gallery_id: 1
-  artist: adam
-  filename: 20100501_25.jpg
+winter-street:
+  gallery: youth
+  artist: mom
+  filename: 19700401_1.jpg
   sequence: 1
+  views: 1
+  caption: me and dad on the lawn
+  photo_at: 1970-04-01 10:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: old pentax
+
+high-chair:
+  gallery: youth
+  artist: mom
+  filename: 19700701_2.jpg
+  sequence: 2
+  views: 13
+  caption: drinking breakfast
+  photo_at: 1970-07-01 10:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: old pentax
+    
+beach:
+  gallery: youth
+  artist: dad
+  filename: 19710401_3.jpg
+  sequence: 3
+  views: 22
+  caption: me and mom on the beach
+  photo_at: 1971-04-01 10:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: old pentax
+  
+clown-pants:
+  gallery: youth
+  artist: dad
+  filename: 19710401_4.jpg
+  sequence: 4
+  views: 0
+  caption: me at a crossroads
+  photo_at: 1971-04-01 14:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: old pentax
+  
+by-the-creek:
+  gallery: youth
+  artist:
+  filename: 19710501_01.jpg
+  sequence: 5
   views: 10
-  caption: else on the beach
-  photo_at: 2010-05-01 10:30
+  caption: all of us by a creek
+  photo_at: 1971-05-01 10:30
+  
+throwing-a-rock:
+  gallery: youth
+  artist: dad
+  filename: 19710501_5.jpg
+  sequence: 6
+  views: 10
+  caption: me throwing a rock at the camera
+  photo_at: 1971-05-01 10:30
   shutter_speed: 1/200
   aperture: 1.8
   focal_length: 50mm
@@ -16,15 +92,150 @@ one:
   exposure_compensation: 0
   camera_model: nikon d80
 
-two:
-  id: 2
-  gallery_id: 1
+night-bear:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_25.jpg
+  sequence: 1
+  views: 10
+  caption: fountain behind the legislature
+  photo_at: 2009-03-03 22:30
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+night-empress-roof:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_27.jpg
+  sequence: 2
+  views: 10
+  caption: else on the beach
+  photo_at: 2009-03-03 22:10
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+night-legislature:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_32.jpg
+  sequence: 3
+  views: 10
+  caption: legislature
+  photo_at: 2009-03-03 22:20
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+night-lights-on-government:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_40.jpg
+  sequence: 4
+  views: 10
+  caption: lights on government street
+  photo_at: 2009-03-03 22:30
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+night-empress:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_44.jpg
+  sequence: 5
+  views: 10
+  caption: empress hotel
+  photo_at: 2009-03-03 22:40
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+night-bastion:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_49.jpg
+  sequence: 6
+  views: 10
+  caption: bastion square
+  photo_at: 2009-03-03 22:50
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+night-fountain-1:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_5.jpg
+  sequence: 7
+  views: 10
+  caption: fountain behind the legislature
+  photo_at: 2009-03-03 23:00
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+night-fountain-2:
+  gallery: victoria-at-night
+  artist: adam
+  filename: 20090303_8.jpg
+  sequence: 8
+  views: 10
+  caption: fountain behind the legislature
+  photo_at: 2009-03-03 23:10
+  shutter_speed: 4
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 1200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+
+summer-quinn-riding:
+  gallery: summer
   artist: adam
   filename: 20100516_7.jpg
   sequence: 2
   views: 12
   caption: quinn riding through a swamp
-  photo_at: 2010-05-01 10:30
+  photo_at: 2010-05-16 10:30
   shutter_speed: 1/200
   aperture: 1.8
   focal_length: 50mm
@@ -34,9 +245,8 @@ two:
   exposure_compensation: 0
   camera_model: nikon d80
 
-three:
-  id: 3
-  gallery_id: 1
+summer-bastion-else:
+  gallery: summer
   artist: adam
   filename: 20100530_9.jpg
   sequence: 3
@@ -52,9 +262,8 @@ three:
   exposure_compensation: 0
   camera_model: nikon d80
   
-four:
-  id: 4
-  gallery_id: 1
+summer-guitar:
+  gallery: summer
   artist: adam
   filename: 20100606_9.jpg
   sequence: 4
@@ -70,11 +279,10 @@ four:
   exposure_compensation: 0
   camera_model: nikon d80
   
-five:
-  id: 5
-  gallery_id: 2
+summer-market-square-both:
+  gallery: summer
   artist: adam
-  filename: 20100606_11.jpg
+  filename: 20100606_20.jpg
   sequence: 5
   views: 0
   caption: market square
@@ -88,12 +296,28 @@ five:
   exposure_compensation: 0
   camera_model: nikon d80 
   
-six:
-  id: 6
-  gallery_id: 2
+summer-else-thetis:
+  gallery: summer
+  artist: adam
+  filename: 20100608_16.jpg
+  sequence: 6
+  views: 9
+  caption: at thetis main beach
+  photo_at: 2010-06-08 12:30
+  shutter_speed: 1/200
+  aperture: 1.8
+  focal_length: 50mm
+  iso: 200
+  exposure_mode:
+  flash: off
+  exposure_compensation: 0
+  camera_model: nikon d80
+  
+summer-fireworks:
+  gallery: summer
   artist: adam
   filename: 20100611_12.jpg
-  sequence: 6
+  sequence: 7
   views: 
   caption: fireworks
   photo_at: 2010-06-11 22:30
@@ -106,12 +330,11 @@ six:
   exposure_compensation: 0
   camera_model: nikon d80
   
-seven:
-  id: 7
-  gallery_id: 2
+summer-snowbirds:
+  gallery: summer
   artist: adam
   filename: 20100612_15.jpg
-  sequence: 7
+  sequence: 8
   views: 88
   caption: snow birds
   photo_at: 2010-06-12 13:30

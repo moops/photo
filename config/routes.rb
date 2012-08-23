@@ -1,8 +1,8 @@
-Photo::Application.routes.draw do
-  resource :photo_comments
+Photos::Application.routes.draw do
+  resources :photo_comments
   
-  resource :galleries do
-    resource :photos do 
+  resources :galleries do
+    resources :photos do 
       collection do
         post :remove, :add
       end

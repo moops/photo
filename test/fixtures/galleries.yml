@@ -1,15 +1,20 @@
-one:
-  id: 1
-  name: first gallery (private)
-  code: 20100501
+youth:
+  name: welcome to canada (private)
+  code: 19710501
   private_key: 123123123
   gallery_on: 2010-06-03
-  default_photo: 1
+  default_photo: 19710501_05.jpg
 
-two:
-  id: 2
-  name: second gallery (public)
-  code: 20100526
+victoria-at-night:
+  name: fountains (public)
+  code: 20090303
   private_key: 
   gallery_on: 2010-06-02
-  default_photo: 5
+  default_photo: 20090303_8.jpg
+
+summer:
+  name: 2010 summer (private)
+  code: 20100612
+  private_key: 
+  gallery_on: 2010-06-02
+  default_photo: 20100612_8.jpg

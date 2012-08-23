@@ -1,9 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
 one:
-  photo_id: 1
-  comment: MyString
+  photo: winter-street
+  comment: first visit to nana's house
 
 two:
-  photo_id: 1
-  comment: MyString
+  photo: winter-street
+  comment: nice pants dad
+  
+three:
+  photo: by-the-creek
+  comment: who is taking this picture?

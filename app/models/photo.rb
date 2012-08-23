@@ -1,6 +1,6 @@
-require 'rubygems'
-require 'mini_magick'
-require 'aws/s3'
+#require 'rubygems'
+#require 'mini_magick'
+#require 'aws/s3'
  
 class Photo < ActiveRecord::Base
 

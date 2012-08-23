@@ -1,4 +1,6 @@
 class Gallery < ActiveRecord::Base
+  
+  attr_accessible :name, :code, :private_key, :gallery_on, :default_photo
 
   has_many :photos
   
