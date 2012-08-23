@@ -22,3 +22,5 @@ gem 'carrierwave'
 gem 'exifr' #, :version => '~> 1.0.3'
 gem 'rmagick'
 
+gem 'debugger', group: [:development, :test]
+
