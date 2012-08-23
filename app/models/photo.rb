@@ -4,8 +4,13 @@ require 'aws/s3'
  
 class Photo < ActiveRecord::Base
 
+  attr_accessible :gallery_id, :image, :artist, :caption, :sequence, :views, :filename, :photo_at, :shutter_speed, :aperture, 
+    :focal_length, :iso, :exposure_mode, :flash, :exposure_compensation, :camera_model
+  
   belongs_to :gallery
   has_many :photo_comments
+  
+  mount_uploader :image, ImageUploader
   
   def save_source(upload)
   
