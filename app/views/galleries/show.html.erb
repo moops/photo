@@ -7,7 +7,7 @@
 </div>
 
 <div id="gallery_options">
-  <% form_tag(:action => 'options') do %>
+  <%= form_tag(galleries_path, :method => :get) do %>
     <%= hidden_field_tag('id',@gallery.id) %>
       <% view_options = "<option value='sequence' #{(session[:gallery_view_mode] == 'sequence' ? 'selected=selected' : '')}>sequence</option><option value='views desc' #{(session[:gallery_view_mode] == 'views desc' ? 'selected=selected' : '')}>most viewed</option><option value='filename' #{(session[:gallery_view_mode] == 'filename' ? 'selected=selected' : '')}>file name</option>" %>
     <table border="0" cellpadding="0" cellspacing="2">

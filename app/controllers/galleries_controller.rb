@@ -16,7 +16,6 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.xml
   def show
-    debugger
     if params[:id] =~ /[^0-9]/
       # params[:id] is a key, searching for a private gallery
       @gallery = Gallery.find_by_private_key(params[:id])

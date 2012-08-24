@@ -5,8 +5,9 @@
         <td>
         <div class="thumbnail">
           <% if link %>
-            <%= link_to_remote(image_tag(p.source_thumb_url, :title => p.filename),
+            <%= link_to(image_tag(p.source_thumb_url, :title => p.filename),
                              :url => gallery_photo_path(@gallery, p), 
+                             :remote => true,
                              :update => 'photo_container',
                              :method => :get) %>
           <% else %>

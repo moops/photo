@@ -2,7 +2,7 @@
 
   <% if @photo.caption %>
     <div class="caption">
-      <%= inline_edit('caption', @photo.caption, "/photos/update_field/#{@photo.id}", 65, "#dddddd", 'caption') %>
+      <%= raw inline_edit('caption', @photo.caption, "/photos/update_field/#{@photo.id}", 65, "#dddddd", 'caption') %>
     </div>
   <% end %>
     
@@ -53,16 +53,18 @@
   <div id="photo_nav">
     <div id="previous">
         <% if @prev %>
-            <%= link_to_remote("<< previous",
+            <%= link_to("<< previous",
                             :url => gallery_photo_path(@gallery, @prev), 
+                            :remote => true,
                             :update => 'photo_container',
                             :method => :get) %>
         <% end %>
     </div> <!-- end previous -->
     <div id="next">
       <% if @next %>
-            <%= link_to_remote("next >>",
+            <%= link_to("next >>",
                           :url => gallery_photo_path(@gallery, @next), 
+                          :remote => true,
                           :update => 'photo_container',
                           :method => :get) %>
         <% end %> 
