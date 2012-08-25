@@ -1,12 +1,11 @@
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
+//= require jdpicker
 //= require_tree .
 
 jQuery(document).ready(function() { 
-
-    $("input.calendar").datepicker();
-    $("input.calendar").datepicker("option", "dateFormat", "yy-mm-dd");
-    $("input.today").datepicker('setDate', new Date());
+	$('#gallery_on').jdPicker();
 });
 
 
@@ -15,20 +14,20 @@ function remove_field(element, item) {
 }
 
 function showAddPhotos(id) {
-    var el = $(id);
-    if (!el.visible()) {
-        Effect.BlindDown(id, { duration: 0.5 });
-    }
+	var el = $(id);
+	if (!el.visible()) {
+		Effect.BlindDown(id, { duration: 0.5 });
+	}
 }
 
 function toggle_photo_form() {
-    var one = $('one_photo');
-    var bunch = $('bunch_photo');
-    if (one.visible()) {
-        Effect.BlindDown('bunch_photo', { duration: 0.5 });
-        Effect.BlindUp('one_photo', { duration: 0.5 });
-    } else {
-        Effect.BlindDown('one_photo', { duration: 0.5 });
-        Effect.BlindUp('bunch_photo', { duration: 0.5 });
-    }
+	var one = $('one_photo');
+	var bunch = $('bunch_photo');
+	if (one.visible()) {
+		Effect.BlindDown('bunch_photo', { duration: 0.5 });
+		Effect.BlindUp('one_photo', { duration: 0.5 });
+	} else {
+		Effect.BlindDown('one_photo', { duration: 0.5 });
+		Effect.BlindUp('bunch_photo', { duration: 0.5 });
+  }
 }
