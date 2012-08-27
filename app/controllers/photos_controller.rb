@@ -1,6 +1,5 @@
 class PhotosController < ApplicationController
 
-  layout 'standard'
   before_filter :get_gallery, :except => :update_field
   
   def get_gallery
