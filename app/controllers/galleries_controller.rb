@@ -1,7 +1,5 @@
 class GalleriesController < ApplicationController
 
-  layout 'standard', :except => :create
-
   # GET /galleries
   # GET /galleries.xml
   def index
