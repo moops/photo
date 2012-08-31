@@ -20,8 +20,8 @@
   <div class="boxhead">view a private gallery</div>
   <div class="boxcontent">
     <%= form_tag(galleries_path, :method => :get) do %>
-      key <%= text_field_tag('id') %>
-      <%= submit_tag('view') %>
+      key <%= text_field_tag :key %>
+      <%= submit_tag :view, :name => nil %>
     <% end %>
   </div>
 </div>

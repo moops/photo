@@ -1,23 +1,23 @@
-<div id="thumbnails">
-  <table cellpadding="0" cellspacing="0">
-    <tr>
-      <% for p in @gallery.photos %>
-        <td>
-        <div class="thumbnail">
+<div id="thumbnail-container">
+    <ul class="thumbnails">
+    <% for p in @gallery.photos %>
+
+        <li class="span4">
           <% if link %>
             <%= link_to(image_tag(p.source_thumb_url, :title => p.filename),
-                             :url => gallery_photo_path(@gallery, p), 
+                             gallery_photo_path(@gallery, p),
                              :remote => true,
                              :update => 'photo_container',
-                             :method => :get) %>
+                             :method => :get,
+                             :class => 'thumbnail') %>
           <% else %>
             <%= image_tag(p.source_thumb_url, :title => p.filename) %>
           <% end %>
           <% if edit %>
             <%= check_box_tag("remove[#{p.id.to_s}]") %>
           <% end %>
-        </div></td>
+        </li>
       <% end %>
-    </tr>
-  </table>
+      </ul>
+
 </div>

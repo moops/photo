@@ -9,5 +9,7 @@ Photos::Application.routes.draw do
     end
   end
 
+  match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
+  
   root :to => 'galleries#index'
 end

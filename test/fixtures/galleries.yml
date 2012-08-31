@@ -1,7 +1,7 @@
 youth:
   name: welcome to canada (private)
   code: 19710501
-  private_key: 123123123
+  private_key: 123123123a
   gallery_on: 2010-06-03
   default_photo: 19710501_05.jpg
 
@@ -13,7 +13,7 @@ victoria-at-night:
   default_photo: 20090303_8.jpg
 
 summer:
-  name: 2010 summer (private)
+  name: 2010 summer (public)
   code: 20100501
   private_key: 
   gallery_on: 2010-06-02

@@ -109,10 +109,13 @@ label       { text-align: right; }
 }
 
 #photo_container {
+  border:2px solid #666;
+  border-radius: .75em;
+  text-align: center;
 }
 
 #photo {
-  float:left;
+  
 }
 
 #photo img {
@@ -121,11 +124,11 @@ label       { text-align: right; }
 }
 
 #photo_nav {
-    text-align:center;
+  text-align:center;
 }
 
 #previous {
-    float:left;
+  float:left;
 }
 
 #photo_info_container {
@@ -143,26 +146,21 @@ label       { text-align: right; }
 }
 
 #next {
-    float:right;
+  float:right;
 }
 
-#thumbnails {
-  height:165px;
+#thumbnail-container {
+  height:100%;
   width:100%;
-  float:left;
-  overflow:auto;
-}
-
-#thumbnails td {
-  vertical-align:bottom;
-}
-
-.thumbnail img {
-  padding:0px 2px 0px 2px;
+  overflow:scroll;
 }
 
 .thumbnail {
-  
+  border:none;
+}
+
+.thumbnail img {
+  border:2px solid #666;
 }
 
 #google {
@@ -207,10 +205,6 @@ label       { text-align: right; }
  miscellaneous
  ************************************************
  */
- 
- a img {
-    border-width: 0px;
-}
 
 .errorText {
   font-style: italic;

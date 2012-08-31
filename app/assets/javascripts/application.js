@@ -2,6 +2,7 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jdpicker
+//= require jeditable
 //= require_tree .
 
 jQuery(document).ready(function() { 

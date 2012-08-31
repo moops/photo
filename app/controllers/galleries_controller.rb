@@ -3,6 +3,22 @@ class GalleriesController < ApplicationController
   # GET /galleries
   # GET /galleries.xml
   def index
+    # searching by private key
+    if params[:key]
+      @gallery = Gallery.find_by_private_key(params[:key])
+      if @gallery.nil?
+        flash[:notice] = "no gallery found"
+      else
+        redirect_to gallery_path(@gallery)
+        return
+      end
+    end
+    
+    # searching public galleries by name and/or date
+    if params[:name] or params[:gallery_on]
+      @search_results = Gallery.find_public(params[:name],params[:gallery_on])
+    end
+    
     @recent_galleries = Gallery.recent_galleries
 
     respond_to do |format|
@@ -14,25 +30,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.xml
   def show
-    if params[:id] =~ /[^0-9]/
-      # params[:id] is a key, searching for a private gallery
-      @gallery = Gallery.find_by_private_key(params[:id])
-      unless @gallery
-        flash[:notice] = "no gallery found"
-        redirect_to(galleries_path)
-        return
-      end
-    elsif params[:name] or params[:gallery_on]
-      #searching for public galleries
-      @search_results = Gallery.find_public(params[:name],params[:gallery_on])
-      logger.debug("search results[#{@search_results.inspect}]")
-      @recent_galleries = Gallery.recent_galleries
-      render 'index'
-      return
-    else 
-      @gallery = Gallery.find(params[:id])
-    end
-
+    @gallery = Gallery.find(params[:id])
     @photos = @gallery.photos
     if false # @gallery.default_photo 
       @photo = Photo.find_by_filename(@gallery.default_photo)
@@ -40,8 +38,6 @@ class GalleriesController < ApplicationController
       @photo = @photos.to_a[0]
     end
     index = @photos.index(@photo)
-    logger.debug("gallery[#{@gallery.inspect}]")
-    logger.debug("index[#{index.inspect}], @photos[#{@photos.inspect}]")
     @next = @photos[index + 1].id if index < @photos.length - 1
     @prev = @photos[index - 1].id if index > 0
 
