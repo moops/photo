@@ -28,12 +28,12 @@ class PhotosController < ApplicationController
     
     @photo.views += 1
     @photo.save
-    
-    render :partial => 'show'
-    # respond_to do |format|
-    #  format.html # show.html.erb
-    #  format.xml  { render :xml => @photo }
-    # end
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.xml  { render :xml => @photo }
+      format.js   { } # show.js.erb
+    end
   end
 
   # GET /galleries/1/photos/new

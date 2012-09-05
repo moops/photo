@@ -1,72 +1,63 @@
-<div id="photo_container">
-
-    <% if @photo.caption %>
-        <div class="caption">
-            
-            <%= raw inline_edit('caption', @photo.caption, caption_path(@photo.id, {:field => 'caption'}) ) %>
-        </div>
-    <% end %>
-    
-    <div id="photo">
-        <%= image_tag(@photo.source_url,
-                  :name => "photo_display",
-                  :title => @photo.filename,
-                  :alt => @photo.filename) %>
-    </div> <!-- end photo -->
-  
-    <div id="photo_info_container">
-        <div id="exif_details" style="display:none">
-
-            <table cellspacing="0" cellpadding="2" border="0">
-                <tr>
-                    <td class="exif_label">viewed:</td><td class="exif_data"><%= @photo.views %> times</td></tr>
-                <tr>
-                    <td class="exif_label">aperture:</td><td class="exif_data"><%= @photo.aperture %></td></tr>
-                <tr>
-                <td class="exif_label">date:</td><td class="exif_data"><%= @photo.photo_at %></td></tr>
-                <tr>
-                    <td class="exif_label">iso:</td><td class="exif_data"><%= @photo.iso %></td></tr>
-                <tr>
-                    <td class="exif_label">mode:</td><td class="exif_data"><%= @photo.exposure_mode %></td></tr>
-                <tr>
-                    <td class="exif_label">photographer:</td><td class="exif_data"><%= @photo.artist %></td></tr>
-                <tr>
-                    <td class="exif_label">flash:</td><td class="exif_data"><%= @photo.flash %></td></tr>
-                <tr>
-                    <td class="exif_label">focal length:</td><td class="exif_data"><%= @photo.focal_length %></td></tr>
-                <tr>
-                    <td class="exif_label">compensation:</td><td class="exif_data"><%= @photo.exposure_compensation %></td></tr>
-                <tr>
-                    <td class="exif_label">shutter speed:</td><td class="exif_data"><%= @photo.shutter_speed %></td></tr>
-                <tr>
-                    <td class="exif_label">camera model:</td><td class="exif_data"><%= @photo.camera_model %></td></tr>
-            </table>
-
-        </div> <!-- end exif_details -->
-
-        <div id="comments" style="display:none">
-            <%= render(:partial => 'photo_comments/comments') %>
-        </div> <!-- end comments -->
+<% if @photo.caption %>
+    <div class="caption">
+        <%= raw inline_edit('caption', @photo.caption, caption_path(@photo.id, {:field => 'caption'}) ) %>
     </div>
-  
-    
-  <div id="photo_nav">
+<% end %>
+
+<div id="photo">
+    <%= image_tag(@photo.source_url,
+              :name => "photo_display",
+              :title => @photo.filename,
+              :alt => @photo.filename) %>
+</div> <!-- end photo -->
+
+<div id="photo_info_container">
+    <div id="exif_details" style="display:none">
+
+        <table cellspacing="0" cellpadding="2" border="0">
+            <tr>
+                <td class="exif_label">viewed:</td><td class="exif_data"><%= @photo.views %> times</td></tr>
+            <tr>
+                <td class="exif_label">aperture:</td><td class="exif_data"><%= @photo.aperture %></td></tr>
+            <tr>
+            <td class="exif_label">date:</td><td class="exif_data"><%= @photo.photo_at %></td></tr>
+            <tr>
+                <td class="exif_label">iso:</td><td class="exif_data"><%= @photo.iso %></td></tr>
+            <tr>
+                <td class="exif_label">mode:</td><td class="exif_data"><%= @photo.exposure_mode %></td></tr>
+            <tr>
+                <td class="exif_label">photographer:</td><td class="exif_data"><%= @photo.artist %></td></tr>
+            <tr>
+                <td class="exif_label">flash:</td><td class="exif_data"><%= @photo.flash %></td></tr>
+            <tr>
+                <td class="exif_label">focal length:</td><td class="exif_data"><%= @photo.focal_length %></td></tr>
+            <tr>
+                <td class="exif_label">compensation:</td><td class="exif_data"><%= @photo.exposure_compensation %></td></tr>
+            <tr>
+                <td class="exif_label">shutter speed:</td><td class="exif_data"><%= @photo.shutter_speed %></td></tr>
+            <tr>
+                <td class="exif_label">camera model:</td><td class="exif_data"><%= @photo.camera_model %></td></tr>
+        </table>
+
+    </div> <!-- end exif_details -->
+
+    <div id="comments" style="display:none">
+        <%= render(:partial => 'photo_comments/comments') %>
+    </div> <!-- end comments -->
+</div>
+
+
+<div id="photo_nav">
     <div id="previous">
         <% if @prev %>
-            <%= link_to("<< previous",
-                            :url => gallery_photo_path(@gallery, @prev), 
-                            :remote => true,
-                            :update => 'photo_container',
-                            :method => :get) %>
+            <%= link_to("<< previous", gallery_photo_path(@gallery, @prev), :remote => true,
+                            :update => 'photo_container') %>
         <% end %>
     </div> <!-- end previous -->
     <div id="next">
       <% if @next %>
-            <%= link_to("next >>",
-                          :url => gallery_photo_path(@gallery, @next), 
-                          :remote => true,
-                          :update => 'photo_container',
-                          :method => :get) %>
+            <%= link_to("next >>", gallery_photo_path(@gallery, @next), :remote => true,
+                          :update => 'photo_container') %>
         <% end %> 
     </div> <!-- end next -->
     <script type="text/javascript">
@@ -79,6 +70,5 @@
     </script>           
     <a href="#" onclick="showExif();">info</a> |
     <a href="#" onclick="showComments();">comments(<%= @photo.photo_comments.size %>)</a>
-    
-    </div> <!-- end photo_nav --> 
-</div> <!-- end photo_container -->
+
+</div> <!-- end photo_nav --> 
