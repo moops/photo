@@ -1,60 +1,18 @@
 #require 'rubygems'
-#require 'mini_magick'
-#require 'aws/s3'
+require 'mini_magick'
+require 'aws/s3'
  
 class Photo < ActiveRecord::Base
-
-  attr_accessible :gallery_id, :image, :artist, :caption, :sequence, :views, :filename, :photo_at, :shutter_speed, :aperture, 
+  include Rails.application.routes.url_helpers
+  
+  attr_accessible :gallery_id, :artist, :caption, :sequence, :views, :img, :photo_at, :shutter_speed, :aperture, 
     :focal_length, :iso, :exposure_mode, :flash, :exposure_compensation, :camera_model
   
   belongs_to :gallery
   has_many :photo_comments
   
-  mount_uploader :image, ImageUploader
-  
-  def save_source(upload)
-  
-    AWS::S3::Base.establish_connection!(
-        :access_key_id     => S3_CONFIG[Rails.env]['access_key_id'],
-        :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
-    )
+  mount_uploader :img, ImageUploader
     
-    # write the original to the temp dir
-    path = File.join('tmp', upload.original_filename)
-    File.open(path, 'wb') { |f| f.write(upload.read) }
-    filename = "tmp/#{upload.original_filename}"
-    original = MiniMagick::Image.from_file(filename)
-    set_exif(original)
-    
-    # write the web and thumb version to the temp dir
-    web = original
-    web.resize '640x640'
-    web.write("tmp/web_#{upload.original_filename}")
-    thumb = original
-    thumb.resize '130x130'
-    thumb.write("tmp/thumb_#{upload.original_filename}")
-    
-    # write to s3
-    file_key = "#{gallery.code}/#{upload.original_filename}"
-    AWS::S3::S3Object.store(file_key, open("tmp/web_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
-    thumb_key = "#{gallery.code}/thumbnails/#{upload.original_filename}"
-    AWS::S3::S3Object.store(thumb_key, open("tmp/thumb_#{upload.original_filename}", 'rb'), bucket_name, :access => :public_read)
-  end
-  
-  def set_exif_from_s3()
-      AWS::S3::Base.establish_connection!(
-          :access_key_id     => S3_CONFIG[Rails.env]['access_key_id'],
-          :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
-      )
-      
-      path = File.join('tmp', self.filename)
-      # get from s3
-      file_key = "#{gallery.code}/#{self.filename}"
-      File.open("tmp/#{self.filename}", 'wb') { |f| f.write(AWS::S3::S3Object.value(file_key, bucket_name)) }
-      tmp_file = MiniMagick::Image.from_file("tmp/#{self.filename}")
-      set_exif(tmp_file)
-  end
-  
   def remove_source
     
       AWS::S3::Base.establish_connection!(
@@ -62,16 +20,16 @@ class Photo < ActiveRecord::Base
           :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
       )
       
-      AWS::S3::S3Object.delete("#{gallery.code}/thumbnails/#{self.filename}", bucket_name)
-      AWS::S3::S3Object.delete("#{gallery.code}/#{self.filename}", bucket_name)
+      AWS::S3::S3Object.delete("#{gallery.code}/thumbnails/#{self.img}", bucket_name)
+      AWS::S3::S3Object.delete("#{gallery.code}/#{self.img}", bucket_name)
   end
   
   def source_url
-    "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/#{filename}"
+    "http://s3.amazonaws.com/#{bucket_name}/foo/#{gallery.code}/bar/#{img}"
   end
   
   def source_thumb_url
-    "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/thumbnails/#{filename}"
+    "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/thumbnails/#{img}"
   end
 
   def next
@@ -90,22 +48,36 @@ class Photo < ActiveRecord::Base
     p
   end
 
-  def set_exif(img)
-    if (img['EXIF:DateTimeOriginal']) 
+  def extract_exif(image)
+    if (image['EXIF:DateTimeOriginal']) 
       begin
-        self.photo_at= DateTime.strptime(img['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
+        self.photo_at= DateTime.strptime(image['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
       rescue
       end
     end
-    self.shutter_speed= img['EXIF:ExposureTime'].strip
-    self.aperture= img['EXIF:FNumber'].strip
-    self.focal_length= img['EXIF:FocalLengthIn35mmFilm'].strip + (img['EXIF:FocalLengthIn35mmFilm'].strip.length > 0 ? 'mm' : '')
-    self.iso= img['EXIF:ISOSpeedRatings'].strip
-    self.exposure_mode= img['EXIF:ExposureProgram'].strip
-    self.flash= img['EXIF:Flash'].strip
-    self.exposure_compensation= img['EXIF:ExposureBiasValue'].strip
-    self.camera_model= img['EXIF:Model'].strip
-    self.save
+    self.shutter_speed= image['EXIF:ExposureTime'].strip if image['EXIF:ExposureTime']
+    self.aperture= image['EXIF:FNumber'].strip if image['EXIF:FNumber']
+    self.focal_length= image['EXIF:FocalLengthIn35mmFilm'].strip + (image['EXIF:FocalLengthIn35mmFilm'].strip.length > 0 ? 'mm' : '') if image['EXIF:FocalLengthIn35mmFilm']
+    self.iso= image['EXIF:ISOSpeedRatings'].strip if image['EXIF:ISOSpeedRatings']
+    self.exposure_mode= image['EXIF:ExposureProgram'].strip if image['EXIF:ExposureProgram']
+    self.flash= image['EXIF:Flash'].strip if image['EXIF:Flash']
+    self.exposure_compensation= image['EXIF:ExposureBiasValue'].strip if image['EXIF:ExposureBiasValue']
+    self.camera_model= image['EXIF:Model'].strip if image['EXIF:Model']
+  end
+  
+  #one convenient method to pass jq_upload the necessary information
+  def to_jq_upload
+    {
+      "id" => read_attribute(:id),
+      "artist" => read_attribute(:artist),
+      "caption" => read_attribute(:caption),
+      "name" => read_attribute(:img),
+      "size" => img.size,
+      "url" => img.url,
+      "thumbnail_url" => img.thumb.url,
+      "delete_url" => gallery_photo_path(gallery, id),
+      "delete_type" => "DELETE" 
+     }
   end
   
   private

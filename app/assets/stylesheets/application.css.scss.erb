@@ -1,12 +1,10 @@
-/*
- *= require_self
- *= require jdpicker
- *= require_tree .
-*/
+
+@import "jdpicker";
+@import "jquery_ui";
 
 // Set the correct sprite paths
-$iconSpritePath: image-path('glyphicons-halflings.png');
-$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+$iconSpritePath: asset-path('glyphicons-halflings', image);
+$iconWhiteSpritePath: asset-path('glyphicons-halflings-white', image);
 
 $navbarBackground: #555;
 $navbarBackgroundHighlight: #888;
@@ -17,22 +15,28 @@ $navbarLinkColor: #eee;
 
 body { padding-top: 60px; }
 
-//@import "bootstrap-responsive";
+@import "bootstrap-responsive";
+
+@import "jquery.fileupload-ui";
+
+.fileupload-loading {
+  background: url(<%= asset_path 'loading.gif' %>) center no-repeat;
+}
 
 .navbar .brand {
   color: #FAFFB8;
 }
 
 body {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  font-size: 76%;
-  font-family: Verdana, Arial, Helvetica, sans-serif;
-  font-style: normal;
-  text-decoration: none;  
-  font-weight: normal;
-  color: #555;
-  background: #fff url(<%= asset_path 'grgrad.gif' %>) repeat-x;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 76%;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-style: normal;
+    text-decoration: none;  
+    font-weight: normal;
+    color: #555;
+    background: #fff url(<%= asset_path 'grgrad.gif' %>) repeat-x;
 }
 
 a           { color: #33f; text-decoration: none; font-family: verdana; }
@@ -41,7 +45,6 @@ a:active    { color: #33f; text-decoration: none; font-family: verdana; }
 a:hover     { color: #33f; text-decoration: underline; font-family: verdana; }
 
 textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
-label       { text-align: right; }
 
 /************************************************
  all pages
@@ -49,10 +52,10 @@ label       { text-align: right; }
  */
  
 #container { 
-  width:90%;  
-  margin-left:auto; 
-  margin-right:auto;
-  margin-bottom:20px; 
+    width:90%;  
+    margin-left:auto; 
+    margin-right:auto;
+    margin-bottom:20px; 
 } 
  
 #header {
@@ -66,21 +69,21 @@ label       { text-align: right; }
  ************************************************
  */
 #gallery_index_recent {
-  margin:20px 20px 0px 0px;
-  float:left;
-  width:40%;
+    margin:20px 20px 0px 0px;
+    float:left;
+    width:40%;
 }
 
 #gallery_index_search {
-  margin:20px 0px 0px 0px;
-  float:left;
-  width:40%;
+    margin:20px 0px 0px 0px;
+    float:left;
+    width:40%;
 }
 
 #gallery_index_private {
-  margin:20px 20px 0px 0px;
-  float:left;
-  width:40%;
+    margin:20px 20px 0px 0px;
+    float:left;
+    width:40%;
 }
 
 /************************************************
@@ -88,30 +91,30 @@ label       { text-align: right; }
  ************************************************
  */
 #gallery_info {
-  margin:0px 0px 30px 0px;
-  float:left;
+    margin:0px 0px 30px 0px;
+    float:left;
 }
 
 #gallery_info .name {
-  color:#333;
-  font-weight:bold;
-  font-size:2em;
+    color:#333;
+    font-weight:bold;
+    font-size:2em;
 }
 
 #gallery_info .info {
-  color:#666;
-  font-weight:bold;
-  font-size:1.5em;
+    color:#666;
+    font-weight:bold;
+    font-size:1.5em;
 }
 
 #gallery_options {
-  float:right;
+    float:right;
 }
 
 #photo_container {
-  border:2px solid #666;
-  border-radius: .75em;
-  text-align: center;
+    border:2px solid #666;
+    border-radius: .75em;
+    text-align: center;
 }
 
 #photo {
@@ -119,65 +122,56 @@ label       { text-align: right; }
 }
 
 #photo img {
-  border:2px solid #666;
-  margin-bottom:8px;
+    border:2px solid #666;
+    margin-bottom:8px;
 }
 
 #photo_nav {
-  text-align:center;
+    text-align:center;
 }
 
 #previous {
-  float:left;
+    float:left;
 }
 
 #photo_info_container {
-  padding-left:20px;
-  float:left;
+    padding-left:20px;
+    float:left;
 }
 
 #exif_details {
 }
 
 #comments {
-  padding-top:15px;
-  width:240px;
-  text-align:left;
+    padding-top:15px;
+    width:240px;
+    text-align:left;
 }
 
 #next {
-  float:right;
+
 }
 
 #thumbnail-container {
-  height:100%;
-  width:100%;
-  overflow:scroll;
+    height:600px;
+    width:100%;
+    overflow:scroll;
+    padding-right:20px;
 }
 
 .thumbnail {
-  border:none;
+    border:none;
 }
 
-.thumbnail img {
-  border:2px solid #666;
+.thumbnail > img {
+    border:2px solid #666;
 }
 
 #google {
 }
- 
-#footer {
-  padding-top:25px;
-  clear:both;
-  color:#999;
-}
 
-#footer .left {
-  float:left;
-}
-
-#footer .right {
-  float: right;
+footer {
+    margin-top: 20px;
 }
 
 

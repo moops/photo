@@ -1,38 +1,196 @@
 <div id="gallery_info">
-  <span class="name"><%= @gallery.name %></span>
-  <span class="info">
-    <%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %>
-  </span>
+    <span class="name"><%= @gallery.name %></span>
+    <span class="info">
+        <%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %>
+    </span>
 </div>
-<p class="clear"/>
 
 <% if(@gallery.photos.size > 0) %>
-  <%= render(:partial => 'galleries/thumbnails', :locals => { :edit => false, :link => false }) %>
+    <%= render(:partial => 'galleries/thumbnails', :locals => { :edit => false, :link => false }) %>
 <% end %>
 
-<h1>add photos</h1>
+<h1 id="foobar">add photos</h1>
 
-<%= link_to_function('toggle', 'toggle_photo_form()') %>
+<%= form_for [@gallery, Photo.new], :html => { :multipart => true, :id => "fileupload", :class => 'form-horizontal' } do |f| %>
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="row fileupload-buttonbar">
+            <div class="span7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-success fileinput-button">
+                    <i class="icon-plus icon-white"></i>
+                    <span>add files</span>
+                    <%= f.file_field :img, :multiple => true, name: "photo[img]" %>
+                </span>
+                <button type="submit" class="btn btn-primary start">
+                    <i class="icon-upload icon-white"></i>
+                    <span>start upload</span>
+                </button>
+                <button type="reset" class="btn btn-warning cancel">
+                    <i class="icon-ban-circle icon-white"></i>
+                    <span>cancel</span>
+                </button>
+                <button type="button" class="btn btn-danger delete">
+                    <i class="icon-trash icon-white"></i>
+                    <span>delete</span>
+                </button>
+                <input type="checkbox" class="toggle">
+            </div>
+            <div class="span5">
+                <!-- The global progress bar -->
+                <div class="progress progress-success progress-striped active fade">
+                    <div class="bar" style="width:0%;"></div>
+                </div>
+            </div>
+        </div>
+        <!-- The loading indicator is shown during image processing -->
+        <div class="fileupload-loading"></div>
+        <br>
+        <!-- The table listing the files available for upload/download -->
+        <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+        </table>
+    <% end %>
+<script>
+  var fileUploadErrors = {
+    maxFileSize: 'File is too big',
+    minFileSize: 'File is too small',
+    acceptFileTypes: 'Filetype not allowed',
+    maxNumberOfFiles: 'Max number of files exceeded',
+    uploadedBytes: 'Uploaded bytes exceed file size',
+    emptyResult: 'Empty file upload result'
+  };
+</script>
 
-<div id="one_photo" style="display:none">
-  <% form_for([@gallery,@photo], :html => { :multipart => true }) do |f| %>
-    <%= f.error_messages %><br />
-    <%= f.label(:artist) %><br />
-    <%= f.text_field(:artist) %><p/>
-    <%= f.label(:caption) %><br />
-    <%= f.text_field(:caption) %><p/>
-    <%= f.label(:source, 'File') %><br />
-    <%= f.file_field(:source) %><p/>
-    <%= f.submit('add') %>
-  <% end %>
-</div>
+<!-- shared/fileupload/_queue.html" -->
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td class="preview"><span class="fade"></span></td>
+        <td class="name"><span>{%=file.name%}</span></td>
+        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+        {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else if (o.files.valid && !i) { %}
+            <td>
+                <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td class="start">{% if (!o.options.autoUpload) { %}
+                <button class="btn btn-primary">
+                    <i class="icon-upload icon-white"></i>
+                    <span>{%=locale.fileupload.start%}</span>
+                </button>
+            {% } %}</td>
+        {% } else { %}
+            <td colspan="2"></td>
+        {% } %}
+        <td class="cancel">{% if (!i) { %}
+            <button class="btn btn-warning">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>{%=locale.fileupload.cancel%}</span>
+            </button>
+        {% } %}</td>
+    </tr>
+{% } %}
+</script>
 
-<div id="bunch_photo">
-  <% form_tag(add_gallery_photos_path(@gallery)) do -%>
-    <%= label_tag(:artist) %><br />
-    <%= text_field_tag(:artist) %><p/>
-    <%= label_tag('file names') %><br />
-    <%= text_area_tag(:file_names, nil, :size => '35x20') %><p/>
-    <%= submit_tag('add') %>
-  <% end -%>
-</div>
+<!-- shared/fileupload/_index.html" -->
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+        {% } else { %}
+            <td class="preview">{% if (file.thumbnail_url) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">
+                <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+            </td>
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td colspan="2"></td>
+        {% } %}
+        <td class="delete">
+            <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+                <i class="icon-trash icon-white"></i>
+                <span>{%=locale.fileupload.destroy%}</span>
+            </button>
+            <input type="checkbox" name="delete" value="1">
+        </td>
+    </tr>
+{% } %}
+</script>
+
+<script>
+
+    $(function () {
+        console.log('function() in new.html.erb')
+        'use strict';
+
+        // Initialize the jQuery File Upload widget:
+        $('#fileupload').fileupload();
+
+        // Enable iframe cross-domain access via redirect option:
+        $('#fileupload').fileupload(
+                'option',
+                'redirect',
+                window.location.href.replace(
+                        /\/[^\/]*$/,
+                        '/cors/result.html?%s'
+                )
+        );
+
+        $('#fileupload').fileupload('option', {
+            maxFileSize:10000000,
+            acceptFileTypes:/(\.|\/)(gif|jpe?g|png)$/i,
+            sequentialUploads:true,
+            process:[
+                {
+                    action:'load',
+                    fileTypes:/^image\/(gif|jpeg|png)$/,
+                    maxFileSize:20000000 // 20MB
+                },
+                {
+                    action:'resize',
+                    maxWidth:2048,
+                    maxHeight:2048
+                },
+                {
+                    action:'save'
+                }
+            ]
+        });
+
+/*        if ($.support.cors) {
+            $.ajax({
+                url:'//aws.something/',
+                type:'HEAD'
+            }).fail(function () {
+                        $('<span class="alert alert-error"/>')
+                                .text('Upload server currently unavailable - ' +
+                                new Date())
+                                .appendTo('#fileupload');
+                    });
+        }
+
+*/
+        // Load existing files:
+        $('#fileupload').each(function () {
+            var that = this;
+            $.getJSON(this.action, function (result) {
+                if (result && result.length) {
+                    $(that).fileupload('option', 'done')
+                            .call(that, null, {result:result});
+                }
+            });
+        });
+
+
+    });
+
+</script>
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+<!--[if gte IE 8]><script src="/javascripts/jquery-file-upload/js/cors/jquery.xdr-transport.js"></script><![endif]-->

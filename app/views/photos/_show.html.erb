@@ -5,10 +5,10 @@
 <% end %>
 
 <div id="photo">
-    <%= image_tag(@photo.source_url,
+    <%= image_tag(@photo.img_url,
               :name => "photo_display",
-              :title => @photo.filename,
-              :alt => @photo.filename) %>
+              :title => @photo.img,
+              :alt => @photo.img) %>
 </div> <!-- end photo -->
 
 <div id="photo_info_container">
@@ -50,14 +50,16 @@
 <div id="photo_nav">
     <div id="previous">
         <% if @prev %>
-            <%= link_to("<< previous", gallery_photo_path(@gallery, @prev), :remote => true,
-                            :update => 'photo_container') %>
+            <%= link_to(gallery_photo_path(@gallery, @prev), :remote => true, :update => 'photo_container')  do %>
+                <i class="pull-left icon-chevron-left"> previous</i>
+            <% end %>
         <% end %>
     </div> <!-- end previous -->
     <div id="next">
       <% if @next %>
-            <%= link_to("next >>", gallery_photo_path(@gallery, @next), :remote => true,
-                          :update => 'photo_container') %>
+            <%= link_to(gallery_photo_path(@gallery, @next), :remote => true, :update => 'photo_container') do %>
+                <i class="pull-right icon-chevron-right"> next</i>
+            <% end %>
         <% end %> 
     </div> <!-- end next -->
     <script type="text/javascript">

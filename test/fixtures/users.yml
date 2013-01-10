@@ -1,0 +1,7 @@
+adam:
+  name: adam
+  email: adam@raceweb.ca
+  # hashed from 'adam_pass'
+  password_digest: $2a$10$MuZ/FSYjDkIim0zFodiV1OjpgDRzKSpnHQtykmm.JQSVGq3JE7BJS
+  # admin and athlete
+  authority: 3

@@ -1,15 +1,11 @@
 class PhotosController < ApplicationController
+  
+  load_and_authorize_resource :gallery
+  load_and_authorize_resource :photo, :through => :gallery
 
-  before_filter :get_gallery, :except => :update_field
-  
-  def get_gallery
-    @gallery = Gallery.find(params[:gallery_id])
-  end
-  
   # GET /galleries/1/photos
   # GET /galleries/1/photos.xml
   def index
-    @photo = Photo.new
     @photos = @gallery.photos
 
     respond_to do |format|
@@ -21,7 +17,6 @@ class PhotosController < ApplicationController
   # GET /galleries/1/photos/1
   # GET /galleries/1/photos/1.xml
   def show
-    @photo = Photo.find(params[:id])
     index = @gallery.photos.index(@photo)
     @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
     @prev = @gallery.photos[index - 1].id if index > 0
@@ -39,8 +34,6 @@ class PhotosController < ApplicationController
   # GET /galleries/1/photos/new
   # GET /galleries/1/photos/new.xml
   def new
-    @photo = @gallery.photos.new
-    logger.info("creating photo #{@photo.inspect}")
     
     respond_to do |format|
       format.html # new.html.erb
@@ -50,30 +43,25 @@ class PhotosController < ApplicationController
 
   # GET /galleries/1/photos/1/edit
   def edit
-    @photo = Photo.find(params[:id])
   end
 
   # POST /galleries/1/photos
-  # POST /galleries/1/photos.xml
+  # POST /galleries/1/photos.json
   def create
-    @photo = @gallery.photos.new
-    @photo.artist=(params[:photo]['artist'])
-    @photo.caption=(params[:photo]['caption'])
-    source = params[:photo]['source']
-    logger.info("creating photo: #{@photo.inspect}")
-    logger.info("with file: #{source.inspect}")
-    @photo.save_source(source)
-    @photo.filename=(source.original_filename)
-    @photo.views s= 0
+    #@photo.artist=(params[:photo]['artist'])
+    #@photo.caption=(params[:photo]['caption'])
+    #source = params[:photo][:img].tempfile
+    #logger.info("create params: #{source.inspect}")
+    #@photo.extract_exif(source)
+    #@photo.save_source(source)
+    #@photo.img=(source.original_filename)
+    @photo.views = 0
     
     respond_to do |format|
       if @photo.save
-        flash[:notice] = "#{@photo.filename} was successfully created."
-        format.html { redirect_to(new_gallery_photo_path(@gallery)) }
-        format.xml  { render :xml => @photo, :status => :created, :location => @photo }
+        format.json { render :json => [ @photo.to_jq_upload ].to_json }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @photo.errors, :status => :unprocessable_entity }
+        format.json { render :json => [ @photo.to_jq_upload.merge({ :error => "custom_failure" }) ].to_json }
       end
     end
   end
@@ -81,7 +69,6 @@ class PhotosController < ApplicationController
   # PUT /galleries/1/photos/1
   # PUT /galleries/1/photos/1.xml
   def update
-    @photo = Photo.find(params[:id])
 
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
@@ -120,10 +107,9 @@ class PhotosController < ApplicationController
     if params[:file_names]
       params[:file_names].each do |val| 
         p = @gallery.photos.new
-        p.filename= val.strip
+        p.img= val.strip
         p.caption= val.strip
         p.views = 0
-        p.set_exif_from_s3()
         p.artist= params[:artist] if (params[:artist])
         p.sequence= sequence += 1
         p.save

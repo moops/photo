@@ -1,5 +1,7 @@
 class GalleriesController < ApplicationController
 
+  load_and_authorize_resource
+
   # GET /galleries
   # GET /galleries.xml
   def index
@@ -30,14 +32,13 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.xml
   def show
-    @gallery = Gallery.find(params[:id])
     @photos = @gallery.photos
-    if false # @gallery.default_photo 
-      @photo = Photo.find_by_filename(@gallery.default_photo)
+    if @gallery.default_photo 
+      @photo = Photo.find_by_img(@gallery.default_photo)
     else
       @photo = @photos.to_a[0]
     end
-    index = @photos.index(@photo)
+    index = @photos.index(@photo) || 0
     @next = @photos[index + 1].id if index < @photos.length - 1
     @prev = @photos[index - 1].id if index > 0
 
@@ -50,8 +51,6 @@ class GalleriesController < ApplicationController
   # GET /galleries/new
   # GET /galleries/new.xml
   def new
-    @gallery = Gallery.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @gallery }
@@ -60,13 +59,11 @@ class GalleriesController < ApplicationController
 
   # GET /galleries/1/edit
   def edit
-    @gallery = Gallery.find(params[:id])
   end
 
   # POST /galleries
   # POST /galleries.xml
   def create
-    @gallery = Gallery.new(params[:gallery])
     
     #generate private key
     if 'private'.eql?(params[:gallery_access])
@@ -90,7 +87,6 @@ class GalleriesController < ApplicationController
   # PUT /galleries/1
   # PUT /galleries/1.xml
   def update
-    @gallery = Gallery.find(params[:id])
 
     respond_to do |format|
       if @gallery.update_attributes(params[:gallery])
@@ -107,7 +103,6 @@ class GalleriesController < ApplicationController
   # DELETE /galleries/1
   # DELETE /galleries/1.xml
   def destroy
-    @gallery = Gallery.find(params[:id])
     @gallery.destroy
 
     respond_to do |format|
@@ -124,7 +119,7 @@ class GalleriesController < ApplicationController
                            :order => session[:gallery_view_mode])
       if use_default
         if @gallery.default_photo 
-          @photo = Photo.find_by_filename(@gallery.default_photo)
+          @photo = Photo.find_by_img(@gallery.default_photo)
         else
           @photo = @photos.to_a[0]
         end

@@ -1,6 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!DOCTYPE html>
+<html>
   <head>
     <title>raceweb - photo</title>
     <!--[if lt IE 9]>
@@ -16,6 +15,17 @@
   </head>
 
 <body>
+    
+    <div id="user-header">
+        <% if current_user %>
+            Logged in as <%= current_user.email %>.
+            <%= link_to "Log Out", logout_path %>
+        <% else %>
+            <%= link_to "Sign Up", signup_path %> or
+            <%= link_to "Log In", login_path %>
+        <% end %>
+    </div>
+      
     <% flash.each do |key, value| %>
         <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
             <a class="close">×</a>
@@ -32,30 +42,23 @@
         </div><!-- end row -->
         
         <footer>
-            <div class="left">
+            <div class="pull-left">
                 &copy; <%= Date.today.year %> raceweb.ca victoria bc<br/>
                 all rights reserved<br/>
                 email: <a href="mailto:info@raceweb.ca">info@raceweb.ca</a>
             </div>
-            <div class="right">
+            <div class="pull-right">
                 <script type="text/javascript">
                   <!--
-                  google_ad_client = "pub-2435759852249095";
-                  google_ad_width = 468;
-                  google_ad_height = 15;
-                  google_ad_format = "468x15_0ads_al_s";
-                  google_ad_channel ="";
-                  google_color_border = "FFFFFF";
-                  google_color_bg = "FFFFFF";
-                  google_color_link = "3333FF";
-                  google_color_url = "008000";
-                  google_color_text = "333333";
+                  google_ad_client = "ca-pub-2435759852249095";
+                  google_ad_slot = "3013266050";
+                  google_ad_width = 728;
+                  google_ad_height = 90;
                   //-->
                 </script>
                 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
             </div>
-            <div class="clear"/>
-        </footer>
+        </footer> <!-- end footer -->
     </div><!-- end container -->
 </body>
 </html>

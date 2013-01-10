@@ -4,14 +4,14 @@
 
         <li class="span4">
           <% if link %>
-            <%= link_to(image_tag(p.source_thumb_url, :title => p.filename),
+            <%= link_to(image_tag(p.img_url(:thumb), :title => p.img),
                              gallery_photo_path(@gallery, p),
                              :remote => true,
                              :update => 'photo_container',
                              :method => :get,
                              :class => 'thumbnail') %>
           <% else %>
-            <%= image_tag(p.source_thumb_url, :title => p.filename) %>
+            <%= image_tag(p.img_url(:thumb), :title => p.img) %>
           <% end %>
           <% if edit %>
             <%= check_box_tag("remove[#{p.id.to_s}]") %>

@@ -1,7 +1,7 @@
 winter-street:
   gallery: youth
   artist: mom
-  filename: 19700401_1.jpg
+  img: 19700401_1.jpg
   sequence: 1
   views: 1
   caption: me and dad on the lawn
@@ -18,7 +18,7 @@ winter-street:
 high-chair:
   gallery: youth
   artist: mom
-  filename: 19700701_2.jpg
+  img: 19700701_2.jpg
   sequence: 2
   views: 13
   caption: drinking breakfast
@@ -35,7 +35,7 @@ high-chair:
 beach:
   gallery: youth
   artist: dad
-  filename: 19710401_3.jpg
+  img: 19710401_3.jpg
   sequence: 3
   views: 22
   caption: me and mom on the beach
@@ -52,7 +52,7 @@ beach:
 clown-pants:
   gallery: youth
   artist: dad
-  filename: 19710401_4.jpg
+  img: 19710401_4.jpg
   sequence: 4
   views: 0
   caption: me at a crossroads
@@ -69,7 +69,7 @@ clown-pants:
 by-the-creek:
   gallery: youth
   artist:
-  filename: 19710501_01.jpg
+  img: 19710501_01.jpg
   sequence: 5
   views: 10
   caption: all of us by a creek
@@ -78,7 +78,7 @@ by-the-creek:
 throwing-a-rock:
   gallery: youth
   artist: dad
-  filename: 19710501_5.jpg
+  img: 19710501_5.jpg
   sequence: 6
   views: 10
   caption: me throwing a rock at the camera
@@ -95,7 +95,7 @@ throwing-a-rock:
 night-bear:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_25.jpg
+  img: 20090303_25.jpg
   sequence: 1
   views: 10
   caption: fountain behind the legislature
@@ -112,7 +112,7 @@ night-bear:
 night-empress-roof:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_27.jpg
+  img: 20090303_27.jpg
   sequence: 2
   views: 10
   caption: roof of the empress
@@ -129,7 +129,7 @@ night-empress-roof:
 night-legislature:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_32.jpg
+  img: 20090303_32.jpg
   sequence: 3
   views: 10
   caption: legislature
@@ -146,7 +146,7 @@ night-legislature:
 night-lights-on-government:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_40.jpg
+  img: 20090303_40.jpg
   sequence: 4
   views: 10
   caption: lights on government street
@@ -163,7 +163,7 @@ night-lights-on-government:
 night-empress:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_44.jpg
+  img: 20090303_44.jpg
   sequence: 5
   views: 10
   caption: empress hotel
@@ -180,7 +180,7 @@ night-empress:
 night-bastion:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_49.jpg
+  img: 20090303_49.jpg
   sequence: 6
   views: 10
   caption: bastion square
@@ -197,7 +197,7 @@ night-bastion:
 night-fountain-1:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_5.jpg
+  img: 20090303_5.jpg
   sequence: 7
   views: 10
   caption: fountain behind the legislature
@@ -214,7 +214,7 @@ night-fountain-1:
 night-fountain-2:
   gallery: victoria-at-night
   artist: adam
-  filename: 20090303_8.jpg
+  img: 20090303_8.jpg
   sequence: 8
   views: 10
   caption: fountain behind the legislature
@@ -231,7 +231,7 @@ night-fountain-2:
 summer-quinn-riding:
   gallery: summer
   artist: adam
-  filename: 20100516_7.jpg
+  img: 20100516_7.jpg
   sequence: 2
   views: 12
   caption: quinn riding through a swamp
@@ -248,7 +248,7 @@ summer-quinn-riding:
 summer-bastion-else:
   gallery: summer
   artist: adam
-  filename: 20100530_9.jpg
+  img: 20100530_9.jpg
   sequence: 3
   views: 3
   caption: else at bastion square
@@ -265,7 +265,7 @@ summer-bastion-else:
 summer-guitar:
   gallery: summer
   artist: adam
-  filename: 20100606_9.jpg
+  img: 20100606_9.jpg
   sequence: 4
   views: 3
   caption: quinn's new guitar
@@ -282,7 +282,7 @@ summer-guitar:
 summer-market-square-both:
   gallery: summer
   artist: adam
-  filename: 20100606_20.jpg
+  img: 20100606_20.jpg
   sequence: 5
   views: 0
   caption: market square
@@ -299,7 +299,7 @@ summer-market-square-both:
 summer-else-thetis:
   gallery: summer
   artist: adam
-  filename: 20100608_16.jpg
+  img: 20100608_16.jpg
   sequence: 6
   views: 9
   caption: at thetis main beach
@@ -316,7 +316,7 @@ summer-else-thetis:
 summer-fireworks:
   gallery: summer
   artist: adam
-  filename: 20100611_12.jpg
+  img: 20100611_12.jpg
   sequence: 7
   views: 
   caption: fireworks
@@ -333,7 +333,7 @@ summer-fireworks:
 summer-snowbirds:
   gallery: summer
   artist: adam
-  filename: 20100612_15.jpg
+  img: 20100612_15.jpg
   sequence: 8
   views: 88
   caption: snow birds

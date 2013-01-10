@@ -53,4 +53,8 @@
   </div>
 </div>
 
-<br class="clear"/>
+<br class="clear">
+
+<% if can? :create, Gallery %>
+  <%= link_to "New Gallery", new_gallery_path %>
+<% end %>

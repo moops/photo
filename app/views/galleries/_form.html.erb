@@ -1,16 +1,9 @@
-<%= f.error_messages %>
-<p/>
-<%= f.label(:name) %><br />
-<%= f.text_field(:name) %>
-<p/>
-<%= f.label(:code) %><br />
-<%= f.text_field(:code) %>
-<p/>
-<%= f.label(:gallery_on) %><br />
-<%= f.text_field(:gallery_on, :size => '12', :class => 'text calendar today') %>
-<p/>
-<%= f.label(:default_photo) %><br />
-<%= f.text_field(:default_photo) %>
-<p/>
-<%= f.label(:gallery_access, 'Access') %><br />
-<%= select_tag('gallery_access','<option>public</option><option>private</option>') %>
+<%= simple_form_for(@gallery, :html => {:class => 'form-horizontal' }) do |f| %>
+    <%= f.error_notification %>
+    <%= f.input(:name) %>
+    <%= f.input(:code) %>
+    <%= f.input(:gallery_on, :as => :string, :id => 'foobar') %>
+    <%= f.input(:default_photo) %>
+    <%= f.error :base %>
+    <%= f.button(:submit) %>
+<% end %>

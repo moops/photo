@@ -1,0 +1,11 @@
+<h1>Sign Up</h1>
+
+<%= simple_form_for(@user, :html => {:class => 'form-horizontal' }) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation %>
+  <%= f.error :base %>
+  <%= f.button :submit %>
+<% end %>

@@ -59,7 +59,7 @@ module Photos
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
     
-    S3_CONFIG = YAML::load(File.open("#{Rails.root}/config/amazon_s3.yml"))
+    #S3_CONFIG = YAML::load(File.open("#{Rails.root}/config/amazon_s3.yml"))
     config.time_zone = 'Pacific Time (US & Canada)'
     DATE_FORMAT = '%B %d %Y'
   end
