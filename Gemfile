@@ -25,5 +25,5 @@ gem 'simple_form'
 
 gem 'fog'
 
-gem 'debugger', :group => [:development, :test]
+gem 'debugger', group: [:development, :test]
 

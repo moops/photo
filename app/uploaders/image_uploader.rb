@@ -11,8 +11,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  # storage :fog
-  storage :file
+  # storage :file
+  storage :fog
   
   include CarrierWave::MimeTypes
   process :set_content_type
@@ -34,13 +34,15 @@ class ImageUploader < CarrierWave::Uploader::Base
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
     #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-    "uploads/#{model.gallery.code}"
+    #"uploads/#{model.gallery.code}"
+    "#{self.model.gallery.code}"
   end
   
   version :thumb do
     process :resize_to_limit => [200, 200]
-    def store_path (for_file = filename) 
-      "uploads/#{model.gallery.code}/thumbnails/#{for_file}"
+
+    def store_dir (for_file = filename)
+      "#{self.model.gallery.code}/thumbnails/"
     end
   end
 
@@ -66,14 +68,20 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
-  # def extension_white_list
-  #   %w(jpg jpeg gif png)
-  # end
+  def extension_white_list
+    %w(jpg jpeg gif png)
+  end
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  #def filename
+  #  puts 'getting filename...'
+  #  "#{model.read_attribute(:img)}"
+  #end
+  
+  def full_filename (for_file = model.img.file) 
+    puts 'getting full_filename...'
+    "#{model.read_attribute(:img)}"
+  end
 
 end

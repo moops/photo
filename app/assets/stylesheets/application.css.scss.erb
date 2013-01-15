@@ -18,6 +18,7 @@ body { padding-top: 60px; }
 @import "bootstrap-responsive";
 
 @import "jquery.fileupload-ui";
+@import "galleriffic";
 
 .fileupload-loading {
   background: url(<%= asset_path 'loading.gif' %>) center no-repeat;
@@ -51,17 +52,8 @@ textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
  ************************************************
  */
  
-#container { 
-    width:90%;  
-    margin-left:auto; 
-    margin-right:auto;
-    margin-bottom:20px; 
-} 
- 
+
 #header {
-}
- 
-#content {
 }
 
 /************************************************
@@ -117,22 +109,6 @@ textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
     text-align: center;
 }
 
-#photo {
-  
-}
-
-#photo img {
-    border:2px solid #666;
-    margin-bottom:8px;
-}
-
-#photo_nav {
-    text-align:center;
-}
-
-#previous {
-    float:left;
-}
 
 #photo_info_container {
     padding-left:20px;
@@ -148,30 +124,16 @@ textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
     text-align:left;
 }
 
-#next {
-
-}
-
-#thumbnail-container {
-    height:600px;
-    width:100%;
-    overflow:scroll;
-    padding-right:20px;
-}
-
-.thumbnail {
-    border:none;
-}
-
-.thumbnail > img {
-    border:2px solid #666;
-}
-
 #google {
 }
 
 footer {
     margin-top: 20px;
+}
+
+div#gallery div.caption div.comment {
+	color: pink;
+	float: right;
 }
 
 
@@ -266,3 +228,4 @@ form.main textarea {
 .label {
   text-align: right;
 }
+
