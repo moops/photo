@@ -9,8 +9,8 @@
 						<div class="download">
 							<%= link_to('download', p.img_url) %>
 							<div class="comment">
-    							<%= link_to('comments', photo_comment_url(p)) %> -
-    							<%= p.photo_comments.count %>
+    							<%= link_to('comments', comment_url(p)) %> -
+    							<%= p.comments.count %>
     						</div>
 						</div>
 						

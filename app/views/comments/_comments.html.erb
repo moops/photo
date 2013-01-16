@@ -1,5 +1,5 @@
 <div class="errorText"><%= flash[:error] %></div>
-<% form_tag(:url => {:controller => 'photo_comment', :action => 'create', :photo_id => @photo.id},
+<% form_tag(:url => {:controller => 'comment', :action => 'create', :photo_id => @photo.id},
                    :remote => true) do %>
     <%= text_area('comment','comment',:rows => 4, :cols => 30) %><br/>
     are you a real human? please enter the date of this gallery<br/>
@@ -8,7 +8,7 @@
 <% end %>
 
 <% unless @photo.photo_comments.empty? %> 
-    <% for c in @photo.photo_comments %>
+    <% for c in @photo.comments %>
         <div class="comment">
             <div class="date"><%= c.created_at.strftime('%b %d, %Y %H:%M:%S') %></div>
             &nbsp;&nbsp;

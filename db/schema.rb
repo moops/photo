@@ -13,6 +13,13 @@
 
 ActiveRecord::Schema.define(:version => 20120921193440) do
 
+  create_table "comments", :force => true do |t|
+    t.integer  "photo_id"
+    t.string   "comment"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "galleries", :force => true do |t|
     t.string   "name"
     t.string   "code"
@@ -21,13 +28,6 @@ ActiveRecord::Schema.define(:version => 20120921193440) do
     t.string   "default_photo"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "photo_comments", :force => true do |t|
-    t.integer  "photo_id"
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "photos", :force => true do |t|

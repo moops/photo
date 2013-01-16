@@ -9,7 +9,7 @@ class Photo < ActiveRecord::Base
     :focal_length, :iso, :exposure_mode, :flash, :exposure_compensation, :camera_model
   
   belongs_to :gallery
-  has_many :photo_comments
+  has_many :comments
   
   mount_uploader :img, ImageUploader
     

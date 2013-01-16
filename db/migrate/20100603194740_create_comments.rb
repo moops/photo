@@ -1,6 +1,6 @@
-class CreatePhotoComments < ActiveRecord::Migration
+class CreateComments < ActiveRecord::Migration
   def self.up
-    create_table :photo_comments do |t|
+    create_table :comments do |t|
       t.integer :photo_id
       t.string :comment
 
@@ -9,6 +9,6 @@ class CreatePhotoComments < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :photo_comments
+    drop_table :comments
   end
 end
