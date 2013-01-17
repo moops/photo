@@ -1,12 +1,16 @@
 class CommentsController < ApplicationController
+  
+  load_and_authorize_resource :photo
+  load_and_authorize_resource :comment, :through => :photo
+  
   # GET /comments
-  # GET /comments.xml
+  # GET /comments.js
   def index
-    @comments = Comment.all
+    @comments = @photo.comments
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @comments }
+      format.js
     end
   end
 

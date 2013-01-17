@@ -6,16 +6,21 @@
 $iconSpritePath: asset-path('glyphicons-halflings', image);
 $iconWhiteSpritePath: asset-path('glyphicons-halflings-white', image);
 
-$navbarBackground: #555;
+$navbarBackground: #333;
 $navbarBackgroundHighlight: #888;
 $navbarText: #eee;
 $navbarLinkColor: #eee;
+$navbarBrandColor: #e22;
 
 @import "bootstrap";
-
 body { padding-top: 60px; }
-
 @import "bootstrap-responsive";
+
+
+
+
+
+
 
 @import "jquery.fileupload-ui";
 @import "galleriffic";
@@ -131,9 +136,13 @@ footer {
     margin-top: 20px;
 }
 
-div#gallery div.caption div.comment {
-	color: pink;
+
+div#gallery div.caption div.tools {
 	float: right;
+}
+
+div#gallery div.caption div.tools div.download {
+	float: none;
 }
 
 
@@ -189,14 +198,16 @@ td.label {
   text-align:right;
 }
 
-td.exif_label {
-  text-align:right;
-  font-weight:bold;
-  color:#999;
+div.exif-label {
+  width: 30%;
+  float: left;
+  font-weight: bold;
+  color: #999;
 }
 
-td.exif_data {
-  text-align:left;
+div.exif-data {
+  marging-left: 30%; 
+  width: 70%;
 }
 
 .caption {

@@ -1,0 +1,3 @@
+jQuery('#popup')
+    .html("<%= escape_javascript(render(:partial => 'comments', :locals => { :photo => @photo })) %>")
+    .modal('show');

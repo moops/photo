@@ -10,7 +10,13 @@ class Ability
       can :read, :all
       can :manage, User
       if user.role?(:contributor)
-        can :manage, Event do |p|
+        can :manage, Gallery do |p|
+          p.try(:user) == user
+        end
+        can :manage, Photo do |p|
+          p.try(:user) == user
+        end
+        can :manage, Comment do |p|
           p.try(:user) == user
         end
       end

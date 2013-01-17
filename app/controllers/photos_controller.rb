@@ -15,19 +15,26 @@ class PhotosController < ApplicationController
   end
 
   # GET /galleries/1/photos/1
-  # GET /galleries/1/photos/1.xml
+  # GET /galleries/1/photos/1.js
   def show
     index = @gallery.photos.index(@photo)
     @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
     @prev = @gallery.photos[index - 1].id if index > 0
     
-    @photo.views += 1
-    @photo.save
+    unless (params[:exif])
+      @photo.views += 1
+      @photo.save
+    end
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @photo }
-      format.js   { } # show.js.erb
+      format.js   { 
+        if params[:exif]
+          render 'exif'
+        else
+          render 'show'
+        end
+      }
     end
   end
 

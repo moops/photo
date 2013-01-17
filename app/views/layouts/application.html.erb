@@ -16,15 +16,56 @@
 
 <body>
     
-    <div id="user-header">
-        <% if current_user %>
-            Logged in as <%= current_user.email %>.
-            <%= link_to "Log Out", logout_path %>
-        <% else %>
-            <%= link_to "Sign Up", signup_path %> or
-            <%= link_to "Log In", login_path %>
-        <% end %>
-    </div>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <a class="brand" href="#">raceweb photo</a>
+            <ul class="nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Link</a></li>
+                <li><a href="#">Link</a></li>
+            </ul>
+            
+            <%= form_tag(galleries_path, :method => 'get', :class => 'navbar-search pull-left') do %>
+                <%= hidden_field_tag :direction, params[:direction] %>
+                <%= hidden_field_tag :sort, params[:sort] %>
+                <%= search_field_tag(:search, params[:search], :placeholder => 'find a gallery', :class => 'search-query') %>
+            <% end %>
+        
+            <div class="pull-right">
+                <ul class="nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Welcome <%= ", #{current_user.email}" if current_user %> 
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/user/preferences"><i class="icon-cog"></i> Preferences</a></li>
+                            <li><a href="/help/support"><i class="icon-envelope"></i> Contact Support</a></li>
+                            <li class="divider"></li>
+                            <% if current_user %>
+                                <li>
+                                <%= link_to logout_path do %>
+                                    <i class="icon-off"></i> logout
+                                <% end %>
+                                </li>
+                            <% else %>
+                                <li>
+                                <%= link_to signup_path do %>
+                                    <i class="icon-new"></i> register
+                                <% end %>
+                                </li>
+                                <li>
+                                <%= link_to login_path do %>
+                                    <i class="icon-on"></i> login
+                                <% end %>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div> <!-- end .nav-bar -->
       
     <% flash.each do |key, value| %>
         <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
@@ -33,7 +74,7 @@
             <%= value %>
         </div>
     <% end %>
-    
+        
     <div class="container-fluid">
         <div class="row-fluid">
             <!-- MAIN CONTENT -->
@@ -45,7 +86,7 @@
             <div class="pull-left">
                 &copy; <%= Date.today.year %> raceweb.ca victoria bc<br/>
                 all rights reserved<br/>
-                email: <a href="mailto:info@raceweb.ca">info@raceweb.ca</a>
+                email: <a href="mailto:info@raceweb.ca" rel="tooltip" title="email address">info@raceweb.ca</a>
             </div>
             <div class="pull-right">
                 <script type="text/javascript">

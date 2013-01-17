@@ -80,7 +80,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   #end
   
   def full_filename (for_file = model.img.file) 
-    puts 'getting full_filename...'
     "#{model.read_attribute(:img)}"
   end
 

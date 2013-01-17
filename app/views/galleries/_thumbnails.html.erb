@@ -1,3 +1,5 @@
+<div id="popup" class="modal hide fade"></div>
+
 <div id="thumbs" class="navigation">
     <ul class="thumbs noscript">
         <% for p in @gallery.photos %>
@@ -6,14 +8,18 @@
                     <%= link_to(image_tag(p.img_url(:thumb), :title => p.read_attribute(:img)), p.img_url, :class => 'thumb') %>
                     <div class="caption">
 						<%= p.caption %>
-						<div class="download">
-							<%= link_to('download', p.img_url) %>
-							<div class="comment">
-    							<%= link_to('comments', comment_url(p)) %> -
+						<div class="tools">
+						    <div class="download">
+    							<%= link_to('download', p.img_url) %>
+    						</div>
+    						<div class="comments">
+    							<%= link_to('comments', photo_comments_path(p), :remote => true) %> -
     							<%= p.comments.count %>
     						</div>
+    						<div class="exif">
+    							<%= link_to('exif', gallery_photo_path(@gallery, p, :exif => true), :remote => true) %>
+    						</div>
 						</div>
-						
 					</div>
                 <% else %>
                     <%= image_tag(p.img_url(:thumb), :title => p.caption) %>

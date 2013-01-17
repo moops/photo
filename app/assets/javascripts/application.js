@@ -14,7 +14,7 @@ $(document).ready(function() {
 	$('#gallery_on').jdPicker();
 	$('#gallery_gallery_on').jdPicker();
 //	$('#new_photo').fileupload();
-	
+
 	// init gallerific
 	$('div.navigation').css({'width' : '300px', 'float' : 'left'});
 	$('div.content').css('display', 'block');
