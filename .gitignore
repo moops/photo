@@ -1,5 +1,7 @@
 config/database.yml
 *.log
 *~
+.DS_Store
 tmp
 public/uploads/*
+public/20121230
