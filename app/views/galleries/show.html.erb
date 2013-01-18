@@ -4,8 +4,7 @@
             <span class="name"><%= @gallery.name %></span>
             <span class="info">
                 <%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %>
-            </span><br/>
-            <%= link_to('find another gallery', :action => 'index') %>
+            </span>
         </div> <!-- end #gallery_info -->
         
         <div id="gallery_options">

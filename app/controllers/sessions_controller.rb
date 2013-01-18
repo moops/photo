@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
+  
+  # GET /users/new
   def new
+    respond_to do |format|
+      format.html { } # new.html.erb
+      format.js   { } # new.js.erb
+    end
   end
   
   def create
