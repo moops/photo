@@ -110,7 +110,7 @@ class GalleriesController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   private
   
     def find_photos(use_default)

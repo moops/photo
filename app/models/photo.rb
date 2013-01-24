@@ -12,6 +12,12 @@ class Photo < ActiveRecord::Base
   has_many :comments
   
   mount_uploader :img, ImageUploader
+  
+  def increment
+    self.views += 1
+    self.save
+    logger.info(self.inspect)
+  end
     
   def remove_source
     

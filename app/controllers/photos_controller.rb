@@ -1,7 +1,10 @@
 class PhotosController < ApplicationController
   
-  load_and_authorize_resource :gallery
-  load_and_authorize_resource :photo, :through => :gallery
+  load_and_authorize_resource :gallery, :except => :increment
+  load_and_authorize_resource :photo, :through => :gallery, :except => :increment
+  
+  skip_authorize_resource :only => :increment
+  skip_authorize_resource :gallery, :only => :increment
 
   # GET /galleries/1/photos
   # GET /galleries/1/photos.xml
@@ -127,6 +130,14 @@ class PhotosController < ApplicationController
       format.html { redirect_to(new_gallery_photo_path(@gallery)) }
       format.xml  { head :ok }
     end
+  end
+  
+  # POST /photos/increment
+  def increment
+    @gallery = Gallery.where('code = ?', params[:gallery]).first
+    @photo = @gallery.photos.where('img = ?', params[:photo]).first
+    @photo.increment
+    render :nothing => true
   end
   
   # non-restfull inline editors

@@ -22,4 +22,5 @@ Photos::Application.routes.draw do
   resources :comments
 
   match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
+  post 'photos/increment'
 end

@@ -1,23 +1,25 @@
+<script>
+    $('#new-comment').popover({'placement': 'bottom'});
+</script>
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>comments</h3>
+</div>
+<div class="modal-body">  
+    <div class="errorText"><%= flash[:error] %></div>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h3>comments</h3>
-    </div>
-    <div class="modal-body">  
-        <div class="errorText"><%= flash[:error] %></div>
 
 
-
-        <% unless @photo.comments.empty? %> 
-            <% for c in @photo.comments %>
-                <div class="comment">
-                    <div class="date"><%= c.created_at.strftime('%b %d, %Y %H:%M:%S') %></div>
-                    &nbsp;&nbsp;
-                    <%= sanitize c.comment %><p/>
-                </div>            
-            <% end %>
+    <% unless @photo.comments.empty? %> 
+        <% for c in @photo.comments %>
+            <div class="comment">
+                <div class="date"><%= c.created_at.strftime('%b %d, %Y %H:%M:%S') %></div>
+                &nbsp;&nbsp;
+                <%= sanitize c.comment %><p/>
+            </div>            
         <% end %>
-    </div>
-    <div class="modal-footer">
-        <%= submit_tag('add', :class => 'btn btn-primary') %>
-    </div>
+    <% end %>
+</div>
+<div class="modal-footer">
+    <%= submit_tag('add', :id => 'new-comment', :class => 'btn btn-primary', :rel => 'popover', 'data-title' => 'new comment', 'data-content' => 'this should be a form') %>
+</div>
