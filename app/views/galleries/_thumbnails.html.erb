@@ -5,7 +5,7 @@
         <% for p in @gallery.photos %>
             <li>
                 <% if link %>
-                    <%= link_to(image_tag(p.img_url(:thumb), :title => p.read_attribute(:img)), p.img_url, :class => 'thumb') %>
+                    <%= link_to(image_tag(p.img_url(:thumb), :size => "100x100", :title => p.read_attribute(:img)), p.img_url, :class => 'thumb') %>
                     <div class="caption">
 						<%= p.caption %>
 						<div class="tools">

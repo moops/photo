@@ -3,10 +3,10 @@ class GalleriesController < ApplicationController
   load_and_authorize_resource
 
   # GET /galleries
-  # GET /galleries.xml
+  # GET /galleries.js
   def index
-    # searching by private key
-    if params[:key]
+    # searching
+    if params[:q]
       @gallery = Gallery.find_by_private_key(params[:key])
       if @gallery.nil?
         flash[:notice] = "no gallery found"
@@ -21,11 +21,11 @@ class GalleriesController < ApplicationController
       @search_results = Gallery.find_public(params[:name],params[:gallery_on])
     end
     
-    @recent_galleries = Gallery.recent_galleries
+    @recent_galleries = Gallery.recent
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @galleries }
+      format.js  # index.js.erb
     end
   end
 

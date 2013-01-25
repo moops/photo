@@ -7,23 +7,15 @@ class Gallery < ActiveRecord::Base
   
   validates_uniqueness_of :code
 
-  def self.recent_galleries
-    Gallery.find(:all,
-                 :conditions => ['private_key is null'],
-                 :order => 'gallery_on desc',
-                 :limit => 6)
+  def self.recent
+    Gallery.where('private_key is null').order('gallery_on desc').limit(6).all
   end
                
-  def self.find_public(name,gallery_on)
-    findSql = 'private_key is null and name like ?'
-    find_conditions = [findSql,"%#{name}%"]
-    unless gallery_on.empty?
-      findSql += ' and gallery_on = ?'
-      find_conditions[0] = findSql
-      find_conditions << gallery_on
-    end
-    logger.debug("find conditions[#{find_conditions.inspect}]")
-    Gallery.paginate :page => 1, :conditions => find_conditions, :order => 'name', :per_page => 10
+  def self.find_public(name=nil, gallery_on=nil)
+    results = Gallery.where('private_key is null')
+    results = results.where('name like ?', "%#{name}%") if name
+    results = results.where('gallery_on = ?', gallery_on) if gallery_on
+    results
   end
 
   def self.find_private
@@ -38,6 +30,10 @@ class Gallery < ActiveRecord::Base
     photo_attributes.each do |attributes|
       photos.build(attributes)
     end
+  end
+  
+  def default_photo_obj
+    photos.where('img = ?', default_photo).first
   end
   
 end

@@ -1,19 +1,18 @@
 <div class="box" id="gallery-index-recent">
-  <div class="boxhead">recent public galleries</div>
-  <div class="boxcontent">
-    <% if @recent_galleries and !@recent_galleries.empty? %>
-      <ul>
-        <% for g in @recent_galleries %>
-          <li>
-            <%= link_to(g.name, g) %><br/>
-            <%= g.photo_count %> photos :: 
-            <%= g.gallery_on.strftime("%b %d, %Y") %></li>
+    <div class="boxhead">recent public galleries</div>
+    <div class="boxcontent">
+        <% if @recent_galleries and !@recent_galleries.empty? %>
+            <ul>
+                <% for g in @recent_galleries %>
+                    <li>
+                        <%= render(:partial => "summary", :locals => { :g => g }) %>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            none
         <% end %>
-      </ul>
-    <% else %>
-      none
-    <% end %>
-  </div>
+    </div>
 </div>
 
 <% if current_user %>
@@ -24,9 +23,7 @@
                 <ul>
                 <% for g in current_user.galleries %>
                     <li>
-                        <%= link_to(g.name, g) %><br/>
-                        <%= g.photo_count %> photos :: 
-                        <%= g.gallery_on.strftime("%b %d, %Y") %>
+                        <%= render(:partial => "summary", :locals => { :g => g }) %>
                     </li>
                 <% end %>
                 </ul>
