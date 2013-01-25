@@ -16,17 +16,16 @@
 </div> <!-- end row -->
 
 <style>.noscript { display: none; }</style>
-    <div class="gallery-container">
-        <div id="gallery" class="content">
-			<div id="controls" class="controls"></div>
-			<div class="slideshow-container">
-				<div id="loading" class="loader"></div>
-				<div id="slideshow" class="slideshow"></div>
-			</div>
-			<div id="caption" class="caption-container"></div>
+<div class="gallery-container">
+    <div id="gallery" class="content">
+		<div id="controls" class="controls"></div>
+		<div class="slideshow-container">
+			<div id="loading" class="loader"></div>
+			<div id="slideshow" class="slideshow"></div>
 		</div>
+		<div id="caption" class="caption-container"></div>
+	</div>
 
-        <%= render(:partial => 'thumbnails', :locals => { :edit => false, :link => true }) %>
-        <div style="clear: both;"></div>
-    </div>
-
+    <%= render(:partial => 'thumbnails', :locals => { :edit => false, :link => true }) %>
+    <div style="clear: both;"></div>
+</div>

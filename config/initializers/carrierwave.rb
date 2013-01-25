@@ -5,5 +5,5 @@ CarrierWave.configure do |config|
     aws_secret_access_key: 'qdH3qhzaZoDOoN0nGtkq+aeNkyTKnoUHgF17v5LM',
     endpoint: 'https://s3.amazonaws.com'
   }
-  config.fog_directory = 'raceweb.photo.dev'
+  config.fog_directory = 'raceweb.photo'
 end
