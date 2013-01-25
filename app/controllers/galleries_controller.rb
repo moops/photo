@@ -7,21 +7,15 @@ class GalleriesController < ApplicationController
   def index
     # searching
     if params[:q]
-      @gallery = Gallery.find_by_private_key(params[:key])
-      if @gallery.nil?
-        flash[:notice] = "no gallery found"
-      else
+      @gallery = Gallery.find_private(params[:q])
+      unless @gallery.nil?
         redirect_to gallery_path(@gallery)
         return
       end
+      @search_results = Gallery.find_public(params[:q]) if @gallery.nil?
     end
-    
-    # searching public galleries by name and/or date
-    if params[:name] or params[:gallery_on]
-      @search_results = Gallery.find_public(params[:name],params[:gallery_on])
-    end
-    
-    @recent_galleries = Gallery.recent
+
+    @recent_galleries = Gallery.recent if @search_results.nil?
 
     respond_to do |format|
       format.html # index.html.erb

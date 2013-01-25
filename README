@@ -15,7 +15,7 @@ x Nov 07 - replace prototype with jquery - Nov 08
 x Jan 18 - clear float below thumbnails so pagination links are always all the way left
 - Jan 18 - swap the regions. ie thumbnails should be to the right of the photo
 x Jan 18 - find a method to produce square thumbnails
-- Jan 18 - get searching working for name and private key
+x Jan 18 - get searching working for name and private key
 x Jan 18 - fix or remove the sorting control
 x Jan 18 - find a way to associate private galleries with a user
 x Jan 18 - show a list of private galleries when the user logs in

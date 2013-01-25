@@ -14,8 +14,6 @@ body { padding-top: 40px; }
 @import "jquery.fileupload-ui";
 @import "galleriffic";
 
-
-
 .fileupload-loading {
   background: url(<%= asset_path 'loading.gif' %>) center no-repeat;
 }
@@ -29,7 +27,6 @@ body {
     text-decoration: none;  
     font-weight: normal;
     color: #555;
-    background: #fff url(<%= asset_path 'grgrad.gif' %>) repeat-x;
 }
 
 a           { text-decoration: none; font-family: verdana; }
@@ -39,19 +36,27 @@ a:hover     { text-decoration: underline; font-family: verdana; }
 
 textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
 
-/************************************************
- all pages
+/*
+ ************************************************
+ gallery
  ************************************************
  */
- 
-
-#header {
+#gallery-info {
+    float: left;
 }
 
-/************************************************
- index
- ************************************************
- */
+#gallery-info .name {
+    color: #333;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+#gallery-info .info {
+    color: #666;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
 #gallery-index-recent {
     margin: 20px 20px 0px 0px;
     float: left;
@@ -59,9 +64,9 @@ textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
 }
 
 #gallery-index-mine {
-    margin:20px 0px 0px 0px;
-    float:left;
-    width:40%;
+    margin-top: 20px;
+    float: left;
+    width: 40%;
 }
 
 div#gallery-index-recent ul, div#gallery-index-mine ul {
@@ -82,45 +87,6 @@ div.gallery-summary>br {
     clear: left;
 }
 
-/************************************************
- gallery
- ************************************************
- */
-#gallery_info {
-    margin:0px 0px 30px 0px;
-    float:left;
-}
-
-#gallery_info .name {
-    color:#333;
-    font-weight:bold;
-    font-size:2em;
-}
-
-#gallery_info .info {
-    color:#666;
-    font-weight:bold;
-    font-size:1.5em;
-}
-
-#gallery_options {
-    float:right;
-}
-
-#photo_container {
-    border:2px solid #666;
-    border-radius: .75em;
-    text-align: center;
-}
-
-
-#photo_info_container {
-    padding-left:20px;
-    float:left;
-}
-
-#exif_details {
-}
 
 #comments {
     padding-top:15px;
@@ -128,12 +94,9 @@ div.gallery-summary>br {
     text-align:left;
 }
 
-#google {
-}
-
 footer {
     margin-top: 20px;
-    border-top: 1px solid #333;
+    border-top: 1px solid #ccc;
 }
 
 
@@ -146,18 +109,20 @@ div#gallery div.caption div.tools div.download {
 }
 
 
-/************************************************
+/*
+ ************************************************
  boxes
  ************************************************
  */
 
 .box {
-  border: 1px solid #666;
+  border: 1px solid #ccc;
+  border-radius: 10px;
 }
 
 .boxhead {
-  border-bottom: 1px solid #666;
-  background-color: #ddd;
+  border-bottom: 1px solid #ccc;
+  border-top-radius: 10px;
   font-weight: bold;
   padding: 5px;
 }
@@ -166,28 +131,17 @@ div#gallery div.caption div.tools div.download {
   padding: 10px;
 }
 
-/************************************************
+/*
+ ************************************************
  miscellaneous
  ************************************************
  */
 
+//still used in _comments
 .errorText {
   font-style: italic;
   font-weight: bold;
   color: #a00;
-}
-
-.errorSmallText {
-  font-style: italic;
-  font-weight: bold;
-  font-size: .75em;
-  color: #a00;
-}
-
-.messageText {
-  font-style: italic;
-  font-weight: bold;
-  color: #090;
 }
 
 .clear {
@@ -206,8 +160,6 @@ div.exif-label {
 }
 
 div.exif-data {
-  marging-left: 30%; 
-  width: 70%;
 }
 
 .caption {
@@ -222,7 +174,8 @@ div.exif-data {
   font-style:italic;
 }
 
-/************************************************
+/*
+ ************************************************
   forms
  ************************************************
  */

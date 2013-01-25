@@ -18,8 +18,8 @@ class Gallery < ActiveRecord::Base
     results
   end
 
-  def self.find_private
-    Gallery.find(:first, :conditions => ['private_key = ?',private_key])
+  def self.find_private(key)
+    Gallery.where('private_key = ?', key).first
   end
 
   def photo_count
