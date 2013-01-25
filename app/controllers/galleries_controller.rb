@@ -72,6 +72,8 @@ class GalleriesController < ApplicationController
       @gallery.private_key=(key)
     end
 
+    @gallery.user = current_user if current_user
+
     respond_to do |format|
       if @gallery.save
         flash[:notice] = "#{@gallery.name} was successfully created."

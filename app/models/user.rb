@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   has_secure_password
+  
+  has_many :galleries
   attr_accessible :name, :email, :password, :password_confirmation
 
   validates :name,     :presence => true

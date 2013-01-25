@@ -32,10 +32,10 @@ body {
     background: #fff url(<%= asset_path 'grgrad.gif' %>) repeat-x;
 }
 
-a           { color: #33f; text-decoration: none; font-family: verdana; }
-a:visited   { color: #33f; text-decoration: none; font-family: verdana; }
-a:active    { color: #33f; text-decoration: none; font-family: verdana; }
-a:hover     { color: #33f; text-decoration: underline; font-family: verdana; }
+a           { text-decoration: none; font-family: verdana; }
+a:visited   { text-decoration: none; font-family: verdana; }
+a:active    { text-decoration: none; font-family: verdana; }
+a:hover     { text-decoration: underline; font-family: verdana; }
 
 textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
 
@@ -52,20 +52,14 @@ textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
  index
  ************************************************
  */
-#gallery_index_recent {
-    margin:20px 20px 0px 0px;
-    float:left;
-    width:40%;
+#gallery-index-recent {
+    margin: 20px 20px 0px 0px;
+    float: left;
+    width: 40%;
 }
 
-#gallery_index_search {
+#gallery-index-mine {
     margin:20px 0px 0px 0px;
-    float:left;
-    width:40%;
-}
-
-#gallery_index_private {
-    margin:20px 20px 0px 0px;
     float:left;
     width:40%;
 }

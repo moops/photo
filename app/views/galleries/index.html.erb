@@ -1,4 +1,4 @@
-<div class="box" id="gallery_index_recent">
+<div class="box" id="gallery-index-recent">
   <div class="boxhead">recent public galleries</div>
   <div class="boxcontent">
     <% if @recent_galleries and !@recent_galleries.empty? %>
@@ -16,45 +16,29 @@
   </div>
 </div>
 
-<div class="box" id="gallery_index_private">
-  <div class="boxhead">view a private gallery</div>
-  <div class="boxcontent">
-    <%= form_tag(galleries_path, :method => :get) do %>
-      key <%= text_field_tag :key %>
-      <%= submit_tag :view, :name => nil %>
-    <% end %>
-  </div>
-</div>
-
-<div class="box" id="gallery_index_search">
-  <div class="boxhead">find a public gallery</div>
-  <div class="boxcontent">
-    <%= form_tag(galleries_path, :method => :get) do %>
-      <table cellspacing="0" cellpadding="2" border="0">
-        <tr>
-          <td>name</td>
-          <td><%= text_field_tag(:name, nil, :size => 25) %></td></tr>
-        <tr>
-          <td>date</td>
-          <td>
-            <%= text_field_tag(:gallery_on, nil, {:maxlength => 19, :size => 12, :class => 'text'}) %></td></tr>
-      </table>
-      <%= submit_tag('find') %>
-    <% end %>
-    <% if @search_results and !@search_results.empty? %>
-      <ul>
-        <% for r in @search_results %>
-          <li><%= link_to(r.name, r) %> 
-             (<%= r.code %>) :: 
-              <%= r.gallery_on.strftime("%b %d, %Y") %></li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
-</div>
-
-<br class="clear">
-
-<% if can? :create, Gallery %>
-  <%= link_to "New Gallery", new_gallery_path %>
+<% if current_user %>
+    <div class="box" id="gallery-index-mine">
+        <div class="boxhead">my galleries</div>
+        <div class="boxcontent">
+            <% if current_user.galleries and !current_user.galleries.empty? %>
+                <ul>
+                <% for g in current_user.galleries %>
+                    <li>
+                        <%= link_to(g.name, g) %><br/>
+                        <%= g.photo_count %> photos :: 
+                        <%= g.gallery_on.strftime("%b %d, %Y") %>
+                    </li>
+                <% end %>
+                </ul>
+            <% else %>
+                none
+            <% end %>
+            <div class="pull-right">
+                <% if can? :create, Gallery %>
+                    <%= link_to("New Gallery", new_gallery_path, :class => 'btn btn-primary') %>
+                <% end %>
+            </div>
+            <div style="clear: both"/>
+        </div>
+    </div>
 <% end %>

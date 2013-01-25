@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20120921193440) do
     t.string   "name"
     t.string   "code"
     t.string   "private_key"
+    t.integer  "user_id"
     t.date     "gallery_on"
     t.string   "default_photo"
     t.datetime "created_at",    :null => false

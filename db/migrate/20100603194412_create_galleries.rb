@@ -4,6 +4,7 @@ class CreateGalleries < ActiveRecord::Migration
       t.string :name
       t.string :code
       t.string :private_key
+      t.references :user
       t.date :gallery_on
       t.string :default_photo
 

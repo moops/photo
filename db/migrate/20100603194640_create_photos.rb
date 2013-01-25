@@ -1,7 +1,7 @@
 class CreatePhotos < ActiveRecord::Migration
   def self.up
     create_table :photos do |t|
-      t.integer :gallery_id
+      t.references :gallery
       t.string :artist
       t.string :caption
       t.integer :sequence
