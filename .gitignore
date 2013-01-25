@@ -3,5 +3,4 @@ config/database.yml
 *~
 .DS_Store
 tmp
-public/uploads/*
-public/20121230
+public/20*
