@@ -24,11 +24,17 @@ ActiveRecord::Schema.define(:version => 20120921193440) do
     t.string   "name"
     t.string   "code"
     t.string   "private_key"
-    t.integer  "user_id"
     t.date     "gallery_on"
     t.string   "default_photo"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "photo_comments", :force => true do |t|
+    t.integer  "photo_id"
+    t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "photos", :force => true do |t|
@@ -37,7 +43,7 @@ ActiveRecord::Schema.define(:version => 20120921193440) do
     t.string   "caption"
     t.integer  "sequence"
     t.integer  "views"
-    t.string   "img"
+    t.string   "filename"
     t.datetime "photo_at"
     t.string   "shutter_speed"
     t.string   "aperture"
@@ -47,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20120921193440) do
     t.string   "flash"
     t.string   "exposure_compensation"
     t.string   "camera_model"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", :force => true do |t|

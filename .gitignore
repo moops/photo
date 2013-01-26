@@ -1,5 +1,6 @@
 config/database.yml
 *.log
+*.dat
 *~
 .DS_Store
 tmp
