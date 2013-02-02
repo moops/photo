@@ -33,7 +33,7 @@ class Gallery < ActiveRecord::Base
   end
   
   def default_photo_obj
-    photos.where('img = ?', default_photo).first
+    photos.where('img = ?', default_photo).first or photos.first
   end
   
 end

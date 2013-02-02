@@ -21,3 +21,9 @@ x Jan 18 - find a way to associate private galleries with a user
 x Jan 18 - show a list of private galleries when the user logs in
 x Jan 19 - make the views increment on each showing of a photo
 x Jan 25 - add default photo thumbnails for galleries
+
+- Feb  1 - fix padding on footer when not logged in
+- Feb  1 - keep 'my galleries' on search results page
+- Feb  1 - paginate search results and my galleries
+- Feb  1 - change carrierwave storage based on environment
+- Feb  1 - upload square thumbnails
