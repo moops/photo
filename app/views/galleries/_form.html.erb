@@ -4,7 +4,7 @@
     <%= f.input(:code) %>
     <%= f.input(:gallery_on, :as => :string, :id => 'foobar') %>
     <%= f.input(:default_photo) %>
-    <%= f.input :private_key, :as => :boolean %>
+    <%= f.input :private_key, :as => :boolean, :label => 'private?' %>
     <%= f.error :base %>
     <%= f.button(:submit) %>
 <% end %>

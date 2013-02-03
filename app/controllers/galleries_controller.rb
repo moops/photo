@@ -60,10 +60,12 @@ class GalleriesController < ApplicationController
   def create
     
     #generate private key
-    if params[:gallery][:private_key]
+    if "1".eql?(params[:gallery][:private_key])
       chars = ("a".."z").to_a + ("1".."9").to_a
       key = Array.new(20, '').collect{chars[rand(chars.size)]}.join
       @gallery.private_key=(key)
+    else
+      @gallery.private_key=(nil)
     end
 
     @gallery.user = current_user if current_user
