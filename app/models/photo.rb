@@ -13,13 +13,9 @@ class Photo < ActiveRecord::Base
   def increment
     self.views += 1
     self.save
-    logger.info(self.inspect)
   end
 
   def extract_exif(image)
-    logger.info("getting exif from: #{image.inspect}")
-    logger.info("exp: #{image['EXIF:ExposureTime']}")
-    #debugger
     if (image['EXIF:DateTimeOriginal']) 
       begin
         self.photo_at= DateTime.strptime(image['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
@@ -34,7 +30,6 @@ class Photo < ActiveRecord::Base
     self.flash= image['EXIF:Flash'].strip if image['EXIF:Flash']
     self.exposure_compensation= image['EXIF:ExposureBiasValue'].strip if image['EXIF:ExposureBiasValue']
     self.camera_model= image['EXIF:Model'].strip if image['EXIF:Model']
-    logger.info("set exif in: #{self.inspect}")
   end
   
   #one convenient method to pass jq_upload the necessary information
