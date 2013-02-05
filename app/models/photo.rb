@@ -6,9 +6,10 @@ class Photo < ActiveRecord::Base
   
   belongs_to :gallery
   has_many :comments
+  before_create :set_defaults
   
   mount_uploader :img, ImageUploader
-  
+
   def increment
     self.views += 1
     self.save
@@ -51,12 +52,15 @@ class Photo < ActiveRecord::Base
      }
   end
   
-  private
-  
-  def bucket_name
-    'raceweb_photo' << (Rails.env.production? ? '' : '_' << Rails.env)
-  end
-  
+  protected
+
+    def set_defaults
+      begin
+        self.artist = self.gallery.user.name unless self.artist
+        self.caption = self.img.full_filename unless self.caption
+      rescue
+      end
+   end
 end
 
 
