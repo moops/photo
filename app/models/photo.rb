@@ -1,7 +1,3 @@
-#require 'rubygems'
-require 'mini_magick'
-require 'aws/s3'
- 
 class Photo < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   
@@ -18,43 +14,11 @@ class Photo < ActiveRecord::Base
     self.save
     logger.info(self.inspect)
   end
-    
-  def remove_source
-    
-      AWS::S3::Base.establish_connection!(
-          :access_key_id     => S3_CONFIG[Rails.env]['access_key_id'],
-          :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
-      )
-      
-      AWS::S3::S3Object.delete("#{gallery.code}/thumbnails/#{self.img}", bucket_name)
-      AWS::S3::S3Object.delete("#{gallery.code}/#{self.img}", bucket_name)
-  end
-  
-  def source_url
-    "http://s3.amazonaws.com/#{bucket_name}/foo/#{gallery.code}/bar/#{img}"
-  end
-  
-  def source_thumb_url
-    "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/thumbnails/#{img}"
-  end
-
-  def next
-    n = nil
-    if self.sequence
-      n = Photo.find(:first, :conditions => ["gallery_id = ? and sequence = ?",self.gallery_id,self.sequence + 1])
-    end
-    n
-  end
-
-  def previous
-    p = nil
-    if self.sequence
-      p = Photo.find(:first, :conditions => ["gallery_id = ? and sequence = ?",self.gallery_id,self.sequence - 1])
-    end
-    p
-  end
 
   def extract_exif(image)
+    logger.info("getting exif from: #{image.inspect}")
+    logger.info("exp: #{image['EXIF:ExposureTime']}")
+    #debugger
     if (image['EXIF:DateTimeOriginal']) 
       begin
         self.photo_at= DateTime.strptime(image['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
@@ -69,6 +33,7 @@ class Photo < ActiveRecord::Base
     self.flash= image['EXIF:Flash'].strip if image['EXIF:Flash']
     self.exposure_compensation= image['EXIF:ExposureBiasValue'].strip if image['EXIF:ExposureBiasValue']
     self.camera_model= image['EXIF:Model'].strip if image['EXIF:Model']
+    logger.info("set exif in: #{self.inspect}")
   end
   
   #one convenient method to pass jq_upload the necessary information

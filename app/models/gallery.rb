@@ -7,7 +7,7 @@ class Gallery < ActiveRecord::Base
   
   validates_uniqueness_of :code
 
-  def self.recent
+  def self.public_recent
     Gallery.where('private_key is null').order('gallery_on desc').limit(6).all
   end
                

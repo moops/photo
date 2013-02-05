@@ -5,7 +5,7 @@ x Nov 07 - replace prototype with jquery - Nov 08
 - Nov 10 - replace prototype show photo link with jquery
 - Nov 10 - rebuild and upload standard test data and upload to raceweb-photo-development aws s3 bucket
 - Dec 14 - fix galley ordering
-- Dec 14 - look into highslide or some other gallery js framework
+x Dec 14 - look into highslide or some other gallery js framework. Jan 2012 - using gallerific
 - Dec 14 - add most popular galleries
 
 2013
@@ -22,8 +22,12 @@ x Jan 18 - show a list of private galleries when the user logs in
 x Jan 19 - make the views increment on each showing of a photo
 x Jan 25 - add default photo thumbnails for galleries
 
-- Feb  1 - fix padding on footer when not logged in
-- Feb  1 - keep 'my galleries' on search results page
-- Feb  1 - paginate search results and my galleries
-- Feb  1 - change carrierwave storage based on environment
-- Feb  1 - upload square thumbnails
+x Feb  1 - fix padding on footer when not logged in
+x Feb  1 - keep 'my galleries' on search results page
+x Feb  1 - paginate search results and my galleries
+x Feb  1 - change carrierwave storage based on environment
+x Feb  1 - upload square thumbnails
+x Feb  3 - get google adds working
+- Feb  3 - find out why exif info is not being added (galleries 20121230 and 20111006 have no exif info)
+- Feb  3 - add 20130113 and 20121208 galleries to db (the files are already on s3)
+- Feb  3 - deal with galleries with missing photos (920101205: 20100828_66.jpg, 20100430: 20100426_37.jpg, 20100428_4.jpg, 20091003: 20090816_57.jpg)

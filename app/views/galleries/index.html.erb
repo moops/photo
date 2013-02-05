@@ -1,3 +1,20 @@
+<div class="box" id="gallery-index-recent">
+    <div class="boxhead">recent public galleries</div>
+    <div class="boxcontent">
+        <% if @recent_galleries and !@recent_galleries.empty? %>
+            <ul>
+                <% for g in @recent_galleries %>
+                    <li>
+                        <%= render(:partial => "summary", :locals => { :g => g }) %>
+                    </li>
+                <% end %>
+            </ul>
+        <% else %>
+            none
+        <% end %>
+    </div>
+</div>
+
 <% if @search_results and !@search_results.empty? %>
     <div class="box" id="gallery-index-recent">
         <div class="boxhead">search results</div>
@@ -9,38 +26,23 @@
                     </li>
                 <% end %>
             </ul>
+            <%= paginate(@search_results, :window => 1, :outer_window => 1) %>
         </div>
     </div>
 <% else %>
-    <div class="box" id="gallery-index-recent">
-        <div class="boxhead">recent public galleries</div>
-        <div class="boxcontent">
-            <% if @recent_galleries and !@recent_galleries.empty? %>
-                <ul>
-                    <% for g in @recent_galleries %>
-                        <li>
-                            <%= render(:partial => "summary", :locals => { :g => g }) %>
-                        </li>
-                    <% end %>
-                </ul>
-            <% else %>
-                none
-            <% end %>
-        </div>
-    </div>
-
-    <% if current_user %>
+    <% if @my_galleries %>
         <div class="box" id="gallery-index-mine">
             <div class="boxhead">my galleries</div>
             <div class="boxcontent">
-                <% if current_user.galleries and !current_user.galleries.empty? %>
+                <% if !@my_galleries.empty? %>
                     <ul>
-                    <% for g in current_user.galleries %>
+                    <% for g in @my_galleries %>
                         <li>
                             <%= render(:partial => "summary", :locals => { :g => g }) %>
                         </li>
                     <% end %>
                     </ul>
+                    <%= paginate(@my_galleries, :window => 1, :outer_window => 1) %>
                 <% else %>
                     none
                 <% end %>
