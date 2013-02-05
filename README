@@ -1,9 +1,10 @@
 datepicker javascript - http://www.eyecon.ro/bootstrap-datepicker/
+simpleform gem - https://github.com/plataformatec/simple_form
 
 2013
 - Feb  4 - fix height of image container for vertical images
 - Feb  4 - make only 2 rows of thumbnails
-x Feb  4 - get gallery_on calendar working
+x Feb  4 - get gallery_on calendar working - changed to bootstrap-datepicker
 - Feb  4 - views increment is not working
 x Feb  4 - default caption and artist on photo create
 x Feb  3 - get google adds working
