@@ -1,76 +1,20 @@
-<% if @photo.caption %>
-    <div class="caption">
-        <%= raw inline_edit('caption', @photo.caption, caption_path(@photo.id, {:field => 'caption'}) ) %>
+<div class="row-fluid">
+    <div class="span6 photo-caption">
+        <%= @photo.caption %>
     </div>
-<% end %>
-
-<div id="photo">
-    <%= image_tag(@photo.img_url,
-              :name => "photo_display",
-              :title => @photo.img,
-              :alt => @photo.img) %>
-</div> <!-- end photo -->
-
-<div id="photo_info_container">
-    <div id="exif_details" style="display:none">
-
-        <table cellspacing="0" cellpadding="2" border="0">
-            <tr>
-                <td class="exif_label">viewed:</td><td class="exif_data"><%= @photo.views %> times</td></tr>
-            <tr>
-                <td class="exif_label">aperture:</td><td class="exif_data"><%= @photo.aperture %></td></tr>
-            <tr>
-            <td class="exif_label">date:</td><td class="exif_data"><%= @photo.photo_at %></td></tr>
-            <tr>
-                <td class="exif_label">iso:</td><td class="exif_data"><%= @photo.iso %></td></tr>
-            <tr>
-                <td class="exif_label">mode:</td><td class="exif_data"><%= @photo.exposure_mode %></td></tr>
-            <tr>
-                <td class="exif_label">photographer:</td><td class="exif_data"><%= @photo.artist %></td></tr>
-            <tr>
-                <td class="exif_label">flash:</td><td class="exif_data"><%= @photo.flash %></td></tr>
-            <tr>
-                <td class="exif_label">focal length:</td><td class="exif_data"><%= @photo.focal_length %></td></tr>
-            <tr>
-                <td class="exif_label">compensation:</td><td class="exif_data"><%= @photo.exposure_compensation %></td></tr>
-            <tr>
-                <td class="exif_label">shutter speed:</td><td class="exif_data"><%= @photo.shutter_speed %></td></tr>
-            <tr>
-                <td class="exif_label">camera model:</td><td class="exif_data"><%= @photo.camera_model %></td></tr>
-        </table>
-
-    </div> <!-- end exif_details -->
-
-    <div id="comments" style="display:none">
-        <%= render(:partial => 'comments/comments') %>
-    </div> <!-- end comments -->
+    <div class="span6 photo-tools">
+        <div class="dropdown pull-right">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">tools</a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><%= link_to('download', @photo.img_url, :tabindex => "-1") %></li>
+                <li><%= link_to('comments', photo_comments_path(@photo), :remote => true, :tabindex => "-1") %></li>
+                <li><%= link_to('exif', gallery_photo_path(@gallery, @photo, :exif => true), :remote => true, :tabindex => "-1") %></li>
+            </ul>
+        </div>
+    </div> <!-- end .photo-tools -->
 </div>
-
-
-<div id="photo_nav">
-    <div id="previous">
-        <% if @prev %>
-            <%= link_to(gallery_photo_path(@gallery, @prev), :remote => true, :update => 'photo_container')  do %>
-                <i class="pull-left icon-chevron-left"> previous</i>
-            <% end %>
-        <% end %>
-    </div> <!-- end previous -->
-    <div id="next">
-      <% if @next %>
-            <%= link_to(gallery_photo_path(@gallery, @next), :remote => true, :update => 'photo_container') do %>
-                <i class="pull-right icon-chevron-right"> next</i>
-            <% end %>
-        <% end %> 
-    </div> <!-- end next -->
-    <script type="text/javascript">
-      function showExif() {
-        Effect.toggle('exif_details','slide');
-      }
-      function showComments() {
-        Effect.toggle('comments','slide');
-      }
-    </script>           
-    <a href="#" onclick="showExif();">info</a> |
-    <a href="#" onclick="showComments();">comments(<%= @photo.comments.size %>)</a>
-
-</div> <!-- end photo_nav --> 
+<div class="row-fluid">
+    <div class="span12 gallery-photo">
+        <%= image_tag(@photo.img_url, :title => @photo.img.full_filename) %>
+    </div>
+</div>

@@ -29,14 +29,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/1.xml
   def show
     @photos = @gallery.photos
-    if @gallery.default_photo 
-      @photo = Photo.find_by_img(@gallery.default_photo)
-    else
-      @photo = @photos.to_a[0]
-    end
-    index = @photos.index(@photo) || 0
-    @next = @photos[index + 1].id if index < @photos.length - 1
-    @prev = @photos[index - 1].id if index > 0
+    @photo = @gallery.default_photo_obj
 
     respond_to do |format|
       format.html # show.html.erb
