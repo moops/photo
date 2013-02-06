@@ -63,14 +63,14 @@
                     </div>
                 <% end %>
                 <!-- MAIN CONTENT -->
-                  <%= yield %>
+                <%= yield %>
                 <!-- END MAIN CONTENT -->
             </div><!-- end span -->
         </div><!-- end row -->
     </div><!-- end container -->
 
-    <footer class="row-fluid">
-        <div class="span9 pull-left">
+    <footer>
+        <div class="pull-left">
             <script type="text/javascript"><!--
             google_ad_client = "ca-pub-2435759852249095";
             google_ad_slot = "2751979843";
@@ -80,11 +80,12 @@
             </script>
             <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
         </div>
-        <div class="span3 pull-right">
+        <div class="pull-right">
             &copy; <%= Date.today.year %> raceweb.ca victoria bc<br/>
             all rights reserved<br/>
             email: <a href="mailto:info@raceweb.ca" rel="tooltip" title="email address">info@raceweb.ca</a>
         </div>
+        <div class="clear"></div>
     </footer> <!-- end footer -->
 </body>
 </html>

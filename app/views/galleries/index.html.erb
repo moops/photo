@@ -1,58 +1,51 @@
-<div class="box" id="gallery-index-recent">
-    <div class="boxhead">recent public galleries</div>
-    <div class="boxcontent">
-        <% if @recent_galleries and !@recent_galleries.empty? %>
-            <ul>
-                <% for g in @recent_galleries %>
-                    <li>
-                        <%= render(:partial => "summary", :locals => { :g => g }) %>
-                    </li>
-                <% end %>
-            </ul>
-        <% else %>
-            none
-        <% end %>
-    </div>
-</div>
-
-<% if @search_results and !@search_results.empty? %>
-    <div class="box" id="gallery-index-recent">
-        <div class="boxhead">search results</div>
-        <div class="boxcontent">
-            <ul>
-                <% for g in @search_results %>
-                    <li>
-                        <%= render(:partial => "summary", :locals => { :g => g }) %>
-                    </li>
-                <% end %>
-            </ul>
-            <%= paginate(@search_results, :window => 2, :outer_window => 1) %>
-        </div>
-    </div>
-<% else %>
-    <% if @my_galleries %>
-        <div class="box" id="gallery-index-mine">
-            <div class="boxhead">my galleries</div>
+<div class="row-fluid">
+    <div class="span5">
+        <div class="box gallery-list">
+            <div class="boxhead">recent public galleries</div>
             <div class="boxcontent">
-                <% if !@my_galleries.empty? %>
+                <% if @recent_galleries and !@recent_galleries.empty? %>
                     <ul>
-                    <% for g in @my_galleries %>
-                        <li>
-                            <%= render(:partial => "summary", :locals => { :g => g }) %>
-                        </li>
-                    <% end %>
+                        <% for g in @recent_galleries %>
+                            <li>
+                                <%= render(:partial => "summary", :locals => { :g => g }) %>
+                            </li>
+                        <% end %>
                     </ul>
-                    <%= paginate(@my_galleries, :window => 2, :outer_window => 1) %>
                 <% else %>
                     none
                 <% end %>
-                <div class="pull-right">
-                    <% if can? :create, Gallery %>
-                        <%= link_to("New Gallery", new_gallery_path, :class => 'btn btn-primary') %>
-                    <% end %>
-                </div>
-                <div style="clear: both"/>
             </div>
         </div>
-    <% end %>
-<% end %>
+    </div> <!-- end .span6 -->
+    <div class="span5">
+        <% if @galleries %>
+            <div class="box gallery-list">
+                <div class="boxhead"><%= params[:q] ? 'search results' : 'my galleries' %></div>
+                <div class="boxcontent">
+                    <% if !@galleries.empty? %>
+                        <ul>
+                            <% for g in @galleries %>
+                                <li>
+                                    <%= render(:partial => "summary", :locals => { :g => g }) %>
+                                </li>
+                            <% end %>
+                        </ul>
+                        <%= paginate(@galleries, :window => 2, :outer_window => 1) %>
+                    <% else %>
+                        none
+                    <% end %>
+                    <div class="pull-right">
+                        <% if can? :create, Gallery %>
+                            <%= link_to("New Gallery", new_gallery_path, :class => 'btn btn-primary') %>
+                        <% end %>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        <% end %>
+    </div> <!-- end .span6 -->
+</div> <!-- end .row-fluid -->
+
+    
+
+

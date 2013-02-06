@@ -1,38 +1,18 @@
-@import "datepicker";
-@import "jquery_ui";
-
 // Set the correct sprite paths
 $iconSpritePath: asset-path('glyphicons-halflings', image);
 $iconWhiteSpritePath: asset-path('glyphicons-halflings-white', image);
 
-$navbarBrandColor: #e22;
-
+@import "slate";
 @import "bootstrap";
-body { padding-top: 40px; }
+
+body { padding-top: 55px; }
 @import "bootstrap-responsive";
 @import "jquery.fileupload-ui";
+@import "datepicker";
 
 .fileupload-loading {
   background: url(<%= asset_path 'loading.gif' %>) center no-repeat;
 }
-
-body {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 76%;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-style: normal;
-    text-decoration: none;  
-    font-weight: normal;
-    color: #555;
-}
-
-a           { text-decoration: none; font-family: verdana; }
-a:visited   { text-decoration: none; font-family: verdana; }
-a:active    { text-decoration: none; font-family: verdana; }
-a:hover     { text-decoration: underline; font-family: verdana; }
-
-textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
 
 /*
  ************************************************
@@ -45,13 +25,11 @@ textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
 }
 
 .gallery-info .name {
-    color: #333;
     font-weight: bold;
     font-size: 2em;
 }
 
 .gallery-info .info {
-    color: #666;
     font-weight: bold;
     font-size: 1.5em;
 }
@@ -75,28 +53,15 @@ textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
 }
 
 .gallery-photo img {
-    border: 1px solid #333;
+    border: 1px solid #000;
     margin: 10px 30px;
 }
 
-
-
-
-#gallery-index-recent {
-    margin: 20px 20px 0px 0px;
-    float: left;
-    width: 40%;
-    box-shadow: 4px 4px 4px #ccc;
+div.gallery-list {
+    box-shadow: 3px 3px 5px #000;
 }
 
-#gallery-index-mine {
-    margin-top: 20px;
-    float: left;
-    width: 40%;
-    box-shadow: 4px 4px 4px #ccc;
-}
-
-div#gallery-index-recent ul, div#gallery-index-mine ul {
+div.gallery-list ul {
     list-style: none;
 }
 
@@ -114,27 +79,16 @@ div.gallery-summary>br {
     clear: left;
 }
 
-
-#comments {
-    padding-top:15px;
-    width:240px;
-    text-align:left;
+.pagination {
+    margin-left: 20px;
 }
 
 footer {
     margin-top: 20px;
-    border-top: 1px solid #ccc;
+    padding: 10px 20px;
+    border-top: 1px solid #000;
+    background-color: $grayDarker;
 }
-
-
-div#gallery div.caption div.tools {
-	float: right;
-}
-
-div#gallery div.caption div.tools div.download {
-	float: none;
-}
-
 
 /*
  ************************************************
@@ -143,15 +97,15 @@ div#gallery div.caption div.tools div.download {
  */
 
 .box {
-  border: 1px solid #ccc;
+  border: 1px solid $grayDarker;
   border-radius: 10px;
 }
 
 .boxhead {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid $grayDarker;
+  background-color: $gray;
   font-weight: bold;
-  padding: 5px;
-  background-color: #eee;
+  padding: 5px 5px 5px 35px;
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -187,14 +141,6 @@ div.exif-label {
   color: #999;
 }
 
-div.exif-data {
-}
-
-.caption {
-  font-weight:bold;
-  padding-bottom:10px;
-}
-
 .comment {
 }
 
@@ -207,16 +153,6 @@ div.exif-data {
   forms
  ************************************************
  */
-
-img.calIcon {
-    position: absolute;
-    cursor: pointer;
-}
-
-form.main textarea { 
-    width: 300px; 
-}
-
 .label {
   text-align: right;
 }

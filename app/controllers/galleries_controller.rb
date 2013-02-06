@@ -5,16 +5,17 @@ class GalleriesController < ApplicationController
   # GET /galleries
   # GET /galleries.js
   def index
-    # searching
+    
     if params[:q]
+      # searching
       @gallery = Gallery.find_private(params[:q])
       unless @gallery.nil?
         redirect_to gallery_path(@gallery)
         return
       end
-      @search_results = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
+      @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
     else
-      @my_galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6) if current_user
+      @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6) if current_user
     end
 
     @recent_galleries = Gallery.public_recent
