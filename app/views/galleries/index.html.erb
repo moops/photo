@@ -26,7 +26,7 @@
                     </li>
                 <% end %>
             </ul>
-            <%= paginate(@search_results, :window => 1, :outer_window => 1) %>
+            <%= paginate(@search_results, :window => 2, :outer_window => 1) %>
         </div>
     </div>
 <% else %>
@@ -42,7 +42,7 @@
                         </li>
                     <% end %>
                     </ul>
-                    <%= paginate(@my_galleries, :window => 1, :outer_window => 1) %>
+                    <%= paginate(@my_galleries, :window => 2, :outer_window => 1) %>
                 <% else %>
                     none
                 <% end %>

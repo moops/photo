@@ -8,6 +8,9 @@ authorization:
     cancan - https://github.com/ryanb/cancan
 
 2013
+- Feb  6 - look into fading in the new photo when transitioning
+- Feb  6 - add previous/next links between caption and tools
+- Feb  6 - re-upload galleries 20121230 and 20111006 for missing exif data
 x Feb  6 - remove gallerific
 x Feb  4 - fix height of image container for vertical images
 - Feb  4 - make only 2 rows of thumbnails
