@@ -3,8 +3,6 @@
 //= require jquery_ui
 //= require jquery-fileupload
 //= require bootstrap
-//= require galleriffic
-//= require opacityrollover
 //= require bootstrap-datepicker
 //= require_tree .
 
