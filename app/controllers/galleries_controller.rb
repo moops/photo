@@ -15,7 +15,11 @@ class GalleriesController < ApplicationController
       end
       @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
     else
-      @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6) if current_user
+      if current_user
+        @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
+      else 
+        @galleries = nil
+      end
     end
 
     @recent_galleries = Gallery.public_recent

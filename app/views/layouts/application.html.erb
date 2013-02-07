@@ -15,59 +15,60 @@
   </head>
 
 <body>
+    <div id="wrap">
+        <div id="registration-form" class="modal hide fade"></div>
+        <div id="login-form" class="modal hide fade"></div>
     
-    <div id="registration-form" class="modal hide fade"></div>
-    <div id="login-form" class="modal hide fade"></div>
-    
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <%= link_to('raceweb photo', root_path, :class => 'brand') %>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <%= link_to('raceweb photo', root_path, :class => 'brand') %>
 
-                <%= form_tag(galleries_path, :method => 'get', :class => 'navbar-search pull-left') do %>
-                    <%= hidden_field_tag :direction, params[:direction] %>
-                    <%= hidden_field_tag :sort, params[:sort] %>
-                    <%= search_field_tag(:q, params[:q], :placeholder => 'find a gallery', :class => 'search-query') %>
-                <% end %>
+                    <%= form_tag(galleries_path, :method => 'get', :class => 'navbar-search pull-left') do %>
+                        <%= hidden_field_tag :direction, params[:direction] %>
+                        <%= hidden_field_tag :sort, params[:sort] %>
+                        <%= search_field_tag(:q, params[:q], :placeholder => 'find a gallery', :class => 'search-query') %>
+                    <% end %>
 
-                <div class="pull-right">
-                    <ul class="nav">
-                        <% if current_user %>
-                            <li><a href="#">Welcome, <%= "#{current_user.email}" %></a></li>
-                            <li><%= link_to'logout', logout_path %></li>
-                        <% else %>
-                            <li><a href="#">Welcome</a></li>
-                            <li><%= link_to 'register', signup_path, :remote => true %></li>
-                            <li><%= link_to 'login', login_path, :remote => true %></li>
-                        <% end %>
-                    </ul>
-                </div> <!-- end .pull-right -->
-            </div> <!-- end .container -->
-        </div> <!-- end .navbar-inner -->
-    </div> <!-- end .nav-bar -->
+                    <div class="pull-right">
+                        <ul class="nav">
+                            <% if current_user %>
+                                <li><a href="#">Welcome, <%= "#{current_user.email}" %></a></li>
+                                <li><%= link_to'logout', logout_path %></li>
+                            <% else %>
+                                <li><a href="#">Welcome</a></li>
+                                <li><%= link_to 'register', signup_path, :remote => true %></li>
+                                <li><%= link_to 'login', login_path, :remote => true %></li>
+                            <% end %>
+                        </ul>
+                    </div> <!-- end .pull-right -->
+                </div> <!-- end .container -->
+            </div> <!-- end .navbar-inner -->
+        </div> <!-- end .nav-bar -->
 
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span12">
-                <% flash.each do |key, value| %>
-                    <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
-                        <a class="close">×</a>
-                        <h4 class="alert-heading"><%= key.capitalize %>:</h4>
-                        <%= value %>
-                    </div>
-                <% end %>
-                <!-- MAIN CONTENT -->
-                <%= yield %>
-                <!-- END MAIN CONTENT -->
-            </div><!-- end span -->
-        </div><!-- end row -->
-    </div><!-- end container -->
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <% flash.each do |key, value| %>
+                        <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
+                            <a class="close">×</a>
+                            <h4 class="alert-heading"><%= key.capitalize %>:</h4>
+                            <%= value %>
+                        </div>
+                    <% end %>
+                    <!-- MAIN CONTENT -->
+                    <%= yield %>
+                    <!-- END MAIN CONTENT -->
+                </div> <!-- end span12 -->
+            </div> <!-- end row-fluid -->
+        </div> <!-- end container-fluid -->
+    </div> <!-- end #wrap -->
 
     <footer>
         <div class="pull-left">

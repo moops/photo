@@ -5,13 +5,26 @@ $iconWhiteSpritePath: asset-path('glyphicons-halflings-white', image);
 @import "slate";
 @import "bootstrap";
 
-body { padding-top: 55px; }
+//body { padding-top: 55px; }
 @import "bootstrap-responsive";
 @import "jquery.fileupload-ui";
 @import "datepicker";
 
 .fileupload-loading {
   background: url(<%= asset_path 'loading.gif' %>) center no-repeat;
+}
+
+/*
+ ************************************************
+ bootstrap fixes
+ ************************************************
+ */
+div.modal form {
+    margin-bottom: 0px;
+}
+
+.pagination {
+    margin-left: 20px;
 }
 
 /*
@@ -35,7 +48,7 @@ body { padding-top: 55px; }
 }
 
 .gallery-thumbnails {
-    height: 700px;
+    max-height: 700px;
     overflow: scroll;
 }
 
@@ -49,7 +62,7 @@ body { padding-top: 55px; }
 }
 
 .gallery-photo {
-    
+
 }
 
 .gallery-photo img {
@@ -58,7 +71,7 @@ body { padding-top: 55px; }
 }
 
 div.gallery-list {
-    box-shadow: 3px 3px 5px #000;
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
 div.gallery-list ul {
@@ -79,15 +92,31 @@ div.gallery-summary>br {
     clear: left;
 }
 
-.pagination {
-    margin-left: 20px;
+/*
+ ************************************************
+ sticky footer
+ ************************************************
+ */
+ 
+html, body {
+    height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+}
+
+.container-fluid {
+    padding-top: 55px;
 }
 
 footer {
-    margin-top: 20px;
+    margin-top: -100px;
     padding: 10px 20px;
     border-top: 1px solid #000;
     background-color: $grayDarker;
+    height: 100px;
+    clear: both;
 }
 
 /*
