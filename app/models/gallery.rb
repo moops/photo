@@ -1,13 +1,13 @@
 class Gallery < ActiveRecord::Base
   
-  attr_accessible :name, :code, :private_key, :gallery_on, :default_photo
+  attr_accessible :name, :code, :private_key, :gallery_on, :default_photo, :gallery_access
 
   has_many :photos
   belongs_to :user
   
   validates_uniqueness_of :code
 
-  def self.recent
+  def self.public_recent
     Gallery.where('private_key is null').order('gallery_on desc').limit(6).all
   end
                
@@ -33,7 +33,7 @@ class Gallery < ActiveRecord::Base
   end
   
   def default_photo_obj
-    photos.where('img = ?', default_photo).first
+    photos.where('img = ?', default_photo).first or photos.first
   end
   
 end

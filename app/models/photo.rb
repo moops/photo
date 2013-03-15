@@ -1,7 +1,3 @@
-#require 'rubygems'
-require 'mini_magick'
-require 'aws/s3'
- 
 class Photo < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   
@@ -10,48 +6,13 @@ class Photo < ActiveRecord::Base
   
   belongs_to :gallery
   has_many :comments
+  before_create :set_defaults
   
   mount_uploader :img, ImageUploader
-  
+
   def increment
     self.views += 1
     self.save
-    logger.info(self.inspect)
-  end
-    
-  def remove_source
-    
-      AWS::S3::Base.establish_connection!(
-          :access_key_id     => S3_CONFIG[Rails.env]['access_key_id'],
-          :secret_access_key => S3_CONFIG[Rails.env]['secret_access_key']
-      )
-      
-      AWS::S3::S3Object.delete("#{gallery.code}/thumbnails/#{self.img}", bucket_name)
-      AWS::S3::S3Object.delete("#{gallery.code}/#{self.img}", bucket_name)
-  end
-  
-  def source_url
-    "http://s3.amazonaws.com/#{bucket_name}/foo/#{gallery.code}/bar/#{img}"
-  end
-  
-  def source_thumb_url
-    "http://s3.amazonaws.com/#{bucket_name}/#{gallery.code}/thumbnails/#{img}"
-  end
-
-  def next
-    n = nil
-    if self.sequence
-      n = Photo.find(:first, :conditions => ["gallery_id = ? and sequence = ?",self.gallery_id,self.sequence + 1])
-    end
-    n
-  end
-
-  def previous
-    p = nil
-    if self.sequence
-      p = Photo.find(:first, :conditions => ["gallery_id = ? and sequence = ?",self.gallery_id,self.sequence - 1])
-    end
-    p
   end
 
   def extract_exif(image)
@@ -86,12 +47,15 @@ class Photo < ActiveRecord::Base
      }
   end
   
-  private
-  
-  def bucket_name
-    'raceweb_photo' << (Rails.env.production? ? '' : '_' << Rails.env)
-  end
-  
+  protected
+
+    def set_defaults
+      begin
+        self.artist = self.gallery.user.name unless self.artist
+        self.caption = self.img.full_filename unless self.caption
+      rescue
+      end
+   end
 end
 
 

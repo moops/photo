@@ -11,14 +11,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  #storage :file
-  storage :fog
+  # this has been moved to config/initializers/carrierwave.rb
   
   include CarrierWave::MimeTypes
   process :set_content_type
   
-  process :resize_to_fit => [800, 800]
   process :extract_exif
+  process :resize_to_fit => [800, 800]
   
   def extract_exif
     manipulate! do |img|

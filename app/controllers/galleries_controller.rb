@@ -5,17 +5,24 @@ class GalleriesController < ApplicationController
   # GET /galleries
   # GET /galleries.js
   def index
-    # searching
+    
     if params[:q]
+      # searching
       @gallery = Gallery.find_private(params[:q])
       unless @gallery.nil?
         redirect_to gallery_path(@gallery)
         return
       end
-      @search_results = Gallery.find_public(params[:q]) if @gallery.nil?
+      @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
+    else
+      if current_user
+        @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
+      else 
+        @galleries = nil
+      end
     end
 
-    @recent_galleries = Gallery.recent if @search_results.nil?
+    @recent_galleries = Gallery.public_recent
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,14 +34,7 @@ class GalleriesController < ApplicationController
   # GET /galleries/1.xml
   def show
     @photos = @gallery.photos
-    if @gallery.default_photo 
-      @photo = Photo.find_by_img(@gallery.default_photo)
-    else
-      @photo = @photos.to_a[0]
-    end
-    index = @photos.index(@photo) || 0
-    @next = @photos[index + 1].id if index < @photos.length - 1
-    @prev = @photos[index - 1].id if index > 0
+    @photo = @gallery.default_photo_obj
 
     respond_to do |format|
       format.html # show.html.erb
@@ -60,10 +60,12 @@ class GalleriesController < ApplicationController
   def create
     
     #generate private key
-    if 'private'.eql?(params[:gallery_access])
+    if "1".eql?(params[:gallery][:private_key])
       chars = ("a".."z").to_a + ("1".."9").to_a
       key = Array.new(20, '').collect{chars[rand(chars.size)]}.join
       @gallery.private_key=(key)
+    else
+      @gallery.private_key=(nil)
     end
 
     @gallery.user = current_user if current_user

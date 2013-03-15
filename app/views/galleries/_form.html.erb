@@ -2,8 +2,9 @@
     <%= f.error_notification %>
     <%= f.input(:name) %>
     <%= f.input(:code) %>
-    <%= f.input(:gallery_on, :as => :string, :id => 'foobar') %>
+    <%= f.input(:gallery_on, :as => :string, input_html: {'value' => Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
     <%= f.input(:default_photo) %>
+    <%= f.input :private_key, :as => :boolean, :label => 'private?' %>
     <%= f.error :base %>
     <%= f.button(:submit) %>
 <% end %>

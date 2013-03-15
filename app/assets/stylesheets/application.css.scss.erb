@@ -1,75 +1,80 @@
-
-@import "jdpicker";
-@import "jquery_ui";
-
 // Set the correct sprite paths
 $iconSpritePath: asset-path('glyphicons-halflings', image);
 $iconWhiteSpritePath: asset-path('glyphicons-halflings-white', image);
 
-$navbarBrandColor: #e22;
-
+@import "slate";
 @import "bootstrap";
-body { padding-top: 40px; }
+
+//body { padding-top: 55px; }
 @import "bootstrap-responsive";
 @import "jquery.fileupload-ui";
-@import "galleriffic";
+@import "datepicker";
 
 .fileupload-loading {
   background: url(<%= asset_path 'loading.gif' %>) center no-repeat;
 }
 
-body {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 76%;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    font-style: normal;
-    text-decoration: none;  
-    font-weight: normal;
-    color: #555;
+/*
+ ************************************************
+ bootstrap fixes
+ ************************************************
+ */
+div.modal form {
+    margin-bottom: 0px;
 }
 
-a           { text-decoration: none; font-family: verdana; }
-a:visited   { text-decoration: none; font-family: verdana; }
-a:active    { text-decoration: none; font-family: verdana; }
-a:hover     { text-decoration: underline; font-family: verdana; }
-
-textarea    { font-family: Arial,Verdana,Helvetica,sans-serif; font-size: 1em; }
+.pagination {
+    margin-left: 20px;
+}
 
 /*
  ************************************************
  gallery
  ************************************************
  */
-#gallery-info {
-    float: left;
+.gallery-info {
+    padding-bottom: 20px;
+    text-align: center;
 }
 
-#gallery-info .name {
-    color: #333;
+.gallery-info .name {
     font-weight: bold;
     font-size: 2em;
 }
 
-#gallery-info .info {
-    color: #666;
+.gallery-info .info {
     font-weight: bold;
     font-size: 1.5em;
 }
 
-#gallery-index-recent {
-    margin: 20px 20px 0px 0px;
-    float: left;
-    width: 40%;
+.gallery-thumbnails {
+    max-height: 700px;
+    overflow: scroll;
 }
 
-#gallery-index-mine {
-    margin-top: 20px;
-    float: left;
-    width: 40%;
+.photo-caption {
+    font-size: 1.5em;
+    padding-left: 30px;
 }
 
-div#gallery-index-recent ul, div#gallery-index-mine ul {
+.photo-tools {
+    padding-right: 2%;
+}
+
+.gallery-photo {
+
+}
+
+.gallery-photo img {
+    border: 1px solid #000;
+    margin: 10px 30px;
+}
+
+div.gallery-list {
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+div.gallery-list ul {
     list-style: none;
 }
 
@@ -87,27 +92,32 @@ div.gallery-summary>br {
     clear: left;
 }
 
+/*
+ ************************************************
+ sticky footer
+ ************************************************
+ */
+ 
+html, body {
+    height: 100%;
+}
 
-#comments {
-    padding-top:15px;
-    width:240px;
-    text-align:left;
+#wrap {
+    min-height: 100%;
+}
+
+.container-fluid {
+    padding-top: 55px;
 }
 
 footer {
-    margin-top: 20px;
-    border-top: 1px solid #ccc;
+    margin-top: -100px;
+    padding: 10px 20px;
+    border-top: 1px solid #000;
+    background-color: $grayDarker;
+    height: 100px;
+    clear: both;
 }
-
-
-div#gallery div.caption div.tools {
-	float: right;
-}
-
-div#gallery div.caption div.tools div.download {
-	float: none;
-}
-
 
 /*
  ************************************************
@@ -116,15 +126,16 @@ div#gallery div.caption div.tools div.download {
  */
 
 .box {
-  border: 1px solid #ccc;
+  border: 1px solid $grayDarker;
   border-radius: 10px;
 }
 
 .boxhead {
-  border-bottom: 1px solid #ccc;
-  border-top-radius: 10px;
+  border-bottom: 1px solid $grayDarker;
+  background-color: $gray;
   font-weight: bold;
-  padding: 5px;
+  padding: 5px 5px 5px 35px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .boxcontent {
@@ -159,14 +170,6 @@ div.exif-label {
   color: #999;
 }
 
-div.exif-data {
-}
-
-.caption {
-  font-weight:bold;
-  padding-bottom:10px;
-}
-
 .comment {
 }
 
@@ -179,16 +182,6 @@ div.exif-data {
   forms
  ************************************************
  */
-
-img.calIcon {
-    position: absolute;
-    cursor: pointer;
-}
-
-form.main textarea { 
-    width: 300px; 
-}
-
 .label {
   text-align: right;
 }

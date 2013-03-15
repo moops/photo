@@ -5,10 +5,6 @@
     </span>
 </div>
 
-<% if(@gallery.photos.size > 0) %>
-    <%= render(:partial => 'galleries/thumbnails', :locals => { :edit => false, :link => false }) %>
-<% end %>
-
 <h1 id="foobar">add photos</h1>
 
 <%= form_for [@gallery, Photo.new], :html => { :multipart => true, :id => "fileupload", :class => 'form-horizontal' } do |f| %>

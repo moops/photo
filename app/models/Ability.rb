@@ -9,15 +9,15 @@ class Ability
     else
       can :read, :all
       can :manage, User
-      if user.role?(:contributor)
-        can :manage, Gallery do |p|
-          p.try(:user) == user
+      if user.role?(:photographer)
+        can :manage, Gallery do |g|
+          g.try(:user) == user or g.new_record?
         end
         can :manage, Photo do |p|
-          p.try(:user) == user
+          p.gallery.try(:user) == user or p.new_record?
         end
-        can :manage, Comment do |p|
-          p.try(:user) == user
+        can :manage, Comment do |c|
+          c.photo.gallery.try(:user) == user or c.new_record?
         end
       end
     end
