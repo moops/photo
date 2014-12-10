@@ -1,11 +1,10 @@
-
 urls
 ----
-css: bootswatch bootstrap theme - http://bootswatch.com/slate
-javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker
-forms: simpleform - https://github.com/plataformatec/simple_form
-file upload/storage: carrierwave - https://github.com/jnicklas/carrierwave
-authorization: cancan - https://github.com/ryanb/cancan
+-css: bootswatch bootstrap theme - http://bootswatch.com/slate
+-javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker
+-forms: simpleform - https://github.com/plataformatec/simple_form
+-file upload/storage: carrierwave - https://github.com/jnicklas/carrierwave
+-authorization: cancan - https://github.com/ryanb/cancan
 
 2013
 ----
@@ -54,10 +53,3 @@ x Dec 14 - look into highslide or some other gallery js framework. Jan 2012 - us
 - Nov 10 - rebuild and upload standard test data and upload to raceweb-photo-development aws s3 bucket
 x Nov 07 - replace prototype with jquery - Nov 08
 x Nov 01 - move to heroku bamboo stack - Nov 01
-
-
-
-
-
-
-
