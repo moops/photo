@@ -1,6 +1,5 @@
 //= require jquery
 //= require jquery_ujs
-//= require jquery_ui
 //= require jquery-fileupload
 //= require bootstrap
 //= require bootstrap-datepicker

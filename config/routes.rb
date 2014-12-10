@@ -7,7 +7,6 @@ Photos::Application.routes.draw do
   resources :users
   resources :sessions
 
-  
   resources :galleries do
     resources :photos, :name_prefix => "gallery_"
   end
