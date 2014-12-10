@@ -1,13 +1,14 @@
 
 urls
 ----
-css: bootswatch bootstrap theme - http://bootswatch.com/slate/
-javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker/
+css: bootswatch bootstrap theme - http://bootswatch.com/slate
+javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker
 forms: simpleform - https://github.com/plataformatec/simple_form
 file upload/storage: carrierwave - https://github.com/jnicklas/carrierwave
 authorization: cancan - https://github.com/ryanb/cancan
 
 2013
+----
 x Feb  7 - fix abilities for other users to create galleries
 x Feb  7 - stick footer to bottom of page
 - Feb  7 - add button to manage photos from a gallery page
@@ -44,6 +45,7 @@ x Jan 18 - fix or remove the sorting control
 x Jan 18 - find a way to associate private galleries with a user
 
 2010
+----
 - Dec 14 - add most popular galleries
 - Dec 14 - fix galley ordering
 x Dec 14 - look into highslide or some other gallery js framework. Jan 2012 - using gallerific
