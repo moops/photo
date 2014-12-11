@@ -1,29 +1,25 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
 
-gem 'rails', '3.2.12'
+ruby '2.1.0'
+gem 'rails', '4.1.7'
 
-group :assets do
-  
-end
+gem 'pg'                        # postgres as the database for Active Record
+gem 'sass-rails', '~> 4.0.0'    # scss stylesheets
+gem 'uglifier'                  # javascript compressor
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'turbolinks'                # https://github.com/rails/turbolinks
+gem 'jbuilder'                  # https://github.com/rails/jbuilder
+gem 'bcrypt-ruby'               # needed for has_secure_password
+gem 'pundit'                    # authorization
+gem 'simple_form'               # form builder
+gem 'kaminari'                  # pagination
+gem 'factory_girl_rails'        # test data generation
 
-gem 'sass-rails',   '~> 3.2.3'
-gem 'coffee-rails', '~> 3.2.1'
-gem 'uglifier', '>= 1.0.3'
-gem 'bootstrap-sass'
 gem 'jquery-fileupload-rails'
-
-gem 'pg'                      # postgres db
 gem 'json'                    # json api
-gem 'kaminari'                # pagination
-gem 'bcrypt-ruby', '~> 3.0.0' # password encryption
-gem 'cancan'                  # authorization
-gem 'jquery-rails'            # unobtrusive javascript
 gem 'carrierwave'             # file uploads to s3
 gem 'rmagick'                 # imagemagick
-gem 'simple_form'
-
 gem 'fog'
 
-gem 'debugger', group: [:development, :test]
-
+gem 'byebug', group: [:development, :test]

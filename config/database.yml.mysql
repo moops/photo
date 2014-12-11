@@ -1,0 +1,26 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: zendogs_development
+  pool: 5
+  username:
+  password:
+  socket: /tmp/mysql.sock
+
+test:
+  adapter: mysql2
+  encoding: utf8
+  database: zendogs_test
+  pool: 5
+  username:
+  password:
+  socket: /tmp/mysql.sock
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: zendogs_production
+  pool: 5
+  username:
+  password:
+  socket: /tmp/mysql.sock

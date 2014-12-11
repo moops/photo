@@ -1,9 +1,6 @@
 class Photo < ActiveRecord::Base
   include Rails.application.routes.url_helpers
   
-  attr_accessible :gallery_id, :artist, :caption, :sequence, :views, :img, :photo_at, :shutter_speed, :aperture, 
-    :focal_length, :iso, :exposure_mode, :flash, :exposure_compensation, :camera_model
-  
   belongs_to :gallery
   has_many :comments
   before_create :set_defaults

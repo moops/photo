@@ -1,5 +1,5 @@
 Photos::Application.routes.draw do
-  root :to => 'galleries#index'
+  
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
@@ -20,6 +20,9 @@ Photos::Application.routes.draw do
 
   resources :comments
 
-  match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
+  # match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
   post 'photos/increment'
+
+  root :to => 'galleries#index'
+
 end

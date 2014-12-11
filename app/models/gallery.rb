@@ -1,7 +1,5 @@
 class Gallery < ActiveRecord::Base
   
-  attr_accessible :name, :code, :private_key, :gallery_on, :default_photo, :gallery_access
-
   has_many :photos
   belongs_to :user
   
