@@ -1,26 +1,25 @@
 class GalleriesController < ApplicationController
 
-  load_and_authorize_resource
-
   # GET /galleries
   # GET /galleries.js
   def index
     
-    if params[:q]
-      # searching
-      @gallery = Gallery.find_private(params[:q])
-      unless @gallery.nil?
-        redirect_to gallery_path(@gallery)
-        return
-      end
-      @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
-    else
-      if current_user
-        @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
-      else 
-        @galleries = nil
-      end
-    end
+    @galleries = policy_scope(Gallery)
+    # if params[:q]
+    #   # searching
+    #   @gallery = Gallery.find_private(params[:q])
+    #   unless @gallery.nil?
+    #     redirect_to gallery_path(@gallery)
+    #     return
+    #   end
+    #   @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
+    # else
+    #   if current_user
+    #     @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
+    #   else 
+    #     @galleries = nil
+    #   end
+    # end
 
     @recent_galleries = Gallery.public_recent
 
@@ -33,6 +32,9 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.xml
   def show
+    @gallery = Gallery.find(params[:id])
+    authorize @gallery
+    
     @photos = @gallery.photos
     @photo = @gallery.default_photo_obj
 
