@@ -2,27 +2,61 @@ require 'rails_helper'
 
 describe GalleryPolicy do
 
-  let(:user) { User.new }
+  let(:admin) { create(:user, authority: 1) }
+  let(:photographer) { create(:user, authority: 2) }
+  let(:user)  { create(:user, authority: 4) }
+  let!(:gallery) { create(:gallery) }
 
-  subject { GalleryPolicy }
+  subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  context ".scope" do
+    it 'shows all galleries to an admin' do
+      galleries = subject::Scope.new(admin, Gallery).resolve
+      expect(galleries.count).to eq(1)
+    end
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it 'shows all public and owned galleries to a user' do
+      galleries = subject::Scope.new(user, Gallery).resolve
+      expect(galleries.count).to eq(1)
+    end
+
+    it 'shows all public galleries to a guest' do
+      galleries = subject::Scope.new(nil, Gallery).resolve
+      expect(galleries.count).to eq(1)
+    end
   end
 
   permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "allows access to everyone" do
+      expect(subject).to permit(user, gallery)
+    end
+  end
+
+  permissions :create? do
+    it "denies access to a guest" do
+      expect(subject).not_to permit(nil, Gallery)
+    end
+    it "allows access to a user" do
+      expect(subject).to permit(user, Gallery)
+    end
   end
 
   permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "denies access to a guest" do
+      expect(subject).not_to permit(nil, gallery)
+    end
+    it "allows access to an admin" do
+      expect(subject).to permit(admin, gallery)
+    end
   end
 
   permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    it "denies access to a guest" do
+      expect(subject).not_to permit(nil, gallery)
+    end
+    it "allows access to an admin" do
+      expect(subject).to permit(admin, gallery)
+    end
   end
 end
+

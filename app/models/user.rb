@@ -1,12 +1,12 @@
 class User < ActiveRecord::Base
   has_secure_password
-  
+
   has_many :galleries
 
   validates :name,     :presence => true
   validates :email,    :presence => true, :on => :create
   validates :email,    :uniqueness => true
-  
+
   ROLES = %w[admin photographer viewer]
 
   def roles=(roles)
@@ -23,6 +23,10 @@ class User < ActiveRecord::Base
 
   def role_symbols
     roles.map(&:to_sym)
+  end
+
+  def admin?
+    role?(:admin)
   end
 
   def self.authenticate(email, password)
