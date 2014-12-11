@@ -22,4 +22,5 @@ gem 'carrierwave'             # file uploads to s3
 gem 'rmagick'                 # imagemagick
 gem 'fog'
 
-gem 'byebug', group: [:development, :test]
+gem 'byebug',      group: [:development, :test]
+gem 'rspec-rails', group: [:development, :test]
