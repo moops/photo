@@ -4,7 +4,7 @@ class GalleriesController < ApplicationController
   # GET /galleries.js
   def index
     
-    @galleries = policy_scope(Gallery)
+    @galleries = policy_scope(Gallery).page(params[:page]).per(6)
     # if params[:q]
     #   # searching
     #   @gallery = Gallery.find_private(params[:q])

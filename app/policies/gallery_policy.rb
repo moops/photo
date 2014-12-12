@@ -4,16 +4,20 @@ class GalleryPolicy < ApplicationPolicy
 
     def resolve
       if user
-        user.admin? ? scope.all : scope.where(user_id: user.id)
+        if user.admin?
+          scope.all
+        else
+          scope.where('user_id = ? or private_key is null', user.id)
+        end
       else
-        Gallery.none
+        scope.where(private_key: nil)
       end
     end
   end
 
   def show?
-    # must be enrolled in course to see lesson details
-    !record.private_key.nil?
+    # admin or public gallery or gallery owner
+    user.admin? || record.private_key.nil? || record.user.id == user.id
   end
 
   def create?

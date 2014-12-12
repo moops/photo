@@ -35,7 +35,7 @@
                         none
                     <% end %>
                     <div class="pull-right">
-                        <% if can? :create, Gallery %>
+                        <% if policy(Gallery).create? %>
                             <%= link_to("New Gallery", new_gallery_path, :class => 'btn btn-primary') %>
                         <% end %>
                     </div>
