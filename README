@@ -1,55 +1,55 @@
 urls
 ----
--css: bootswatch bootstrap theme - http://bootswatch.com/slate
--javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker
--forms: simpleform - https://github.com/plataformatec/simple_form
--file upload/storage: carrierwave - https://github.com/jnicklas/carrierwave
--authorization: cancan - https://github.com/ryanb/cancan
+- css: bootswatch bootstrap theme - http://bootswatch.com/slate
+- javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker
+- forms: simpleform - https://github.com/plataformatec/simple_form
+- file upload/storage: carrierwave - https://github.com/jnicklas/carrierwave
+- authorization: cancan - https://github.com/ryanb/cancan
 
 2013
 ----
-x Feb  7 - fix abilities for other users to create galleries  
-x Feb  7 - stick footer to bottom of page  
-- Feb  7 - add button to manage photos from a gallery page  
-x Feb  7 - make a slate bootstrap theme  
-- Feb  6 - add inline editing for captions  
-- Feb  6 - look into fading in the new photo when transitioning  
+- ~~Feb  7 - fix abilities for other users to create galleries~~
+- ~~Feb  7 - stick footer to bottom of page~~
+- Feb  7 - add button to manage photos from a gallery page
+- ~~Feb  7 - make a slate bootstrap theme~~
+- Feb  6 - add inline editing for captions
+- Feb  6 - look into fading in the new photo when transitioning
 - Feb  6 - add previous/next links between caption and tools
-x Feb  6 - re-upload galleries 20121230 and 20111006 for missing exif data
-x Feb  6 - remove gallerific
-x Feb  4 - fix height of image container for vertical images
-x Feb  4 - make only 2 rows of thumbnails
-x Feb  4 - get gallery_on calendar working - changed to bootstrap-datepicker
-x Feb  4 - views increment is not working
-x Feb  4 - default caption and artist on photo create
-x Feb  3 - get google adds working
+- ~~ Feb  6 - re-upload galleries 20121230 and 20111006 for missing exif data~~
+- ~~ Feb  6 - remove gallerific~~
+- ~~Feb  4 - fix height of image container for vertical images~~
+- ~~Feb  4 - make only 2 rows of thumbnails~~
+- ~~Feb  4 - get gallery_on calendar working - changed to bootstrap-datepicker~~
+- ~~Feb  4 - views increment is not working~~
+- ~~Feb  4 - default caption and artist on photo create~~
+- ~~Feb  3 - get google adds working~~
 - Feb  3 - find out why exif info is not being added (galleries 20121230 and 20111006 have no exif info)
-x Feb  3 - add 20130113 and 20121208 galleries to db (the files are already on s3)
-x Feb  3 - deal with galleries with missing photos (20101205: 20100828_66.jpg, 20100430: 20100426_37.jpg, 20100428_4.jpg, 20091003: 20090816_57.jpg)
-x Feb  1 - fix padding on footer when not logged in
-x Feb  1 - keep 'my galleries' on search results page
-x Feb  1 - paginate search results and my galleries
-x Feb  1 - change carrierwave storage based on environment
-x Feb  1 - upload square thumbnails
-x Jan 25 - add default photo thumbnails for galleries
-x Jan 19 - make the views increment on each showing of a photo
-x Jan 18 - show a list of private galleries when the user logs in
-x Jan 18 - move tools (download, comments, exif) above photo
-x Jan 18 - put tools into a dropdown or button group
+- ~~Feb  3 - add 20130113 and 20121208 galleries to db (the files are already on s3)~~
+- ~~Feb  3 - deal with galleries with missing photos (20101205: 20100828_66.jpg, 20100430: 20100426_37.jpg, 20100428_4.jpg, 20091003: 20090816_57.jpg)~~
+- ~~Feb  1 - fix padding on footer when not logged in~~
+- ~~Feb  1 - keep 'my galleries' on search results page~~
+- ~~Feb  1 - paginate search results and my galleries~~
+- ~~Feb  1 - change carrierwave storage based on environment~~
+- ~~Feb  1 - upload square thumbnails~~
+- ~~Jan 25 - add default photo thumbnails for galleries~~
+- ~~Jan 19 - make the views increment on each showing of a photo~~
+- ~~Jan 18 - show a list of private galleries when the user logs in
+- ~~Jan 18 - move tools (download, comments, exif) above photo~~
+- ~~Jan 18 - put tools into a dropdown or button group~~
 - Jan 18 - add popover comment form to the add button on the comment dialog
-x Jan 18 - clear float below thumbnails so pagination links are always all the way left
-x Jan 18 - find a method to produce square thumbnails
-x Jan 18 - get searching working for name and private key
-x Jan 18 - fix or remove the sorting control
-x Jan 18 - find a way to associate private galleries with a user
+- ~~Jan 18 - clear float below thumbnails so pagination links are always all the way left~~
+- ~~Jan 18 - find a method to produce square thumbnails~~
+- ~~Jan 18 - get searching working for name and private key~~
+- ~~Jan 18 - fix or remove the sorting control~~
+- ~~Jan 18 - find a way to associate private galleries with a user~~
 
 2010
 ----
 - Dec 14 - add most popular galleries
 - Dec 14 - fix galley ordering
-x Dec 14 - look into highslide or some other gallery js framework. Jan 2012 - using gallerific
+- ~~Dec 14 - look into highslide or some other gallery js framework. Jan 2012 - using gallerific~~
 - Nov 10 - replace prototype inline editing with jquery
 - Nov 10 - replace prototype show photo link with jquery
 - Nov 10 - rebuild and upload standard test data and upload to raceweb-photo-development aws s3 bucket
-x Nov 07 - replace prototype with jquery - Nov 08
-x Nov 01 - move to heroku bamboo stack - Nov 01
+- ~~Nov 07 - replace prototype with jquery - Nov 08~~
+- ~~Nov 01 - move to heroku bamboo stack - Nov 01~~
