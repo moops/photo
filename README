@@ -8,12 +8,12 @@ urls
 
 2013
 ----
-x Feb  7 - fix abilities for other users to create galleries<br>
-x Feb  7 - stick footer to bottom of page<br>
-- Feb  7 - add button to manage photos from a gallery page<br>
-x Feb  7 - make a slate bootstrap theme<br>
-- Feb  6 - add inline editing for captions<br>
-- Feb  6 - look into fading in the new photo when transitioning<br>
+x Feb  7 - fix abilities for other users to create galleries  
+x Feb  7 - stick footer to bottom of page  
+- Feb  7 - add button to manage photos from a gallery page  
+x Feb  7 - make a slate bootstrap theme  
+- Feb  6 - add inline editing for captions  
+- Feb  6 - look into fading in the new photo when transitioning  
 - Feb  6 - add previous/next links between caption and tools
 x Feb  6 - re-upload galleries 20121230 and 20111006 for missing exif data
 x Feb  6 - remove gallerific
