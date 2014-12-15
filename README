@@ -33,7 +33,7 @@ urls
 - ~~Feb  1 - upload square thumbnails~~
 - ~~Jan 25 - add default photo thumbnails for galleries~~
 - ~~Jan 19 - make the views increment on each showing of a photo~~
-- ~~Jan 18 - show a list of private galleries when the user logs in
+- ~~Jan 18 - show a list of private galleries when the user logs in~~
 - ~~Jan 18 - move tools (download, comments, exif) above photo~~
 - ~~Jan 18 - put tools into a dropdown or button group~~
 - Jan 18 - add popover comment form to the add button on the comment dialog
