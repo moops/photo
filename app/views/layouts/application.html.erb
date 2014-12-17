@@ -91,7 +91,7 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <% flash.each do |key, value| %>
                         <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
                             <a class="close">×</a>
@@ -102,7 +102,7 @@
                 </div> <!-- end span12 -->
             </div> <!-- end row -->
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <!-- MAIN CONTENT -->
                     <%= yield %>
                     <!-- END MAIN CONTENT -->

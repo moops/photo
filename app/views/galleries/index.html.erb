@@ -1,5 +1,5 @@
-<div class="row-fluid">
-    <div class="span5">
+<div class="row">
+    <div class="col-md-6">
         <div class="box gallery-list">
             <div class="boxhead">recent public galleries</div>
             <div class="boxcontent">
@@ -16,8 +16,8 @@
                 <% end %>
             </div>
         </div>
-    </div> <!-- end .span6 -->
-    <div class="span5">
+    </div> <!-- end .col-md-5 -->
+    <div class="col-md-6">
         <% if @galleries %>
             <div class="box gallery-list">
                 <div class="boxhead"><%= params[:q] ? 'search results' : 'my galleries' %></div>
@@ -43,7 +43,11 @@
                 </div>
             </div>
         <% end %>
-    </div> <!-- end .span6 -->
+    </div> <!-- end .col-md-5 -->
+
+    <button type="button" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Star
+    </button>
 </div> <!-- end .row-fluid -->
 
     

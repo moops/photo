@@ -5,6 +5,7 @@ gem 'rails', '4.1.7'
 
 gem 'pg'                        # postgres as the database for Active Record
 gem 'sass-rails', '~> 4.0.0'    # scss stylesheets
+gem 'bootstrap-sass'
 gem 'uglifier'                  # javascript compressor
 gem 'coffee-rails'
 gem 'jquery-rails'
