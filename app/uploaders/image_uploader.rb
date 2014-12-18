@@ -23,8 +23,8 @@ class ImageUploader < CarrierWave::Uploader::Base
     manipulate! do |img|
       Rails.logger.info("manipulating #{img.inspect} ...")
       Rails.logger.info("manipulating #{img.class} ...")
-      Rails.logger.info("manipulating #{model.inspect} ...")
       model.extract_exif(img)
+      Rails.logger.info("manipulating #{model.inspect} ...")
       img
     end
   end

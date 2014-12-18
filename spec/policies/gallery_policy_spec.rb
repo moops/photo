@@ -35,6 +35,9 @@ describe GalleryPolicy do
   end
 
   permissions :show? do
+    it "allows access to a guest" do
+      expect(subject).to permit(nil, user_gallery)
+    end
     it "allows access to an owner" do
       expect(subject).to permit(user, user_gallery)
     end
