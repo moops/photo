@@ -3,6 +3,6 @@ config/database.yml
 *.dat
 *.dump
 *~
-.DS_Store
+**/.DS_Store
 tmp
 public/20*

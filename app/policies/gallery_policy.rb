@@ -17,7 +17,7 @@ class GalleryPolicy < ApplicationPolicy
 
   def show?
     # admin or public gallery or gallery owner
-    user.admin? || record.private_key.nil? || record.user.id == user.id
+    record.private_key.nil? || (user && user.admin?) || (user && user.id == record.user.id)
   end
 
   def create?

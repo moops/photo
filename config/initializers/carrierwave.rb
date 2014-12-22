@@ -10,8 +10,8 @@ CarrierWave.configure do |config|
     }
     config.fog_directory = 'raceweb.photo'
   end
-  #if Rails.env.development?
-  #  Rails.logger.info('development: using file for carrierwave storage')
-  #  config.storage = :file
-  #end
+  if Rails.env.development?
+    Rails.logger.info('development: using file for carrierwave storage')
+    config.storage = :file
+  end
 end
