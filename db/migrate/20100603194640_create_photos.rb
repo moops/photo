@@ -1,4 +1,4 @@
-class CreatePhotos < ActiveRecord::Migration
+class CreatePhotos < ActiveRecord::Migration[5.1]
   def self.up
     create_table :photos do |t|
       t.references :gallery
