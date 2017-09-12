@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta name="description" content="raceweb photo galleries"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link rel="shortcut icon" href="/favicon.ico" />
     <%= csrf_meta_tags %>
   </head>
@@ -81,7 +81,7 @@
                                 <li><%# link_to 'login', login_path, :remote => true %></li>
                             <%# end %>
                         </ul>
-                    </div> 
+                    </div>
                 </div>
 
         </div>
@@ -136,6 +136,6 @@
     <div id="login-form" class="modal hide fade"></div>
 
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag 'application' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 </body>
 </html>

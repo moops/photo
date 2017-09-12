@@ -1,10 +1,15 @@
 source 'https://rubygems.org'
 
-ruby '2.1.0'
-gem 'rails', '4.1.7'
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
+ruby '2.4.1'
+gem 'rails', '5.1.4'
 
 gem 'pg'                        # postgres as the database for Active Record
-gem 'sass-rails', '~> 4.0.0'    # scss stylesheets
+gem 'sass-rails'                # scss stylesheets
 gem 'bootstrap-sass'
 gem 'uglifier'                  # javascript compressor
 gem 'coffee-rails'

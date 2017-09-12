@@ -1,8 +1,16 @@
+# Ignore bundler config.
+/.bundle
+
 config/database.yml
-*.log
+/log/*
+/tmp/*
 *.dat
 *.dump
 *~
 **/.DS_Store
-tmp
 public/20*
+
+/node_modules
+/yarn-error.log
+
+.byebug_history
