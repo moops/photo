@@ -1,118 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>raceweb - photo</title>
-    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta name="description" content="raceweb photo galleries"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= stylesheet_link_tag 'application', media: 'all' %>
     <link rel="shortcut icon" href="/favicon.ico" />
     <%= csrf_meta_tags %>
   </head>
-
-<body>
+  <body>
     <div id="wrap">
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li><a href="../navbar-static-top/">Static top</a></li>
-            <li class="active"><a href="./">Fixed top <span class="sr-only">(current)</span></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <%= link_to('raceweb photo', root_path, class: 'navbar-brand') %>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar01" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="navbar01" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="nav-dropdown-link" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            droopdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="nav-dropdown-link">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                </ul>
+                <%= form_tag(galleries_path, method: 'get', class: 'form-inline') do %>
+                    <%= hidden_field_tag :direction, params[:direction] %>
+                    <%= hidden_field_tag :sort, params[:sort] %>
+                    <%= search_field_tag(:q, params[:q], placeholder: 'find a gallery', class: 'form-control') %>
+                <% end %>
 
-
-        <!-- old navbar
-        <nav class="navbar navbar-fixed-top">
-
-                <div class="container">
-
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <%# link_to('raceweb photo', root_path, :class => 'brand') %>
-
-                    <%# form_tag(galleries_path, :method => 'get', :class => 'navbar-search pull-left') do %>
-                        <%# hidden_field_tag :direction, params[:direction] %>
-                        <%# hidden_field_tag :sort, params[:sort] %>
-                        <%# search_field_tag(:q, params[:q], :placeholder => 'find a gallery', :class => 'search-query') %>
-                    <%# end %>
-
-                    <div class="pull-right">
-                        <ul class="nav">
-                            <%# if current_user %>
-                                <li><a href="#">Welcome, <%# "#{current_user.email}" %></a></li>
-                                <li><%# link_to'logout', logout_path %></li>
-                            <%# else %>
-                                <li><a href="#">Welcome</a></li>
-                                <li><%# link_to 'register', signup_path, :remote => true %></li>
-                                <li><%# link_to 'login', login_path, :remote => true %></li>
-                            <%# end %>
-                        </ul>
-                    </div>
-                </div>
-
-        </div>
-        -->
-
-
+                <ul class="navbar-nav my-2 my-md-0">
+                    <% if current_user %>
+                        <li class="nav-item"><a class="nav-link" href="#">Welcome, <%= current_user.email %></a></li>
+                        <li class="nav-item"><%= link_to'logout', logout_path, class: 'nav-link' %></li>
+                    <% else %>
+                        <li class="nav-item"><%= link_to 'register', signup_path, class: 'nav-link', remote: true %></li>
+                        <li class="nav-item"><%= link_to 'login', login_path, class: 'nav-link', remote: true %></li>
+                    <% end %>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </nav>
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <% flash.each do |key, value| %>
-                        <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
-                            <a class="close">×</a>
-                            <h4 class="alert-heading"><%= key.capitalize %>:</h4>
-                            <%= value %>
-                        </div>
-                    <% end %>
-                </div> <!-- end span12 -->
+                <% flash.each do |key, value| %>
+                    <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
+                        <a class="close">×</a>
+                        <h4 class="alert-heading"><%= key.capitalize %>:</h4>
+                        <%= value %>
+                    </div>
+                <% end %>
             </div> <!-- end row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- MAIN CONTENT -->
-                    <%= yield %>
-                    <!-- END MAIN CONTENT -->
-                </div> <!-- end span12 -->
-            </div> <!-- end row -->
+            <!-- MAIN CONTENT -->
+            <%= yield %>
+            <!-- END MAIN CONTENT -->
         </div> <!-- end container-fluid -->
     </div> <!-- end #wrap -->
 
     <footer>
-        <div class="pull-left">
+        <div class="float-left">
             <!--
             <script type="text/javascript">
             google_ad_client = "ca-pub-2435759852249095";
@@ -123,7 +85,7 @@
             <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
             -->
         </div>
-        <div class="pull-right">
+        <div class="float-right">
             &copy; <%= Date.today.year %> raceweb.ca victoria bc<br/>
             all rights reserved<br/>
             email: <a href="mailto:info@raceweb.ca" rel="tooltip" title="email address">info@raceweb.ca</a>
@@ -136,6 +98,6 @@
     <div id="login-form" class="modal hide fade"></div>
 
     <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application' %>
 </body>
 </html>

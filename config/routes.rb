@@ -8,14 +8,14 @@ Rails.application.routes.draw do
   resources :sessions
 
   resources :galleries do
-    resources :photos, :name_prefix => "gallery_"
+    resources :photos, name_prefix: 'gallery_'
   end
 
   resources :photos do
     collection do
       post :remove, :add
     end
-    resources :comments, :name_prefix => "photop_"
+    resources :comments, name_prefix: 'photo_'
   end
 
   resources :comments
@@ -23,6 +23,6 @@ Rails.application.routes.draw do
   # match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
   post 'photos/increment'
 
-  root :to => 'galleries#index'
+  root to: 'galleries#index'
 
 end

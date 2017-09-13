@@ -1,10 +1,10 @@
 class Photo < ActiveRecord::Base
   include Rails.application.routes.url_helpers
-  
+
   belongs_to :gallery
   has_many :comments
   before_create :set_defaults
-  
+
   mount_uploader :img, ImageUploader
 
   def increment
@@ -13,7 +13,7 @@ class Photo < ActiveRecord::Base
   end
 
   def extract_exif(image)
-    if (image['EXIF:DateTimeOriginal']) 
+    if (image['EXIF:DateTimeOriginal'])
       begin
         self.photo_at= DateTime.strptime(image['EXIF:DateTimeOriginal'].strip, '%Y:%m:%d %H:%M:%S')
       rescue
@@ -28,7 +28,7 @@ class Photo < ActiveRecord::Base
     self.exposure_compensation= image['EXIF:ExposureBiasValue'].strip if image['EXIF:ExposureBiasValue']
     self.camera_model= image['EXIF:Model'].strip if image['EXIF:Model']
   end
-  
+
   #one convenient method to pass jq_upload the necessary information
   def to_jq_upload
     {
@@ -40,16 +40,16 @@ class Photo < ActiveRecord::Base
       "url" => img.url,
       "thumbnail_url" => img.thumb.url,
       "delete_url" => gallery_photo_path(gallery, id),
-      "delete_type" => "DELETE" 
+      "delete_type" => "DELETE"
      }
   end
-  
+
   protected
 
     def set_defaults
       begin
         self.artist = self.gallery.user.name unless self.artist
-        self.caption = self.img.full_filename unless self.caption
+        self.caption = self.img.model.read_attribute(:img) unless self.caption
       rescue
       end
    end

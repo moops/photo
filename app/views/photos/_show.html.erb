@@ -1,20 +1,20 @@
-<div class="row-fluid">
-    <div class="span6 photo-caption">
+<div class="row">
+    <div class="col-6 photo-caption">
         <%= @photo.caption %>
     </div>
-    <div class="span6 photo-tools">
-        <div class="dropdown pull-right">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">tools</a>
+    <div class="col-6 photo-tools">
+        <div class="dropdown">
+            <a class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#">tools</a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li><%= link_to('download', @photo.img_url, :tabindex => "-1") %></li>
-                <li><%= link_to('comments', photo_comments_path(@photo), :remote => true, :tabindex => "-1") %></li>
-                <li><%= link_to('exif', gallery_photo_path(@gallery, @photo, :exif => true), :remote => true, :tabindex => "-1") %></li>
+                <li><%= link_to('download', @photo.img_url, tabindex: '-1') %></li>
+                <li><%= link_to('comments', photo_comments_path(@photo), remote: true, tabindex: '-1') %></li>
+                <li><%= link_to('exif', gallery_photo_path(@gallery, @photo, exif: true), remote: true, tabindex: '-1') %></li>
             </ul>
         </div>
     </div> <!-- end .photo-tools -->
 </div>
-<div class="row-fluid">
-    <div class="span12 gallery-photo">
-        <%= image_tag(@photo.img_url, :title => @photo.img.full_filename) %>
+<div class="row">
+    <div class="col gallery-photo">
+        <%= image_tag(@photo.img.url, title: @photo.img.filename) %>
     </div>
 </div>

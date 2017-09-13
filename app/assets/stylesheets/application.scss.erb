@@ -1,0 +1,196 @@
+@import "bootstrap";
+
+//body { padding-top: 55px; }
+@import "datepicker";
+
+.fileupload-loading {
+  background: url(<%= asset_path 'loading.gif' %>) center no-repeat;
+}
+
+/*
+ ************************************************
+ bootstrap fixes
+ ************************************************
+ */
+div.modal form {
+    margin-bottom: 0px;
+}
+
+.pagination {
+    margin-left: 20px;
+}
+
+/*
+ ************************************************
+ gallery
+ ************************************************
+ */
+.gallery-info {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.gallery-info .name {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.gallery-info .info {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+ul.thumbnails li {
+  list-style: none;
+}
+
+.gallery-thumbnails {
+    max-height: 700px;
+    overflow: scroll;
+}
+
+.photo-caption {
+    font-size: 1.5em;
+    padding-left: 30px;
+}
+
+.photo-tools {
+    padding-right: 2%;
+}
+
+.gallery-photo {
+
+}
+
+.gallery-photo img {
+    border: 1px solid #000;
+    margin: 10px 30px;
+    max-height: 500px;
+}
+
+div.gallery-list {
+    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+div.gallery-list ul {
+    list-style: none;
+}
+
+div.gallery-summary img {
+    float: left;
+    width: 60px;
+    padding-bottom: 10px;
+}
+
+div.gallery-summary div.gallery-summary-text {
+    padding-left: 80px;
+}
+
+div.gallery-summary>br {
+    clear: left;
+}
+
+/*
+ ************************************************
+ sticky footer
+ ************************************************
+ */
+
+html, body {
+    height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+}
+
+.container-fluid {
+    padding-top: 55px;
+}
+
+footer {
+    margin-top: -100px;
+    padding: 10px 20px;
+    border-top: 1px solid #000;
+    background-color: #333;
+    height: 100px;
+    clear: both;
+}
+
+/*
+ ************************************************
+ boxes
+ ************************************************
+ */
+
+.box {
+  border: 1px solid #333;
+  border-radius: 10px;
+  margin-top: 1.5em;
+}
+
+.boxhead {
+  border-bottom: 1px solid #333;
+  background-color: #333;
+  font-weight: bold;
+  padding: 5px 5px 5px 35px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.boxcontent {
+  padding: 10px;
+}
+
+/*
+ ************************************************
+ miscellaneous
+ ************************************************
+ */
+
+//still used in _comments
+.errorText {
+  font-style: italic;
+  font-weight: bold;
+  color: #a00;
+}
+
+.clear {
+  clear:both;
+}
+
+td.label {
+  text-align:right;
+}
+
+div.exif-label {
+  width: 30%;
+  float: left;
+  font-weight: bold;
+  color: #999;
+}
+
+.comment {
+}
+
+.comment .date {
+  font-style:italic;
+}
+
+/*
+ ************************************************
+  forms
+ ************************************************
+ */
+.label {
+  text-align: right;
+}
+
+label.required:after {
+    color: red;
+	font-weight: bold;
+	font-size: 1.5em;
+	line-height: 50%;
+	content: " *";
+	vertical-align: bottom;
+}
+

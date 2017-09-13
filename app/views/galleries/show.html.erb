@@ -1,6 +1,4 @@
-<div id="gallery-popup" class="modal hide fade"></div>
-
-<div class="row-fluid">
+<div class="row">
     <div class="span12 gallery-info">
         <span class="name"><%= @gallery.name %></span>
         <span class="info">
@@ -9,11 +7,13 @@
     </div> <!-- end #gallery-info -->
 </div> <!-- end row -->
 
-<div class="row-fluid">
-    <div class="span3 gallery-thumbnails">
-        <%= render(:partial => 'thumbnails') %>
+<div class="row">
+    <div class="col-3 gallery-thumbnails">
+        <%= render(partial: 'thumbnails') %>
     </div> <!-- end .gallery-thumbnails -->
-    <div class="span9 gallery-photo-container">
-        <%= render(:partial => 'photos/show') %>
+    <div class="col-9 gallery-photo-container">
+        <%= render(partial: 'photos/show') %>
     </div> <!-- end .gallery-photo-container -->
 </div> <!-- end row -->
+
+<div id="gallery-popup" class="modal hide fade"></div>

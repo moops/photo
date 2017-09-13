@@ -1,9 +1,9 @@
-//= require jquery
-//= require rails_ujs
-//= require jquery-fileupload
-//= require turbolinks
+//= require rails-ujs
+//= require jquery3
+//= require popper
 //= require bootstrap
-//= require bootstrap-datepicker
+//= require datepicker
+//= require dropzone
 //= require_tree .
 
 $(document).ready(function() {

@@ -3,7 +3,7 @@ class GalleriesController < ApplicationController
   # GET /galleries
   # GET /galleries.js
   def index
-    
+
     @galleries = policy_scope(Gallery).page(params[:page]).per(6)
     # if params[:q]
     #   # searching
@@ -16,7 +16,7 @@ class GalleriesController < ApplicationController
     # else
     #   if current_user
     #     @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
-    #   else 
+    #   else
     #     @galleries = nil
     #   end
     # end
@@ -34,7 +34,7 @@ class GalleriesController < ApplicationController
   def show
     @gallery = Gallery.find(params[:id])
     authorize @gallery
-    
+
     @photos = @gallery.photos
     @photo = @gallery.default_photo_obj
 
@@ -60,7 +60,7 @@ class GalleriesController < ApplicationController
   # POST /galleries
   # POST /galleries.xml
   def create
-    
+
     #generate private key
     if "1".eql?(params[:gallery][:private_key])
       chars = ("a".."z").to_a + ("1".."9").to_a
@@ -112,13 +112,13 @@ class GalleriesController < ApplicationController
   end
 
   private
-  
+
     def find_photos(use_default)
-      @photos = Photo.find(:all, 
+      @photos = Photo.find(:all,
                            :conditions => ["gallery_id = ?", @gallery],
                            :order => session[:gallery_view_mode])
       if use_default
-        if @gallery.default_photo 
+        if @gallery.default_photo
           @photo = Photo.find_by_img(@gallery.default_photo)
         else
           @photo = @photos.to_a[0]

@@ -1,10 +1,11 @@
 class PhotosController < ApplicationController
-  
-  load_and_authorize_resource :gallery, :except => :increment
-  load_and_authorize_resource :photo, :through => :gallery, :except => :increment
-  
-  skip_authorize_resource :only => :increment
-  skip_authorize_resource :gallery, :only => :increment
+  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+  # load_and_authorize_resource :gallery, :except => :increment
+  # load_and_authorize_resource :photo, :through => :gallery, :except => :increment
+
+  # skip_authorize_resource :only => :increment
+  # skip_authorize_resource :gallery, :only => :increment
 
   # GET /galleries/1/photos
   # GET /galleries/1/photos.xml
@@ -13,7 +14,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @photos }
+      format.xml  { render xml: @photos }
     end
   end
 
@@ -23,7 +24,7 @@ class PhotosController < ApplicationController
     index = @gallery.photos.index(@photo)
     @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
     @prev = @gallery.photos[index - 1].id if index > 0
-    
+
     unless (params[:exif])
       @photo.views += 1
       @photo.save
@@ -31,7 +32,7 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.js   { 
+      format.js   {
         if params[:exif]
           render 'exif'
         else
@@ -44,7 +45,7 @@ class PhotosController < ApplicationController
   # GET /galleries/1/photos/new
   # GET /galleries/1/photos/new.xml
   def new
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @photo }
@@ -66,12 +67,12 @@ class PhotosController < ApplicationController
     #@photo.save_source(source)
     #@photo.img=(source.original_filename)
     @photo.views = 0
-    
+
     respond_to do |format|
       if @photo.save
-        format.json { render :json => [ @photo.to_jq_upload ].to_json }
+        format.json { render json: [ @photo.to_jq_upload ].to_json }
       else
-        format.json { render :json => [ @photo.to_jq_upload.merge({ :error => "custom_failure" }) ].to_json }
+        format.json { render json: [ @photo.to_jq_upload.merge({ error: "custom_failure" }) ].to_json }
       end
     end
   end
@@ -86,36 +87,36 @@ class PhotosController < ApplicationController
         format.html { redirect_to(@photo) }
         format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @photo.errors, :status => :unprocessable_entity }
+        format.html { render action: 'edit' }
+        format.xml  { render xml: @photo.errors, status: :unprocessable_entity }
       end
     end
   end
-  
+
   # POST /galleries/1/photos/remove
   # POST /galleries/1/photos/remove.xml
   def remove
-  
+
     if params[:remove]
-      params[:remove].each do |key,val| 
+      params[:remove].each do |key,val|
         @photo = Photo.find(key)
         @photo.remove_source
         @photo.destroy
       end
     end
-    
+
     respond_to do |format|
       format.html { redirect_to(edit_gallery_path(@gallery)) }
       format.xml  { head :ok }
     end
   end
-  
+
   # POST /galleries/1/photos/add
   # POST /galleries/1/photos/add.xml
   def add
     sequence = 0
     if params[:file_names]
-      params[:file_names].each do |val| 
+      params[:file_names].each do |val|
         p = @gallery.photos.new
         p.img= val.strip
         p.caption= val.strip
@@ -131,21 +132,35 @@ class PhotosController < ApplicationController
       format.xml  { head :ok }
     end
   end
-  
+
   # POST /photos/increment
   def increment
     @gallery = Gallery.where('code = ?', params[:gallery]).first
     @photo = @gallery.photos.where('img = ?', params[:photo]).first
     @photo.increment
-    render :nothing => true
+    render nothing: true
   end
-  
+
   # non-restfull inline editors
   def update_field
     photo = Photo.find(params[:id])
     photo.update_attribute(params[:field], params[:value])
-    render(:text => params[:value])
+    render(text: params[:value])
   end
   # end non-restfull inline editors
-  
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_photo
+      @photo = Photo.find(params[:id])
+    end
+
+    def set_gallery
+      @gallery = Gallery.find(params[:gallery_id])
+    end
+
+    def photo_params
+      params.require(:photo).permit(:artist, :caption, :views)
+    end
+
 end

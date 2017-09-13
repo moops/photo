@@ -9,10 +9,8 @@ ruby '2.4.1'
 gem 'rails', '5.1.4'
 
 gem 'pg'                        # postgres as the database for Active Record
-gem 'sass-rails'                # scss stylesheets
-gem 'bootstrap-sass'
+gem 'bootstrap'
 gem 'uglifier'                  # javascript compressor
-gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'turbolinks'                # https://github.com/rails/turbolinks
 gem 'jbuilder'                  # https://github.com/rails/jbuilder
@@ -22,10 +20,9 @@ gem 'simple_form'               # form builder
 gem 'kaminari'                  # pagination
 gem 'factory_girl_rails'        # test data generation
 
-gem 'jquery-fileupload-rails'
 gem 'json'                    # json api
 gem 'carrierwave'             # file uploads to s3
-gem 'rmagick'                 # imagemagick
+gem 'mini_magick'
 gem 'fog'
 
 gem 'byebug',      group: [:development, :test]
@@ -35,4 +32,6 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry'
+  gem 'pry-byebug'
 end
