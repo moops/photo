@@ -1,5 +1,5 @@
 <div class="gallery-summary">
-	<%= image_tag(g.default_photo_obj.img_url(:thumb)) %>
+	<%# image_tag(g.default_photo_obj.img_url(:thumb)) %>
 	<div class="gallery-summary-text">
 	    <%= link_to(g.name, g) %><br/>
     	<%= g.photo_count %> photos :: <%= g.gallery_on.strftime("%b %d, %Y") %>

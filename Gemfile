@@ -12,11 +12,9 @@ gem 'pg'                        # postgres as the database for Active Record
 gem 'bootstrap'
 gem 'uglifier'                  # javascript compressor
 gem 'jquery-rails'
-gem 'turbolinks'                # https://github.com/rails/turbolinks
 gem 'jbuilder'                  # https://github.com/rails/jbuilder
 gem 'bcrypt-ruby'               # needed for has_secure_password
 gem 'pundit'                    # authorization
-gem 'simple_form'               # form builder
 gem 'kaminari'                  # pagination
 gem 'factory_girl_rails'        # test data generation
 

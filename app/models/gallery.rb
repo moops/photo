@@ -2,6 +2,7 @@ class Gallery < ActiveRecord::Base
 
   has_many :photos
   belongs_to :user
+  belongs_to :default_photo, class_name: 'Photo', optional: true
 
   validates_uniqueness_of :code
 
@@ -31,7 +32,6 @@ class Gallery < ActiveRecord::Base
   end
 
   def default_photo_obj
-    default_photo = photos.where(img: default_photo).first
-    default_photo ||= photos.first
+    photos.where(img: default_photo).first || photos.first
   end
 end

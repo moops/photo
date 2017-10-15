@@ -1,20 +1,26 @@
 <div class="row">
-    <div class="col-6 photo-caption">
-        <%= @photo.caption %>
-    </div>
-    <div class="col-6 photo-tools">
-        <div class="dropdown">
-            <a class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" href="#">tools</a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li><%= link_to('download', @photo.img_url, tabindex: '-1') %></li>
-                <li><%= link_to('comments', photo_comments_path(@photo), remote: true, tabindex: '-1') %></li>
-                <li><%= link_to('exif', gallery_photo_path(@gallery, @photo, exif: true), remote: true, tabindex: '-1') %></li>
-            </ul>
-        </div>
-    </div> <!-- end .photo-tools -->
+  <div class="col-sm-6 photo-caption">
+    <%= @photo.caption %>
+  </div>
 </div>
 <div class="row">
-    <div class="col gallery-photo">
-        <%= image_tag(@photo.img.url, title: @photo.img.filename) %>
-    </div>
+  <div class="col gallery-photo">
+    <%= image_tag(@photo.img.url, title: @photo.img.filename) %>
+  </div>
+</div>
+<div class="row">
+  <div class="col tools">
+    <%= link_to(photo_comments_path(@photo), remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: "#{@photo.comments.count} comments") do %>
+      <span class="icon-comments"></span>
+    <% end %> &#8226;
+    <a href="#" data-toggle="tooltip", data-placement="top" title="<%= @photo.views %> views">
+      <span class="icon-views"></span>
+    </a> &#8226;
+    <%= link_to(photo_path(@photo, exif: true), remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: 'exif details') do %>
+      <span class="icon-exif"></span>
+    <% end %> &#8226;
+    <%= link_to(@photo.img_url, data: {toggle: 'tooltip', placement: 'top'}, title: 'download') do %>
+      <span class="icon-download"></span>
+    <% end %>
+  </div>
 </div>

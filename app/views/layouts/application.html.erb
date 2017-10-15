@@ -8,73 +8,53 @@
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <link rel="shortcut icon" href="/favicon.ico" />
     <%= csrf_meta_tags %>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag 'application' %>
   </head>
   <body>
-    <div id="wrap">
-        <!-- Fixed navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-            <%= link_to('raceweb photo', root_path, class: 'navbar-brand') %>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar01" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div id="navbar01" class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a id="nav-dropdown-link" class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            droopdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="nav-dropdown-link">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                </ul>
-                <%= form_tag(galleries_path, method: 'get', class: 'form-inline') do %>
-                    <%= hidden_field_tag :direction, params[:direction] %>
-                    <%= hidden_field_tag :sort, params[:sort] %>
-                    <%= search_field_tag(:q, params[:q], placeholder: 'find a gallery', class: 'form-control') %>
-                <% end %>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <%= link_to('raceweb photo', root_path, class: 'navbar-brand') %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar01" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div id="navbar01" class="collapse navbar-collapse">
+            <div class="mr-auto"></div>
+            <%= form_tag(galleries_path, method: 'get', class: 'form-inline') do %>
+                <%= hidden_field_tag :direction, params[:direction] %>
+                <%= hidden_field_tag :sort, params[:sort] %>
+                <%= search_field_tag(:q, params[:q], placeholder: 'find a gallery', class: 'form-control') %>
+            <% end %>
 
-                <ul class="navbar-nav my-2 my-md-0">
-                    <% if current_user %>
-                        <li class="nav-item"><a class="nav-link" href="#">Welcome, <%= current_user.email %></a></li>
-                        <li class="nav-item"><%= link_to'logout', logout_path, class: 'nav-link' %></li>
-                    <% else %>
-                        <li class="nav-item"><%= link_to 'register', signup_path, class: 'nav-link', remote: true %></li>
-                        <li class="nav-item"><%= link_to 'login', login_path, class: 'nav-link', remote: true %></li>
-                    <% end %>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </nav>
-
-        <div class="container-fluid">
-            <div class="row">
-                <% flash.each do |key, value| %>
-                    <div class="alert alert-block alert-<%= key == :notice ? "success" : key %>" data-dismiss="alert">
-                        <a class="close">×</a>
-                        <h4 class="alert-heading"><%= key.capitalize %>:</h4>
-                        <%= value %>
-                    </div>
+            <ul class="navbar-nav my-2 my-md-0">
+                <% if current_user %>
+                    <li class="nav-item"><a class="nav-link" href="#">Welcome, <%= current_user.email %></a></li>
+                    <li class="nav-item"><%= link_to'logout', logout_path, class: 'nav-link' %></li>
+                <% else %>
+                    <li class="nav-item"><%= link_to 'register', signup_path, class: 'nav-link', remote: true %></li>
+                    <li class="nav-item"><%= link_to 'login', login_path, class: 'nav-link', remote: true %></li>
                 <% end %>
-            </div> <!-- end row -->
-            <!-- MAIN CONTENT -->
-            <%= yield %>
-            <!-- END MAIN CONTENT -->
-        </div> <!-- end container-fluid -->
-    </div> <!-- end #wrap -->
+            </ul>
+        </div><!--/.nav-collapse -->
+    </nav>
+
+    <div class="container-fluid">
+        <% flash.each do |key, value| %>
+            <% type = 'success' if key == 'notice'; type = 'danger' if key == 'alert'; %>
+            <div class="alert alert-<%= type %> alert-dismissible fade show" role="alert">
+                <strong><%= key.capitalize %>:</strong> <%= value %>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <% end %>
+        <!-- MAIN CONTENT -->
+        <%= yield %>
+        <!-- END MAIN CONTENT -->
+    </div> <!-- end container-fluid -->
 
     <footer>
-        <div class="float-left">
+        <div class="text-left">
             <!--
             <script type="text/javascript">
             google_ad_client = "ca-pub-2435759852249095";
@@ -85,19 +65,14 @@
             <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
             -->
         </div>
-        <div class="float-right">
-            &copy; <%= Date.today.year %> raceweb.ca victoria bc<br/>
-            all rights reserved<br/>
-            email: <a href="mailto:info@raceweb.ca" rel="tooltip" title="email address">info@raceweb.ca</a>
+        <div class="copy">
+            &copy; <%= Date.today.year %> <a href="mailto:info@raceweb.ca" rel="tooltip" title="email address">raceweb.ca</a>
         </div>
         <div class="clear"></div>
     </footer> <!-- end footer -->
 
     <!-- hidden modal forms -->
     <div id="registration-form" class="modal hide fade"></div>
-    <div id="login-form" class="modal hide fade"></div>
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <%= javascript_include_tag 'application' %>
+    <div id="login-form" class="modal hide"></div>
 </body>
 </html>

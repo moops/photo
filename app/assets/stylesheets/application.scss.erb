@@ -1,6 +1,11 @@
-@import "bootstrap";
+/*
+ *= require_tree .
+ *= require_self
+ */
 
-//body { padding-top: 55px; }
+ @import "bootstrap";
+
+body { margin-top: 8px; }
 @import "datepicker";
 
 .fileupload-loading {
@@ -49,9 +54,12 @@ ul.thumbnails li {
     overflow: scroll;
 }
 
+a.thumbnail img {
+  margin: 1px 0px;
+}
+
 .photo-caption {
     font-size: 1.5em;
-    padding-left: 30px;
 }
 
 .photo-tools {
@@ -64,7 +72,7 @@ ul.thumbnails li {
 
 .gallery-photo img {
     border: 1px solid #000;
-    margin: 10px 30px;
+    margin: 12px 0px;
     max-height: 500px;
 }
 
@@ -96,12 +104,9 @@ div.gallery-summary>br {
  ************************************************
  */
 
-html, body {
+body {
     height: 100%;
-}
-
-#wrap {
-    min-height: 100%;
+    margin-bottom: 50px;
 }
 
 .container-fluid {
@@ -109,12 +114,17 @@ html, body {
 }
 
 footer {
-    margin-top: -100px;
-    padding: 10px 20px;
-    border-top: 1px solid #000;
-    background-color: #333;
-    height: 100px;
-    clear: both;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  border-top: 1px solid #000;
+  line-height: 50px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+}
+
+.copy {
+  margin-left: 10px;
 }
 
 /*
@@ -194,3 +204,38 @@ label.required:after {
 	vertical-align: bottom;
 }
 
+form.dropzone {
+  border: 1px solid red;
+}
+
+div#drop-zone {
+  border: 5px dashed orange;
+  height: 50px;
+  line-height: 50px;
+}
+
+div#photos-file-input {
+  border: 5px dashed red;
+  height: 50px;
+  line-height: 50px;
+}
+
+#photos-file-input input[type="file"] {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*
+ ************************************************
+  icon links
+ ************************************************
+ */
+ a:link [class^="icon-"], a:visited [class^="icon-"], a:hover, a:active [class^="icon-"] {
+  text-decoration: none;
+  color: #333;
+}
+
+span.info a [class^="icon-"] {
+  font-size: 0.7em;
+}

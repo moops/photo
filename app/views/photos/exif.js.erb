@@ -1,3 +1,1 @@
-jQuery('#gallery-popup')
-    .html("<%= escape_javascript(render(:partial => 'exif')) %>")
-    .modal('show');
+jQuery('#gallery-popup').html("<%= escape_javascript(render partial: 'exif') %>").modal('show');

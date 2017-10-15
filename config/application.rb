@@ -28,5 +28,7 @@ module Photos
     #S3_CONFIG = YAML::load(File.open("#{Rails.root}/config/amazon_s3.yml"))
     config.time_zone = 'Pacific Time (US & Canada)'
     DATE_FORMAT = '%B %d %Y'
+
+    # config.filter_parameters += [:photos]
   end
 end

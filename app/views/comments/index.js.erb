@@ -1,3 +1,1 @@
-jQuery('#gallery-popup')
-    .html("<%= escape_javascript(render(:partial => 'comments', :locals => { :photo => @photo })) %>")
-    .modal('show');
+jQuery('#gallery-popup').html("<%= escape_javascript(render partial: 'index', locals: { photo: @photo }) %>").modal('show');

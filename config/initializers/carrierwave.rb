@@ -1,4 +1,5 @@
 CarrierWave.configure do |config|
+  puts 'carrierwave config...'
   if Rails.env.production?
     Rails.logger.info('production: using fog for carrierwave storage')
     config.storage = :fog
@@ -12,6 +13,7 @@ CarrierWave.configure do |config|
   end
   if Rails.env.development?
     Rails.logger.info('development: using file for carrierwave storage')
+    puts 'development: using file for carrierwave storage'
     config.storage = :file
   end
 end

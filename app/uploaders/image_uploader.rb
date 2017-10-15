@@ -35,4 +35,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w(jpg jpeg gif png)
   end
+
+  # def full_filename (for_file = model.img.file)
+  #   model.read_attribute(:img)
+  # end
 end

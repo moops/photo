@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20120921193440) do
 
   create_table "comments", force: :cascade do |t|
     t.bigint "photo_id"
-    t.string "comment"
+    t.string "message"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["photo_id"], name: "index_comments_on_photo_id"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20120921193440) do
     t.string "private_key"
     t.bigint "user_id"
     t.date "gallery_on"
-    t.string "default_photo"
+    t.integer "default_photo_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_galleries_on_user_id"

@@ -1,2 +1,2 @@
-jQuery('.gallery-photo-container')
-    .html("<%= escape_javascript(render(:partial => 'show')) %>")
+jQuery('.gallery-photo-container').html("<%= escape_javascript(render partial: 'show') %>")
+$('[data-toggle="tooltip"]').tooltip();

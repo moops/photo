@@ -1,19 +1,48 @@
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>photo details</h3>
-</div>
-<div class="modal-body">
-    <div id="exif">
-        <div class="exif-label">viewed:</div><div class="exif-data"><%= h @photo.views %> times&nbsp;</div>
-        <div class="exif-label">aperture:</div><div class="exif-data"><%= h @photo.aperture %>&nbsp;</div>
-        <div class="exif-label">date:</div><div class="exif-data"><%= h @photo.photo_at %>&nbsp;</div>
-        <div class="exif-label">iso:</div><div class="exif-data"><%= h @photo.iso %>&nbsp;</div>
-        <div class="exif-label">mode:</div><div class="exif-data"><%= h @photo.exposure_mode %>&nbsp;</div>
-        <div class="exif-label">photographer:</div><div class="exif-data"><%= h @photo.artist %>&nbsp;</div>
-        <div class="exif-label">flash:</div><div class="exif-data"><%= h @photo.flash %>&nbsp;</div>
-        <div class="exif-label">focal length:</div><div class="exif-data"><%= h @photo.focal_length %>&nbsp;</div>
-        <div class="exif-label">compensation:</div><div class="exif-data"><%= h @photo.exposure_compensation %>&nbsp;</div>
-        <div class="exif-label">shutter speed:</div><div class="exif-data"><%= h @photo.shutter_speed %>&nbsp;</div>
-        <div class="exif-label">camera model:</div><div class="exif-data"><%= h @photo.camera_model %>&nbsp;</div>
-    </div> <!-- end #exif -->
-</div>
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">photo details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="container" id="exif">
+                <div class="row">
+                    <div class="col-4 text-right exif-label">viewed:</div><div class="col-8 exif-data"><%= h @photo.views %> times</div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">aperture:</div><div class="col-8 exif-data"><%= h @photo.aperture %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">date:</div><div class="col-8 exif-data"><%= h @photo.photo_at %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">iso:</div><div class="col-8 exif-data"><%= h @photo.iso %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">mode:</div><div class="col-8 exif-data"><%= h @photo.exposure_mode %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">photographer:</div><div class="col-8 exif-data"><%= h @photo.artist %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">flash:</div><div class="col-8 exif-data"><%= h @photo.flash %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">focal length:</div><div class="col-8 exif-data"><%= h @photo.focal_length %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">compensation:</div><div class="col-8 exif-data"><%= h @photo.exposure_compensation %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">shutter speed:</div><div class="col-8 exif-data"><%= h @photo.shutter_speed %></div>
+                </div>
+                <div class="row">
+                    <div class="col-4 text-right exif-label">camera model:</div><div class="col-8 exif-data"><%= h @photo.camera_model %></div>
+                </div> <!-- end .row -->
+            </div> <!-- end #exif -->
+        </div> <!-- end .modal-body -->
+        <div class="modal-footer">
+            <a href="#" class="btn btn-secondary" data-dismiss="modal">got it</a>
+        </div> <!-- end .modal-footer -->
+    </div> <!-- end .modal-content -->
+</div> <!-- end .modal-dialog -->

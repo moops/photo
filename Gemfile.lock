@@ -328,9 +328,6 @@ GEM
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
-    simple_form (3.5.0)
-      actionpack (> 4, < 5.2)
-      activemodel (> 4, < 5.2)
     slop (3.6.0)
     spring (2.0.2)
       activesupport (>= 4.2)
@@ -347,9 +344,6 @@ GEM
     thor (0.20.0)
     thread_safe (0.3.6)
     trollop (2.1.2)
-    turbolinks (5.0.1)
-      turbolinks-source (~> 5)
-    turbolinks-source (5.0.3)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uglifier (3.2.0)
@@ -381,10 +375,8 @@ DEPENDENCIES
   pundit
   rails (= 5.1.4)
   rspec-rails
-  simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
-  turbolinks
   uglifier
 
 RUBY VERSION

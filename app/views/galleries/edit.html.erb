@@ -1,14 +1,6 @@
 <h1>Editing gallery</h1>
 
-<% form_for(@gallery) do |f| %>
-  <%= render(:partial => 'form', :locals => {:f => f}) %>
-  <p/>
-  <%= f.submit 'Update' %>
-<% end %>
+<%= render 'form' %>
 
-<% form_tag(remove_gallery_photos_path(@gallery)) do %>
-
-<%= render(:partial => 'thumbnails', :locals => { :edit => true, :link => false }) %>
-
+<%= render partial: 'thumbnails', locals: { edit: true, link: false } %>
 <%= submit_tag('remove selected') %>
-<% end %>

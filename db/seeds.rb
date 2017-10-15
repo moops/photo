@@ -1,34 +1,31 @@
 # users
-# adam = User.create(
-#   name: 'adam',
-#   email: 'adam@raceweb.ca',
-#   password: 'pass',
-#   password_confirmation: 'pass',
-#   # admin, user
-#   authority: 3)
+adam = User.create(
+  name: 'adam',
+  email: 'adam@raceweb.ca',
+  password: 'pass',
+  password_confirmation: 'pass',
+  # admin, user
+  authority: 3)
 
 # galleries
-# youth = Gallery.create(
-#   name: 'welcome to canada (private)',
-#   code: '19710501',
-#   private_key: '123123123a',
-#   user: adam,
-#   gallery_on: Time.local(2010, 6, 3),
-#   default_photo: '19710501_5.jpg')
+youth = Gallery.create(
+  name: 'welcome to canada (private)',
+  code: '19710501',
+  private_key: '123123123a',
+  user: adam,
+  gallery_on: Time.local(2010, 6, 3))
 
-# victoria_at_night = Gallery.create(
-#   name: 'victoria at night (public)',
-#   code: '20090303',
-#   user: adam,
-#   gallery_on: Time.local(2010, 6, 2),
-#   default_photo: '20090303_8.jpg')
+victoria_at_night = Gallery.create(
+  name: 'victoria at night (public)',
+  code: '20090303',
+  user: adam,
+  gallery_on: Time.local(2010, 6, 2))
 
-# summer = Gallery.create(
-#   name: '2010 summer (public)',
-#   code: '20100501',
-#   user: adam,
-#   gallery_on: Time.local(2010, 6, 1),
-#   default_photo: '20100612_8.jpg')
+summer = Gallery.create(
+  name: '2010 summer (public)',
+  code: '20100501',
+  user: adam,
+  gallery_on: Time.local(2010, 6, 1))
 
 adam = User.first
 youth = Gallery.find(1)
@@ -355,3 +352,15 @@ photos.each do |photo_attributes|
   File.open(Rails.root.join("db/seeds/#{photo.gallery.code}/#{image_file}")) { |f| photo.img = f }
   photo.save
 end
+
+# gallery default photos
+youth.default_photo = youth.photos.where(caption: 'me at a crossroads').first
+youth.save
+victoria_at_night.default_photo = victoria_at_night.photos.where(caption: 'fountain behind the legislature 3').first
+victoria_at_night.save
+summer.default_photo = summer.photos.where(caption: 'snow birds').first
+summer.save
+
+comment_1 = Photo.last.comments.create(message: 'comment 1')
+comment_2 = Photo.last.comments.create(message: 'comment 2')
+

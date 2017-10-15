@@ -2,9 +2,18 @@ urls
 ----
 - css: bootswatch bootstrap theme - http://bootswatch.com/slate
 - javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker
-- forms: simpleform - https://github.com/plataformatec/simple_form
 - file upload/storage: carrierwave - https://github.com/jnicklas/carrierwave
 - authorization: cancan - https://github.com/ryanb/cancan
+
+- icons - made a font at http://fontello.com with the entypo icons (download, info(exif), comments, edit, gallery, camera, ...)
+
+2017
+----
+x oct 13 - fix spacing of gallery title
+- oct 13 - can't dismiss comment modal after adding comment
+- oct 13 - make default photo a foreign key on gallery object
+- oct 13 - re-enable search results for gallery search
+x oct 14 - re-enable icons and change tools dropdown to icon links
 
 2013
 ----

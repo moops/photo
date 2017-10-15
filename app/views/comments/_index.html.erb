@@ -1,0 +1,32 @@
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">comments</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+                <div class="errorText"><%= flash[:error] %></div>
+
+                <div class="row">
+                    <%= form_with(model: [@photo, @photo.comments.new], class: 'form-inline') do |form| %>
+                        <%= form.text_field(:message, class: 'form-control', placeholder: 'message', id: 'new-message') %>
+                        <%= form.submit('add', class: 'btn btn-small btn-primary') %>
+                    <% end %>
+                </div>
+
+                <% @comments.each do |comment| %>
+                    <% next if comment.new_record? %>
+                    <div class="row comment">
+                        <div class="date"><%= comment.created_at.strftime('%b %d, %Y %H:%M:%S') %></div>
+                        &nbsp;&nbsp;
+                        <%= sanitize comment.message %><p/>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+        </div> <!-- end .modal-footer -->
+    </div> <!-- end .modal-content -->
+</div> <!-- end .modal-dialog -->

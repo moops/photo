@@ -1,10 +1,39 @@
-<%= simple_form_for(@gallery, :html => {:class => 'form-horizontal' }) do |f| %>
-    <%= f.error_notification %>
-    <%= f.input :name %>
-    <%= f.input :code %>
-    <%= f.input(:gallery_on, :as => :string, input_html: {'value' => Date.today.strftime("%Y-%m-%d"), 'data-date-format' => "yyyy-mm-dd"}) %>
-    <%= f.input :default_photo) %>
-    <%= f.input :private_key, :as => :boolean, :label => 'private?' %>
-    <%= f.error :base %>
-    <%= f.button(:submit) %>
+<%= form_for(@gallery) do |f| %>
+    <div class="form-group row">
+        <%= f.label(:name, class: 'col-sm-3 col-form-label text-right') %>
+        <div class="col-sm-9">
+            <%= f.text_field(:name, class: 'form-control') %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <%= f.label(:code, class: 'col-sm-3 col-form-label text-right') %>
+        <div class="col-sm-9">
+            <%= f.text_field(:code, class: 'form-control') %>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label(:gallery_on, class: 'col-sm-3 col-form-label text-right') %>
+        <div class="col-sm-9">
+            <%= f.text_field(:gallery_on, placeholder: Date.today.strftime("%Y-%m-%d"), class: 'form-control') %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <%= f.label(:default_photo, class: 'col-sm-3 col-form-label text-right') %>
+        <div class="col-sm-9">
+            <%= f.text_field(:default_photo, class: 'form-control') %>
+        </div>
+    </div>
+    <div class="form-group row">
+        <%= f.label('private?', class: 'col-sm-3 col-form-label text-right') %>
+        <div class="col-sm-9">
+            <%= f.check_box(:private_key, class: 'form-control') %>
+        </div>
+    </div>
+    <div class="form-group row justify-content-end">
+        <div class="col-4">
+            <%= f.submit(@gallery.new_record? ? 'create' : 'update', class: 'btn btn-primary') %>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+        </div>
+    </div>
 <% end %>

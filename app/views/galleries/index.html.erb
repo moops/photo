@@ -7,7 +7,7 @@
                     <ul>
                         <% for g in @recent_galleries %>
                             <li>
-                                <%= render(:partial => "summary", :locals => { :g => g }) %>
+                                <%= render partial: 'summary', locals: { g: g } %>
                             </li>
                         <% end %>
                     </ul>
@@ -26,17 +26,17 @@
                         <ul>
                             <% for g in @galleries %>
                                 <li>
-                                    <%= render(:partial => "summary", :locals => { :g => g }) %>
+                                    <%= render partial: 'summary', locals: { g: g } %>
                                 </li>
                             <% end %>
                         </ul>
-                        <%= paginate(@galleries, :window => 2, :outer_window => 1) %>
+                        <%= paginate(@galleries, window: 2, outer_window: 1) %>
                     <% else %>
                         none
                     <% end %>
                     <div class="pull-right">
                         <% if policy(Gallery).create? %>
-                            <%= link_to("New Gallery", new_gallery_path, :class => 'btn btn-primary') %>
+                            <%= link_to('New Gallery', new_gallery_path, class: 'btn btn-primary') %>
                         <% end %>
                     </div>
                     <div class="clear"></div>

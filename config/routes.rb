@@ -7,22 +7,23 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
 
-  resources :galleries do
-    resources :photos, name_prefix: 'gallery_'
-  end
-
-  resources :photos do
-    collection do
-      post :remove, :add
+  resources :galleries, shallow: true do
+    resources :photos do
+      resources :comments
     end
-    resources :comments, name_prefix: 'photo_'
   end
 
-  resources :comments
+  # resources :photos do
+  #   collection do
+  #     post :remove, :add
+  #   end
+  #   resources :comments
+  # end
+
+  # resources :comments
 
   # match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
   post 'photos/increment'
 
   root to: 'galleries#index'
-
 end
