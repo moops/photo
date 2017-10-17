@@ -15,11 +15,10 @@ $(document).ready(function() {
     // files is a FileList of File objects. List some properties.
     for (var i = 0, f; f = files[i]; i++) {
 
-      var formRow = document.createElement('div');
-      formRow.className = "form-group row";
-      formRow.id = `photo-row-${i}`;
-      document.getElementById('upload-form').insertBefore(formRow, document.getElementById('upload-buttons'));
-      console.log('created row: i', i, formRow, f);
+      var photoCell = document.createElement('span');
+      photoCell.className = "card mt-2 mr-2";
+      photoCell.id = `photo-cell-${i}`;
+      document.getElementById('photos-row').appendChild(photoCell);
 
       var files = evt.target.files;
 
@@ -33,14 +32,21 @@ $(document).ready(function() {
       // Closure to capture the file information.
       reader.onload = (function(theFile, index) {
         return function(e) {
-          console.log(index, theFile.name, `photo-row-${index}`);
-          var foundFormRow = document.getElementById(`photo-row-${index}`);
-          foundFormRow.innerHTML = [
-              '<span class="col-sm-1"><img class="thumb" height="100" width="100" src="', e.target.result, '" title="', escape(theFile.name), '"/></span>',
-              '<div class="col-sm-2"><input name="photo_names[]" type="text" value="', escape(theFile.name), '"/></div>',
-              '<div class="col-sm-2"><input name="photo_artists[]" type="text" placeholder="artist"/></div>',
-              '<div class="col-sm-2"><input name="photo_captions[]" type="text" placeholder="caption"/></div>',
-              '<div class="col-sm-2"><input name="photo_includes[]" type="checkbox" checked value="', index, '"/></div>'].join('');
+          var foundPhotoCell = document.getElementById(`photo-cell-${index}`);
+          foundPhotoCell.innerHTML = [
+              '  <span class="card-body">',
+              '    <div class="row">',
+              '      <div class="col-5 px-1">',
+              '        <img height="120" width="120" src="', e.target.result, '" title="', escape(theFile.name), '"/>',
+              '      </div>',
+              '      <div class="col-7 px-1">',
+              '        <input name="photo_names[]" type="text" size="16" value="', escape(theFile.name), '" class="form-control"/>',
+              '        <input name="photo_artists[]" type="text" size="16" placeholder="artist" class="form-control my-2"/>',
+              '        <input name="photo_captions[]" type="text" size="16" placeholder="caption" class="form-control my-2"/>',
+              '        <input name="photo_includes[]" type="checkbox" checked value="', index, '" class="form-control"/>',
+              '      </div>',
+              '    </div>',
+              '  </span>'].join('');
         };
       })(f, i);
 

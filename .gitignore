@@ -8,7 +8,7 @@ config/database.yml
 *.dump
 *~
 **/.DS_Store
-public/20*
+public/uploads
 
 /node_modules
 /yarn-error.log

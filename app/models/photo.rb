@@ -44,6 +44,10 @@ class Photo < ActiveRecord::Base
      }
   end
 
+  def description
+    caption.empty? ? img.file.filename : caption
+  end
+
   protected
 
     def set_defaults

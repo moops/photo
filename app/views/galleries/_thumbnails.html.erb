@@ -1,7 +1,3 @@
-<ul class="thumbnails">
-    <% for p in @gallery.photos %>
-        <li>
-            <%= link_to(image_tag(p.img_url(:thumb), size: '80x80', title: p.img.filename), photo_path(p), remote: true, class: 'thumbnail') %>
-        </li>
-    <% end %>
-</ul>
+<% @gallery.photos.each do |p| %>
+    <%= link_to(image_tag(p.img_url(:thumb), size: '80x80', class: 'thumbnail', title: p.img.filename), photo_path(p), remote: true) %>
+<% end %>

@@ -5,23 +5,23 @@ class GalleriesController < ApplicationController
   # GET /posts.json
   def index
     @galleries = policy_scope(Gallery).page(params[:page]).per(6)
-    # if params[:q]
-    #   # searching
-    #   @gallery = Gallery.find_private(params[:q])
-    #   unless @gallery.nil?
-    #     redirect_to gallery_path(@gallery)
-    #     return
-    #   end
-    #   @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
-    # else
-    #   if current_user
-    #     @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
-    #   else
-    #     @galleries = nil
-    #   end
-    # end
+    if params[:q]
+      # searching
+      @gallery = Gallery.find_private(params[:q])
+      unless @gallery.nil?
+        redirect_to gallery_path(@gallery)
+        return
+      end
+      @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
+    else
+      if current_user
+        @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
+      else
+        @galleries = nil
+      end
+    end
 
-    @recent_galleries = Gallery.public_recent
+    @recent_galleries = Gallery.public_recent.all
   end
 
   # GET /galleries/1
@@ -29,6 +29,10 @@ class GalleriesController < ApplicationController
   def show
     authorize @gallery
     @photos = @gallery.photos
+    if @photos.blank?
+      redirect_to new_gallery_photo_path(@gallery)
+      return
+    end
     @photo = @gallery.default_photo_obj
   end
 
@@ -46,16 +50,8 @@ class GalleriesController < ApplicationController
   # POST /posts.json
   def create
     @gallery = Gallery.new(gallery_params)
-
-    # generate private key
-    if "1".eql? gallery_params[:private_key]
-      chars = ("a".."z").to_a + ("1".."9").to_a
-      key = Array.new(20, '').collect{chars[rand(chars.size)]}.join
-      @gallery.private_key = key
-    else
-      @gallery.private_key = nil
-    end
-
+    @gallery.private_key = Gallery.new_private_key(gallery_params[:private_key])
+    @gallery.gallery_on = Date.today if gallery_params[:gallery_on].empty?
     @gallery.user = current_user if current_user
 
     respond_to do |format|
@@ -95,28 +91,11 @@ class GalleriesController < ApplicationController
 
   private
 
-    # def find_photos(use_default)
-    #   @photos = Photo.find(:all,
-    #                        :conditions => ["gallery_id = ?", @gallery],
-    #                        :order => session[:gallery_view_mode])
-    #   if use_default
-    #     if @gallery.default_photo
-    #       @photo = Photo.find_by_img(@gallery.default_photo)
-    #     else
-    #       @photo = @photos.to_a[0]
-    #     end
-    #   end
-    #   index = @photos.index(@photo)
-    #   @next = @photos[index + 1].id if index < @photos.length - 1
-    #   @prev = @photos[index - 1].id if index > 0
-    #   # @photo.set_exif
-    # end
-
     def set_gallery
       @gallery = Gallery.find(params[:id])
     end
 
     def gallery_params
-      params.require(:gallery).permit(:name, :code, :private_key, :user_id, :gallery_on, :default_photo)
+      params.require(:gallery).permit(:name, :code, :private_key, :user_id, :gallery_on, :default_photo_id)
     end
 end

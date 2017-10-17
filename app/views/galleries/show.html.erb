@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col gallery-info">
-        <span class="name"><%= @gallery.name %></span>
-        <span class="info">
+    <div class="col">
+        <span class="gallery-name"><%= @gallery.name %></span>
+        <span class="gallery-date">
             <%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %>
             <% if policy(Gallery).edit? %>
                 <%= link_to(edit_gallery_path(@gallery), data: {toggle: 'tooltip', placement: 'top'}, title: 'edit') do %>
@@ -13,9 +13,11 @@
 </div> <!-- end row -->
 
 <div class="row">
-    <div class="col-3 gallery-thumbnails">
-        <%= render(partial: 'thumbnails') %>
-    </div> <!-- end .gallery-thumbnails -->
+    <div class="col-3">
+        <div class="d-inline-flex flex-wrap gallery-thumbnails">
+            <%= render(partial: 'thumbnails') %>
+        </div><!-- end .gallery-thumbnails -->
+    </div>
     <div class="col-9 gallery-photo-container">
         <%= render(partial: 'photos/show') %>
     </div> <!-- end .gallery-photo-container -->

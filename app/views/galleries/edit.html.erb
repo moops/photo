@@ -1,6 +1,35 @@
-<h1>Editing gallery</h1>
+<div class="row">
+    <div class="col">
+        <span class="gallery-name"><%= @gallery.name %></span>
+        <span class="gallery-date"><%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %></span>
+    </div>
+</div>
 
-<%= render 'form' %>
+<div class="row">
+    <div class="col">
+        <%= render 'form' %>
+    </div>
+</div>
 
-<%= render partial: 'thumbnails', locals: { edit: true, link: false } %>
-<%= submit_tag('remove selected') %>
+<%= form_with(model: @gallery, id: 'update-existing-form') do |form| %>
+    <div class="row">
+        <div class="col">
+            <h2>existing photos</h2>
+            <div class="d-inline-flex flex-wrap" id="existing-photos-row">
+                <%= render partial: 'photos/form', collection: @gallery.photos, as: :photo %>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <%= form.submit('bulk update', class: 'btn btn-small btn-primary') %>
+        </div>
+    </div>
+<% end %>
+
+<div class="row">
+    <div class="col">
+        <h2>add more photos</h2>
+        <%= render partial: 'photos/add_photos' %>
+    </div>
+</div>

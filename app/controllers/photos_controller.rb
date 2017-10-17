@@ -74,6 +74,7 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1
   # PATCH/PUT /photos/1.json
   def update
+    binding.pry
     respond_to do |format|
       if @photo.update(photo_params)
         format.html { redirect_to @photo, notice: 'photo was successfully updated.' }

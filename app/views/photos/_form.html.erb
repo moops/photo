@@ -1,0 +1,15 @@
+<span class="card mt-2 mr-2">
+    <span class="card-body">
+        <div class="row">
+            <div class="col-5 px-1">
+                <img height="120" width="120" src="<%= photo.img.url %>" title="<%= photo.img.file.filename %>"/>
+            </div>
+            <div class="col-7 px-1">
+                <input name="photo_names[]" type="text" size="16" value="<%= photo.img.file.filename %>" class="form-control"/>
+                <input name="photo_artists[]" type="text" size="16" value="<%= photo.artist %>" class="form-control my-2"/>
+                <input name="photo_captions[]" type="text" size="16" value="<%= photo.caption %>" class="form-control my-2"/>
+                <input name="photo_includes[]" type="checkbox" checked value="<%= photo.id %>" class="form-control"/>
+            </div>
+        </div>
+    </span>
+</span>

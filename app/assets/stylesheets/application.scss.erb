@@ -18,11 +18,11 @@ body { margin-top: 8px; }
  ************************************************
  */
 div.modal form {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .pagination {
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 /*
@@ -30,72 +30,43 @@ div.modal form {
  gallery
  ************************************************
  */
-.gallery-info {
-    padding-bottom: 20px;
-    text-align: center;
+
+.gallery-name {
+  font-weight: bold;
+  font-size: 2em;
 }
 
-.gallery-info .name {
-    font-weight: bold;
-    font-size: 2em;
-}
-
-.gallery-info .info {
-    font-weight: bold;
-    font-size: 1.5em;
-}
-
-ul.thumbnails li {
-  list-style: none;
+.gallery-date {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
 .gallery-thumbnails {
-    max-height: 700px;
-    overflow: scroll;
+  max-height: 700px;
+  overflow: scroll;
 }
 
-a.thumbnail img {
-  margin: 1px 0px;
+img.thumbnail {
+  margin: 2px;
+  border: 2px solid #333;
 }
 
 .photo-caption {
-    font-size: 1.5em;
-}
-
-.photo-tools {
-    padding-right: 2%;
-}
-
-.gallery-photo {
-
+  font-size: 1.5em;
 }
 
 .gallery-photo img {
-    border: 1px solid #000;
-    margin: 12px 0px;
-    max-height: 500px;
+  border: 2px solid #333;
+  max-height: 550px;
 }
 
 div.gallery-list {
-    box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
-}
-
-div.gallery-list ul {
-    list-style: none;
+  box-shadow: 3px 3px 6px rgba(0,0,0,0.3);
 }
 
 div.gallery-summary img {
-    float: left;
-    width: 60px;
-    padding-bottom: 10px;
-}
-
-div.gallery-summary div.gallery-summary-text {
-    padding-left: 80px;
-}
-
-div.gallery-summary>br {
-    clear: left;
+  width: 70px;
+  margin-bottom: 0.5em;
 }
 
 /*
@@ -103,23 +74,18 @@ div.gallery-summary>br {
  sticky footer
  ************************************************
  */
-
-body {
-    height: 100%;
-    margin-bottom: 50px;
-}
-
 .container-fluid {
-    padding-top: 55px;
+  padding-top: 55px;
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
   height: 50px;
   border-top: 1px solid #000;
-  line-height: 50px; /* Vertically center the text there */
+  line-height: 50px;
   background-color: #f5f5f5;
 }
 
@@ -179,9 +145,6 @@ div.exif-label {
   color: #999;
 }
 
-.comment {
-}
-
 .comment .date {
   font-style:italic;
 }
@@ -204,17 +167,7 @@ label.required:after {
 	vertical-align: bottom;
 }
 
-form.dropzone {
-  border: 1px solid red;
-}
-
-div#drop-zone {
-  border: 5px dashed orange;
-  height: 50px;
-  line-height: 50px;
-}
-
-div#photos-file-input {
+#photos-file-input {
   border: 5px dashed red;
   height: 50px;
   line-height: 50px;
@@ -239,3 +192,11 @@ div#photos-file-input {
 span.info a [class^="icon-"] {
   font-size: 0.7em;
 }
+
+.empty-gallery-icon {
+  font-size: 70px;
+  line-height: 50px;
+  color: #666;
+}
+
+

@@ -1,0 +1,21 @@
+<%= form_tag(gallery_photos_path(@gallery, format: :js), id: 'upload-form', enctype: 'multipart/form-data') do %>
+    <div class="row">
+        <div class="col">
+            Drop files here:<br>
+            <div id="photos-file-input">
+                <%= file_field_tag('photos[]', multiple: true, accept: 'image/png,image/gif,image/jpeg') %>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="d-inline-flex flex-wrap" id="photos-row"></div>
+        </div>
+    </div>
+
+    <div id="upload-buttons" class="invisible form-group text-right">
+        <%= submit_tag('upload', class: 'btn btn-primary') %>
+        <button type="button" class="btn btn-secondary">cancel</button>
+    </div>
+<% end %>

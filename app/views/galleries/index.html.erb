@@ -1,47 +1,32 @@
 <div class="row">
     <div class="col-md-6">
-        <div class="box gallery-list">
-            <div class="boxhead">recent public galleries</div>
-            <div class="boxcontent">
-                <% if @recent_galleries and !@recent_galleries.empty? %>
-                    <ul>
-                        <% for g in @recent_galleries %>
-                            <li>
-                                <%= render partial: 'summary', locals: { g: g } %>
-                            </li>
-                        <% end %>
-                    </ul>
+        <div class="card gallery-list">
+            <h3 class="card-header bg-light">recent public galleries</h3>
+            <div class="card-body">
+                <% unless @recent_galleries.empty? %>
+                        <%= render partial: 'summary', collection: @recent_galleries, as: :gallery %>
                 <% else %>
                     none
                 <% end %>
             </div>
         </div>
-    </div> <!-- end .col-md-5 -->
+    </div> <!-- end .col-md-6 -->
     <div class="col-md-6">
-        <% if @galleries %>
-            <div class="box gallery-list">
-                <div class="boxhead"><%= params[:q] ? 'search results' : 'my galleries' %></div>
-                <div class="boxcontent">
-                    <% if !@galleries.empty? %>
-                        <ul>
-                            <% for g in @galleries %>
-                                <li>
-                                    <%= render partial: 'summary', locals: { g: g } %>
-                                </li>
-                            <% end %>
-                        </ul>
-                        <%= paginate(@galleries, window: 2, outer_window: 1) %>
-                    <% else %>
-                        none
-                    <% end %>
-                    <div class="pull-right">
-                        <% if policy(Gallery).create? %>
-                            <%= link_to('New Gallery', new_gallery_path, class: 'btn btn-primary') %>
-                        <% end %>
-                    </div>
-                    <div class="clear"></div>
-                </div>
+        <div class="card bg-light gallery-list">
+            <h3 class="card-header"><%= params[:q] ? 'search results' : 'my galleries' %></h3>
+            <div class="card-body">
+                <% unless @galleries.empty? %>
+                        <%= render partial: 'summary', collection: @galleries, as: :gallery %>
+                    <%= paginate(@galleries, window: 2, outer_window: 1) %>
+                <% else %>
+                    none
+                <% end %>
             </div>
-        <% end %>
-    </div> <!-- end .col-md-5 -->
-</div> <!-- end .row-fluid -->
+            <% if policy(Gallery).create? %>
+                <div class="card-footer text-right">
+                    <%= link_to('New Gallery', new_gallery_path, class: 'btn btn-primary') %>
+                </div>
+            <% end %>
+        </div>
+    </div> <!-- end .col-md-6 -->
+</div> <!-- end .row -->

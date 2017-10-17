@@ -9,18 +9,12 @@ Rails.application.routes.draw do
 
   resources :galleries, shallow: true do
     resources :photos do
+      collection do
+        put 'update'
+      end
       resources :comments
     end
   end
-
-  # resources :photos do
-  #   collection do
-  #     post :remove, :add
-  #   end
-  #   resources :comments
-  # end
-
-  # resources :comments
 
   # match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
   post 'photos/increment'
