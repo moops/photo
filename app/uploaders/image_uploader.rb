@@ -1,7 +1,5 @@
-# encoding: utf-8
-
+# image uploader
 class ImageUploader < CarrierWave::Uploader::Base
-
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage in config/initializers/carrierwave.rb
@@ -33,10 +31,6 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg gif png)
+    %w[jpg jpeg gif png]
   end
-
-  # def full_filename (for_file = model.img.file)
-  #   model.read_attribute(:img)
-  # end
 end

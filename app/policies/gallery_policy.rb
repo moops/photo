@@ -1,7 +1,7 @@
+# gallery policy
 class GalleryPolicy < ApplicationPolicy
-
+  # class scope
   class Scope < Scope
-
     def resolve
       if user
         if user.admin?
@@ -34,5 +34,4 @@ class GalleryPolicy < ApplicationPolicy
     # must be admin or own the gallery
     user.admin? || user.id == record.user.id if user
   end
-
 end

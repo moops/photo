@@ -1,5 +1,5 @@
+# gallery model
 class Gallery < ActiveRecord::Base
-
   has_many :photos
   belongs_to :user
   belongs_to :default_photo, class_name: 'Photo', optional: true
@@ -24,7 +24,7 @@ class Gallery < ActiveRecord::Base
   def self.new_private_key(priv = nil)
     return nil unless '1'.eql? priv
     chars = ('a'..'z').to_a + ('1'..'9').to_a
-    Array.new(20, '').collect{chars[rand(chars.size)]}.join
+    Array.new(20, '').collect { chars[rand(chars.size)] }.join
   end
 
   def photo_count

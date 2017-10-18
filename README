@@ -9,9 +9,10 @@ urls
 
 2017
 ----
+- oct 17 - adjust rubocop rules for line length, class comments, ignore schema.rb
 - oct 17 - add keyboard shortcuts to go forward and backward through a gallery
 - oct 17 - update tests
-- oct 17 - add rubocop
+x oct 17 - add rubocop
 - oct 17 - gallery edit needs submit button for existing phot changes form
 - oct 17 - photos form partial needs to use form helpers
 - oct 17 - create new gallery not showing add photos form (js request failing)

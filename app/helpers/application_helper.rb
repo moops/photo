@@ -1,8 +1,7 @@
-# Methods added to this helper will be available to all templates in the application.
+# Methods added to this helper will be available to all templates
 module ApplicationHelper
-
-  def calendar(obj, attr, time=false, onupdate=nil)
-    #http://www.dynarch.com/demos/jscalendar/doc/html/reference.html#node_sec_5.3.5
+  def calendar(obj, attr, time = false, onupdate = nil)
+    # http://www.dynarch.com/demos/jscalendar/doc/html/reference.html#node_sec_5.3.5
     val = "<img src=\"/images/calendar.png\"\n"
     val += "      id=\"#{obj}_#{attr}_tr\"\n"
     val += "      class=\"calIcon\"\n"
@@ -26,18 +25,16 @@ module ApplicationHelper
     val += "      cache          :    true\n"
     val += "      });\n"
     val += "</script>\n"
+    val
   end
-  
-  
 
-  
-  def inline_edit(element, display, url)
+  def inline_edit(_element, display, url)
     val =  "<span class=\"editable\">#{display}</span>\n"
     val += "  <script type=\"text/javascript\">\n"
-    val += "    $(document).ready(function() {"
+    val += '    $(document).ready(function() {'
     val += "      $('.editable').editable('#{url}', {width: 'none'});"
-    val += "    });"
+    val += '    });'
     val += "  </script>\n"
+    val
   end
-  
 end

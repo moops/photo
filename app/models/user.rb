@@ -1,13 +1,14 @@
+# user model
 class User < ActiveRecord::Base
   has_secure_password
 
   has_many :galleries
 
-  validates :name,     :presence => true
-  validates :email,    :presence => true, :on => :create
-  validates :email,    :uniqueness => true
+  validates :name,     presence: true
+  validates :email,    presence: true, on: :create
+  validates :email,    uniqueness: true
 
-  ROLES = %w[admin photographer viewer]
+  ROLES = %w[admin photographer viewer].freeze
 
   def roles=(roles)
     self.authority = (roles & ROLES).map { |r| 2**ROLES.index(r) }.sum
@@ -33,8 +34,6 @@ class User < ActiveRecord::Base
     user = find_by_email(email)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
-    else
-      nil
     end
   end
 
