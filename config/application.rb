@@ -25,9 +25,9 @@ module Photos
       g.helper = false
     end
 
-    #S3_CONFIG = YAML::load(File.open("#{Rails.root}/config/amazon_s3.yml"))
+    # S3_CONFIG = YAML::load(File.open("#{Rails.root}/config/amazon_s3.yml"))
     config.time_zone = 'Pacific Time (US & Canada)'
-    DATE_FORMAT = '%B %d %Y'
+    DATE_FORMAT = '%B %d %Y'.freeze
 
     # config.filter_parameters += [:photos]
   end

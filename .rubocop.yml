@@ -1,5 +1,12 @@
 AllCops:
   Excludes:
     - db/schema.rb
+    - bin/**
+    - test/**/*
+    - spec/**/*
 Metrics/LineLength:
   Max: 120
+Documentation:
+    Enabled: false
+Rails:
+  Enabled: true

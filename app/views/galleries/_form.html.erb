@@ -1,8 +1,8 @@
-<%= form_with(model: @gallery) do |form| %>
+<%= form_with(model: @gallery, local: true) do |form| %>
     <div class="form-group row">
         <%= form.label(:name, class: 'col-sm-2 col-form-label text-right') %>
         <div class="col-sm-3">
-            <%= form.text_field(:name, class: 'form-control') %>
+            <%= form.text_field(:name, class: 'form-control focus') %>
         </div>
         <%= form.label(:code, class: 'col-sm-2 col-form-label text-right') %>
         <div class="col-sm-3">
@@ -13,7 +13,7 @@
     <div class="form-group row">
         <%= form.label(:gallery_on, class: 'col-sm-2 col-form-label text-right') %>
         <div class="col-sm-3">
-            <%= form.text_field(:gallery_on, placeholder: Date.today.strftime("%Y-%m-%d"), class: 'form-control') %>
+            <%= form.text_field(:gallery_on, placeholder: Date.today.strftime("%Y-%m-%d"), id: 'gallery-gallery-on', class: 'form-control') %>
         </div>
         <%= form.label(:default_photo, class: 'col-sm-2 col-form-label text-right') %>
         <div class="col-sm-3">

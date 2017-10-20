@@ -1,9 +1,8 @@
-# photo model
-class Photo < ActiveRecord::Base
+class Photo < ApplicationRecord
   include Rails.application.routes.url_helpers
 
   belongs_to :gallery
-  has_many :comments
+  has_many :comments, dependent: :delete_all
   before_create :set_defaults
 
   mount_uploader :img, ImageUploader
@@ -11,6 +10,10 @@ class Photo < ActiveRecord::Base
   def increment
     self.views += 1
     save
+  end
+
+  def artist=(artist)
+    artist.blank? ? gallery.user.name : artist
   end
 
   def extract_exif(image)
@@ -22,7 +25,7 @@ class Photo < ActiveRecord::Base
     end
     self.shutter_speed = image['EXIF:ExposureTime'].strip if image['EXIF:ExposureTime']
     self.aperture = image['EXIF:FNumber'].strip if image['EXIF:FNumber']
-    self.focal_length = image['EXIF:FocalLengthIn35mmFilm'].strip + (image['EXIF:FocalLengthIn35mmFilm'].strip.length > 0 ? 'mm' : '') if image['EXIF:FocalLengthIn35mmFilm']
+    self.focal_length = image['EXIF:FocalLengthIn35mmFilm'].strip + (image['EXIF:FocalLengthIn35mmFilm'].strip.empty? ? '' : 'mm') if image['EXIF:FocalLengthIn35mmFilm']
     self.iso = image['EXIF:ISOSpeedRatings'].strip if image['EXIF:ISOSpeedRatings']
     self.exposure_mode = image['EXIF:ExposureProgram'].strip if image['EXIF:ExposureProgram']
     self.flash = image['EXIF:Flash'].strip if image['EXIF:Flash']

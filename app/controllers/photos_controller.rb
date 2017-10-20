@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
-  before_action :set_gallery, only: [:index, :create, :new]
-  before_action :set_photo, only: [:show, :edit, :update, :destroy]
+  before_action :set_gallery, only: %i[index create new]
+  before_action :set_photo, only: %i[show edit update destroy]
 
   # GET /galleries/1/photos
   # GET /galleries/1/photos.json
@@ -11,36 +11,36 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-
     index = @gallery.photos.index(@photo)
     @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
     @prev = @gallery.photos[index - 1].id if index > 0
 
-    unless (params[:exif])
+    unless params[:exif]
       @photo.views += 1
       @photo.save
     end
 
     respond_to do |format|
       format.html # show.html.erb
-      format.js   {
+      format.js do
         if params[:exif]
           render 'exif'
         else
           render 'show'
         end
-      }
+      end
     end
   end
 
   # GET /galleries/1/photos/new
   def new
     @photo = Photo.new
+    @uploader = @photo.img
+    @uploader.success_action_redirect = gallery_url(@gallery)
   end
 
   # GET /galleries/1/photos/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /galleries/1/photos
   # POST /galleries/1/photos.json
@@ -53,28 +53,25 @@ class PhotosController < ApplicationController
         artist: params[:photo_artists][i].blank? ? @gallery.user.name : params[:photo_artists][i],
         caption: params[:photo_captions][i],
         views: 0,
-        sequence: i)
-
-      photo.img = params[:photos][i]
-      # photo.save_source(source)
-      # photo.img = params[:photos][i].original_filename
+        sequence: i,
+        img: params[:photos][i]
+      )
 
       photo.save
-      # logger.info("#{source} saved. setting img to #{params[:photos][i].original_filename}...")
-      # photo.img = params[:photos][i].original_filename
-      # photo.save
+      wait 10
     end
 
     respond_to do |format|
-      format.html { redirect_to gallery_path(@gallery) }
-      format.js   { redirect_to gallery_path(@gallery) }
+      format.html {
+        redirect_to gallery_path(@gallery) }
+      format.js   {
+        redirect_to gallery_path(@gallery) }
     end
   end
 
   # PATCH/PUT /photos/1
   # PATCH/PUT /photos/1.json
   def update
-    binding.pry
     respond_to do |format|
       if @photo.update(photo_params)
         format.html { redirect_to @photo, notice: 'photo was successfully updated.' }
@@ -90,7 +87,7 @@ class PhotosController < ApplicationController
   # DELETE /photos/1.json
   def destroy
     if params[:remove]
-      params[:remove].each do |key,val|
+      params[:remove].each_key do |key|
         @photo = Photo.find(key)
         @photo.remove_source
         @photo.destroy
@@ -109,11 +106,11 @@ class PhotosController < ApplicationController
     if params[:file_names]
       params[:file_names].each do |val|
         p = @gallery.photos.new
-        p.img= val.strip
-        p.caption= val.strip
+        p.img = val.strip
+        p.caption = val.strip
         p.views = 0
-        p.artist= params[:artist] if (params[:artist])
-        p.sequence= sequence += 1
+        p.artist = params[:artist] if params[:artist]
+        p.sequence = sequence += 1
         p.save
       end
     end
@@ -135,26 +132,27 @@ class PhotosController < ApplicationController
   # non-restfull inline editors
   def update_field
     photo = Photo.find(params[:id])
-    photo.update_attribute(params[:field], params[:value])
+    photo.update(params[:field], params[:value])
     render(text: params[:value])
   end
   # end non-restfull inline editors
 
   private
-    def set_photo
-      @photo = Photo.find(params[:id])
-      @gallery = @photo.gallery
-    end
 
-    def set_gallery
-      @gallery = Gallery.find(params[:gallery_id])
-    end
+  def set_photo
+    @photo = Photo.find(params[:id])
+    @gallery = @photo.gallery
+  end
 
-    def photo_params
-      params.require(:photo).permit(:artist, :caption, :views)
-    end
+  def set_gallery
+    @gallery = Gallery.find(params[:gallery_id])
+  end
 
-    def create_photo_params
-      params.permit(photos: [], photo_names: [], photo_includes: [], photo_artists: [], photo_captions: [])
-    end
+  def photo_params
+    params.require(:photo).permit(:artist, :caption, :views)
+  end
+
+  def create_photo_params
+    params.permit(photos: [], photo_names: [], photo_includes: [], photo_artists: [], photo_captions: [])
+  end
 end

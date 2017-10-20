@@ -7,7 +7,7 @@ class CreatePhotos < ActiveRecord::Migration[5.1]
       t.integer :sequence
       t.integer :views
       t.string :img
-      #exif details
+      # exif details
       t.datetime :photo_at
       t.string :shutter_speed
       t.string :aperture

@@ -1,10 +1,9 @@
-# gallery model
-class Gallery < ActiveRecord::Base
-  has_many :photos
+class Gallery < ApplicationRecord
+  has_many :photos, dependent: :delete_all
   belongs_to :user
   belongs_to :default_photo, class_name: 'Photo', optional: true
 
-  validates_uniqueness_of :code
+  validates :code, uniqueness: true
 
   def self.public_recent
     Gallery.where('private_key is null').order('gallery_on desc').limit(6).all
@@ -18,7 +17,7 @@ class Gallery < ActiveRecord::Base
   end
 
   def self.find_private(key)
-    Gallery.where('private_key = ?', key).first
+    Gallery.find_by(private_key: key)
   end
 
   def self.new_private_key(priv = nil)

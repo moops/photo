@@ -1,8 +1,8 @@
 # user model
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   has_secure_password
 
-  has_many :galleries
+  has_many :galleries, dependent: :delete_all
 
   validates :name,     presence: true
   validates :email,    presence: true, on: :create
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(email, password)
-    user = find_by_email(email)
+    user = find_by(email: email)
     if user && user.password_hash == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     end

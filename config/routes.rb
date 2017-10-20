@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
   get 'logout', to: 'sessions#destroy'
@@ -8,9 +7,10 @@ Rails.application.routes.draw do
   resources :sessions
 
   resources :galleries, shallow: true do
+    get 'count', on: :member
     resources :photos do
       collection do
-        put 'update'
+        put 'bulkupdate'
       end
       resources :comments
     end

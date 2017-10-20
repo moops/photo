@@ -9,19 +9,23 @@ urls
 
 2017
 ----
-- oct 17 - adjust rubocop rules for line length, class comments, ignore schema.rb
+- oct 18 - file name field on add photos action is being ignored (original_filename from the temp file is being used). how should it be used?
+- oct 18 - add progress bar for add photos action
+x oct 18 - fix date picker
+x oct 17 - adjust rubocop rules for line length, class comments, ignore schema.rb
+x oct 17 - rubocop ignore schema.rb
 - oct 17 - add keyboard shortcuts to go forward and backward through a gallery
 - oct 17 - update tests
 x oct 17 - add rubocop
-- oct 17 - gallery edit needs submit button for existing phot changes form
+- oct 17 - gallery edit needs submit button for existing photo changes form
 - oct 17 - photos form partial needs to use form helpers
-- oct 17 - create new gallery not showing add photos form (js request failing)
+x oct 17 - create new gallery not showing add photos form (js request failing)
 x oct 17 - don't fail the home page with galleries with no default photo
+x oct 14 - re-enable icons and change tools dropdown to icon links
 x oct 13 - fix spacing of gallery title
 - oct 13 - can't dismiss comment modal after adding comment
 x oct 13 - make default photo a foreign key on gallery object
 x oct 13 - re-enable search results for gallery search
-x oct 14 - re-enable icons and change tools dropdown to icon links
 
 2013
 ----

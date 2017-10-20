@@ -1,5 +1,5 @@
 class GalleriesController < ApplicationController
-  before_action :set_gallery, only: [:show, :edit, :update, :destroy]
+  before_action :set_gallery, only: %i[show edit update destroy count]
 
   # GET /posts
   # GET /posts.json
@@ -46,17 +46,29 @@ class GalleriesController < ApplicationController
     authorize @gallery
   end
 
+  # GET /posts/1/count.json
+  def count
+    authorize @gallery
+    upl = params[:foo]
+    logger.info("gallery #{@gallery.id} - #{upl} photos uploaded")
+    @count = upl # @gallery.photo_count
+  end
+
   # POST /posts
   # POST /posts.json
   def create
     @gallery = Gallery.new(gallery_params)
     @gallery.private_key = Gallery.new_private_key(gallery_params[:private_key])
-    @gallery.gallery_on = Date.today if gallery_params[:gallery_on].empty?
+    @gallery.gallery_on = Time.zone.today if gallery_params[:gallery_on].empty?
     @gallery.user = current_user if current_user
 
     respond_to do |format|
       if @gallery.save
         format.html { redirect_to new_gallery_photo_path(@gallery), notice: "#{@gallery.name} was successfully created." }
+        format.js   {
+          binding.pry
+          redirect_to new_gallery_photo_path(@gallery, format: :html)
+        }
         format.json { render :show, status: :created, location: @gallery }
       else
         format.html { render :new }
@@ -91,11 +103,11 @@ class GalleriesController < ApplicationController
 
   private
 
-    def set_gallery
-      @gallery = Gallery.find(params[:id])
-    end
+  def set_gallery
+    @gallery = Gallery.find(params[:id])
+  end
 
-    def gallery_params
-      params.require(:gallery).permit(:name, :code, :private_key, :user_id, :gallery_on, :default_photo_id)
-    end
+  def gallery_params
+    params.require(:gallery).permit(:name, :code, :private_key, :user_id, :gallery_on, :default_photo_id)
+  end
 end

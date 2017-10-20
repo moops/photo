@@ -58,7 +58,10 @@ $(document).ready(function() {
   }
 
   var photosInput = document.querySelector('#photos-file-input input[type="file"]');
-  if (photosInput) {
+  if (!!photosInput) {
+    console.log('found a photo drop zone');
     photosInput.addEventListener('change', handleFileDrop);
+  } else {
+    console.log('NO photo drop zone found');
   }
 });

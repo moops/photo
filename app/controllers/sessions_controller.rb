@@ -1,12 +1,10 @@
 class SessionsController < ApplicationController
-
   # GET /sessions/new
-  def new
-  end
+  def new; end
 
   # POST /sessions
   def create
-    user = User.find_by_email(params[:email])
+    user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to root_url, notice: 'logged in. nice'

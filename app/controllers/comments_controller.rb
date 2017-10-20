@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  before_action :set_photo, only: [:index, :create, :new]
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  before_action :set_photo, only: %i[index create new]
+  before_action :set_comment, only: %i[show edit update destroy]
 
   # GET /photos/1/comments
   # GET /photos/1/comments.js
@@ -12,17 +12,14 @@ class CommentsController < ApplicationController
 
   # GET /comments/1
   # GET /comments/1.json
-  def show
-  end
+  def show; end
 
   # GET /photos/1/comments/new
   # GET /photos/1/comments/new.json
-  def new
-  end
+  def new; end
 
   # GET /comments/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /photos/1/comments
   # POST /photos/1/comments.json
@@ -67,16 +64,17 @@ class CommentsController < ApplicationController
   end
 
   private
-    def set_comment
-      @comment = Comment.find(params[:id])
-      @photo = @comment.photo
-    end
 
-    def set_photo
-      @photo = Photo.find(params[:photo_id])
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+    @photo = @comment.photo
+  end
 
-    def comment_params
-      params.require(:comment).permit(:message)
-    end
+  def set_photo
+    @photo = Photo.find(params[:photo_id])
+  end
+
+  def comment_params
+    params.require(:comment).permit(:message)
+  end
 end

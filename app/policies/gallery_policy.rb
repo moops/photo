@@ -34,4 +34,9 @@ class GalleryPolicy < ApplicationPolicy
     # must be admin or own the gallery
     user.admin? || user.id == record.user.id if user
   end
+
+  def count?
+    # must be admin or own the gallery
+    user.admin? || user.id == record.user.id if user
+  end
 end
