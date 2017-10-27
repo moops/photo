@@ -5,15 +5,14 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-ruby '2.4.1'
+ruby '2.4.0'
 gem 'rails', '5.1.4'
 
 gem 'bootstrap'
 gem 'pg'                        # postgres as the database for Active Record
 
 gem 'carrierwave'               # file uploads to s3
-gem 'carrierwave_direct'
-gem 'fog'
+gem 'fog-aws'
 gem 'mini_magick'
 
 gem 'jbuilder'                  # https://github.com/rails/jbuilder
