@@ -48,6 +48,9 @@
 .icon-exif:before {
   content: "\e992";
 }
+.icon-delete:before {
+  content: "\e9ad";
+}
 .icon-views:before {
   content: "\e9ce";
 }

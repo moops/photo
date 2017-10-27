@@ -3,7 +3,7 @@
         <span class="gallery-name"><%= @gallery.name %></span>
         <span class="gallery-date">
             <%= ": #{@gallery.gallery_on.strftime('%b %d, %Y')}" if @gallery.gallery_on %>
-            <% if policy(Gallery).edit? %>
+            <% if policy(@gallery).edit? %>
                 <%= link_to(edit_gallery_path(@gallery), data: {toggle: 'tooltip', placement: 'top'}, title: 'edit') do %>
                     <span class="icon-edit"></span>
                 <% end %>

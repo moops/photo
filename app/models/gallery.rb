@@ -30,7 +30,21 @@ class Gallery < ApplicationRecord
     photos.size
   end
 
-  def default_photo_obj
-    default_photo || photos.first
+  def default_photo
+    # return self[:default_photo] if self[:default_photo]
+    # self[:default_photo_id] = photos.first.id if photos.present?
+    # save
+    # Photo.find(self[:default_photo_id])
+
+    self[:default_photo] || photos.order(:id).first
   end
+
+  # def default_photo_obj
+  #   binding.pry
+  #   if default_photo_id.nil? && !photos.empty?
+  #     self.default_photo = photos.first
+  #     save
+  #   end
+  #   self.default_photo
+  # end
 end

@@ -3,7 +3,6 @@
 //= require popper
 //= require bootstrap
 //= require datepicker
-//= require_tree .
 
 document.addEventListener("DOMContentLoaded", function(event) {
   // calendars
@@ -30,34 +29,84 @@ window.setTimeout(function() {
     });
 }, 3000);
 
-document.addEventListener('submit', function(event) {
-  if (event.target) {
-    console.log('submit happened!', event);
-    upload_progress(17, document.getElementById('upload-progress'), 5);
+document.addEventListener('click', function(event) {
+  if (event.target && event.target.matches('#upload-photos-btn')) {
+    event.preventDefault();
+    // show the progress bars
+    $('.progress-container').removeClass('d-none');
+
+    // do the stuff
+    upload();
+    return false;
   }
 });
 
-function upload_progress(galleryId, element, total) {
-  console.log(`update progress with: ${total}`);
-  //var total = 6;
-  $.ajax({
-    url: `/galleries/${galleryId}/count?foo=${total}`,
-    dataType: 'json',
-    success: function(data) {
-      var percent = (data.count / total) * 100;
-      console.log(`success, data ${data.count}`);
-      element.style.width = percent;
-
-      if (total < 10) {// (percent < 100) {
-        console.log('do it again in 1s');
-        window.setTimeout(upload_progress(galleryId, element, total + 1), 1000);
+var processProgress = function(galleryId, uploadFileCount) {
+  var processProgressBar = $('#process-progress');
+  var width = 0;
+  var id = setInterval(foobar, 1000);
+  function foobar() {
+    $.ajax({
+      url: `/galleries/${galleryId}/count`,
+      dataType: 'json',
+      method: 'GET',
+      // processData: false,
+      // contentType: false,
+      success: function(data) {
+        console.log('process progress success', data);
+        if (width == 100) {
+          console.log('process progress done');
+          $('#process-progress-label').html('done');
+          clearInterval(id);
+        } else {
+          width = (data.count / uploadFileCount) * 100;
+          console.log(`process progress. data.count: ${data.count}, uploadFileCount: ${uploadFileCount}, width: ${width}`);
+          processProgressBar.css('width', `${width}%`);
+        }
+      },
+      error: function(data, status, error) {
+        console.log(`process progress error, data ${data} status ${status} error ${error}`);
       }
+    });
+  }
+}
+
+function upload() {
+  var form = $('#upload-form').get(0);
+  var uploadProgressBar = $('#upload-progress');
+  var formData = new FormData(form);
+  var galleryId = $('input[name=gallery_id]').val();
+  // start monitoring proccessing progress
+  var uploadFileCount = $('#photos-file-input input').get(0).files.length;
+  processProgress(galleryId, uploadFileCount);
+
+  $.ajax({
+    url: form.action,
+    dataType: 'json',
+    method: 'POST',
+    data : formData,
+    processData: false,
+    contentType: false,
+    xhr: function() {
+      var xhr = new window.XMLHttpRequest();
+      xhr.upload.addEventListener("progress", function(evt) {
+        if (evt.lengthComputable) {
+          var percentComplete = Math.round((evt.loaded / evt.total) * 100);
+          //Do something with upload progress here
+          console.log(`uploading. percentComplete: ${percentComplete}`);
+          uploadProgressBar.css('width', `${percentComplete}%`);
+          if (percentComplete == 100) {
+            $('#upload-progress-label').html('uploaded');
+          }
+        }
+     }, false);
+     return xhr;
+    },
+    success: function(data) {
+      console.log('upload progress success', data);
     },
     error: function(data, status, error) {
-      console.log(`error, count ${data} of ${total} status ${status} error ${error}`);
-    },
-    complete: function(request, status) {
-      console.log('complete:', request, status);
+      console.log(`upload progress error, data ${data} status ${status} error ${error}`);
     }
   });
 }

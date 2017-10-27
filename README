@@ -9,8 +9,11 @@ urls
 
 2017
 ----
+- oct 26 - add existing photos (thumbnails) to add photos form
+- oct 26 - add google adds
+x oct 26 - add delete icon
 - oct 18 - file name field on add photos action is being ignored (original_filename from the temp file is being used). how should it be used?
-- oct 18 - add progress bar for add photos action
+x oct 18 - add progress bar for add photos action
 x oct 18 - fix date picker
 x oct 17 - adjust rubocop rules for line length, class comments, ignore schema.rb
 x oct 17 - rubocop ignore schema.rb

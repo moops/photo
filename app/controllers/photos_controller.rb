@@ -11,9 +11,9 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    index = @gallery.photos.index(@photo)
-    @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
-    @prev = @gallery.photos[index - 1].id if index > 0
+    # index = @gallery.photos.index(@photo)
+    # @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
+    # @prev = @gallery.photos[index - 1].id if index > 0
 
     unless params[:exif]
       @photo.views += 1
@@ -21,22 +21,14 @@ class PhotosController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # show.html.erb
-      format.js do
-        if params[:exif]
-          render 'exif'
-        else
-          render 'show'
-        end
-      end
+      format.js { render params[:exif] ? 'exif' : 'show' }
+      format.json
     end
   end
 
   # GET /galleries/1/photos/new
   def new
-    @photo = Photo.new
-    @uploader = @photo.img
-    @uploader.success_action_redirect = gallery_url(@gallery)
+    @photo = @gallery.photos.new
   end
 
   # GET /galleries/1/photos/1/edit
@@ -45,27 +37,21 @@ class PhotosController < ApplicationController
   # POST /galleries/1/photos
   # POST /galleries/1/photos.json
   def create
+    # @photo = @gallery.photos.new(create_photo_params)
     params = create_photo_params
-    params[:photo_includes].each do |index|
-      i = index.to_i
-      # create a photo
+    params[:photo_includes].map(&:to_i).each do |index|
       photo = @gallery.photos.new(
-        artist: params[:photo_artists][i].blank? ? @gallery.user.name : params[:photo_artists][i],
-        caption: params[:photo_captions][i],
-        views: 0,
-        sequence: i,
-        img: params[:photos][i]
+        caption: params[:photo_captions][index],
+        artist: params[:photo_artists][index],
+        img: params[:photos][index],
+        views: 0
       )
-
       photo.save
-      wait 10
     end
 
     respond_to do |format|
-      format.html {
-        redirect_to gallery_path(@gallery) }
-      format.js   {
-        redirect_to gallery_path(@gallery) }
+      format.json { render json: { gallery: @gallery.id, count: @gallery.photo_count } } # render :index }
+      format.js   { render :show }
     end
   end
 
@@ -96,28 +82,6 @@ class PhotosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to edit_gallery_path(@gallery), notice: 'photo was successfully destroyed.' }
       format.json { head :no_content }
-    end
-  end
-
-  # POST /galleries/1/photos/add
-  # POST /galleries/1/photos/add.xml
-  def add
-    sequence = 0
-    if params[:file_names]
-      params[:file_names].each do |val|
-        p = @gallery.photos.new
-        p.img = val.strip
-        p.caption = val.strip
-        p.views = 0
-        p.artist = params[:artist] if params[:artist]
-        p.sequence = sequence += 1
-        p.save
-      end
-    end
-
-    respond_to do |format|
-      format.html { redirect_to(new_gallery_photo_path(@gallery)) }
-      format.xml  { head :ok }
     end
   end
 

@@ -5,5 +5,17 @@
     <div class="col-10 gallery-summary-text">
         <%= link_to(gallery.name, gallery) %><br/>
         <%= gallery.photo_count %> photos :: <%= gallery.gallery_on.strftime("%b %d, %Y") %>
+        <div>
+            <% if policy(gallery).edit? %>
+                <%= link_to(edit_gallery_path(gallery), data: {toggle: 'tooltip', placement: 'top'}, title: 'edit') do %>
+                    <span class="icon-edit text-success"></span>
+                <% end %>
+            <% end %>
+            <% if policy(gallery).destroy? %>
+                <%= link_to(gallery_path(gallery), method: :delete, data: {confirm: 'are you sure?', toggle: 'tooltip', placement: 'top'}, title: 'delete') do %>
+                      <span class="icon-delete text-danger"></span>
+                <% end %>
+          <% end %>
+        </div>
     </div>
 </div>

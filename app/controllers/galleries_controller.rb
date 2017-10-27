@@ -33,7 +33,7 @@ class GalleriesController < ApplicationController
       redirect_to new_gallery_photo_path(@gallery)
       return
     end
-    @photo = @gallery.default_photo_obj
+    @photo = @gallery.default_photo
   end
 
   # GET /posts/new
@@ -49,9 +49,8 @@ class GalleriesController < ApplicationController
   # GET /posts/1/count.json
   def count
     authorize @gallery
-    upl = params[:foo]
-    logger.info("gallery #{@gallery.id} - #{upl} photos uploaded")
-    @count = upl # @gallery.photo_count
+    # @count = @gallery.photo_count
+    render json: { gallery_id: @gallery.id, count: @gallery.photo_count }
   end
 
   # POST /posts
@@ -65,10 +64,7 @@ class GalleriesController < ApplicationController
     respond_to do |format|
       if @gallery.save
         format.html { redirect_to new_gallery_photo_path(@gallery), notice: "#{@gallery.name} was successfully created." }
-        format.js   {
-          binding.pry
-          redirect_to new_gallery_photo_path(@gallery, format: :html)
-        }
+        format.js   { redirect_to new_gallery_photo_path(@gallery, format: :html) }
         format.json { render :show, status: :created, location: @gallery }
       else
         format.html { render :new }
@@ -96,7 +92,7 @@ class GalleriesController < ApplicationController
   def destroy
     @gallery.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'gallery was successfully destroyed.' }
+      format.html { redirect_to root_url, notice: "gallery \"#{@gallery.name}\" was successfully destroyed." }
       format.json { head :no_content }
     end
   end

@@ -3,17 +3,13 @@ class Photo < ApplicationRecord
 
   belongs_to :gallery
   has_many :comments, dependent: :delete_all
-  before_create :set_defaults
+  before_save :set_defaults
 
   mount_uploader :img, ImageUploader
 
   def increment
     self.views += 1
     save
-  end
-
-  def artist=(artist)
-    artist.blank? ? gallery.user.name : artist
   end
 
   def extract_exif(image)
@@ -34,13 +30,14 @@ class Photo < ApplicationRecord
   end
 
   def description
-    caption.empty? ? img.file.filename : caption
+    caption.blank? ? img.file.filename : caption
   end
 
   protected
 
   def set_defaults
-    self.artist = gallery.user.name unless artist
-    self.caption = img.model.read_attribute(:img) unless caption
+    self.artist = gallery.user.name if artist.blank?
+    self.caption = img.model.read_attribute(:img) if caption.blank?
+    self.sequence ||= gallery.photos.maximum(:sequence).to_i + 1
   end
 end

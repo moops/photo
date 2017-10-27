@@ -1,7 +1,6 @@
 # image uploader
 class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  include CarrierWaveDirect::Uploader
 
   # Choose what kind of storage in config/initializers/carrierwave.rb
 
