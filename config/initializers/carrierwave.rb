@@ -1,3 +1,4 @@
+require 'fog/aws'
 CarrierWave.configure do |config|
   if Rails.env.production?
     Rails.logger.info('production: using fog for carrierwave storage')
