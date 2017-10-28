@@ -3,7 +3,7 @@
         <div class="card gallery-list">
             <h3 class="card-header bg-light">recent public galleries</h3>
             <div class="card-body">
-                <% unless @recent_galleries.empty? %>
+                <% if @recent_galleries.present? %>
                         <%= render partial: 'summary', collection: @recent_galleries, as: :gallery %>
                 <% else %>
                     none
@@ -15,7 +15,7 @@
         <div class="card bg-light gallery-list">
             <h3 class="card-header"><%= params[:q] ? 'search results' : 'my galleries' %></h3>
             <div class="card-body">
-                <% unless @galleries.empty? %>
+                <% if @galleries.present? %>
                         <%= render partial: 'summary', collection: @galleries, as: :gallery %>
                     <%= paginate(@galleries, window: 2, outer_window: 1) %>
                 <% else %>

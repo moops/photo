@@ -1,7 +1,6 @@
 CarrierWave.configure do |config|
   if Rails.env.production?
     Rails.logger.info('production: using fog for carrierwave storage')
-    puts "s3_key: #{ENV['S3_KEY']}, s3_secret: #{ENV['S3_SECRET']}"
     config.fog_provider = 'fog/aws'
     config.fog_credentials = {
       provider: 'AWS',
