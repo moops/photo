@@ -2,6 +2,7 @@
 /.bundle
 
 config/database.yml
+config/application.yml
 /log/*
 /tmp/*
 *.dat
