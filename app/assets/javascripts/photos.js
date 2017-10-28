@@ -17,7 +17,7 @@ $(document).ready(function() {
 
       var photoCell = document.createElement('span');
       photoCell.className = "card mt-2 mr-2";
-      photoCell.id = `photo-cell-${i}`;
+      photoCell.id = 'photo-cell-' + i;
       document.getElementById('photos-row').appendChild(photoCell);
 
       var files = evt.target.files;
@@ -32,7 +32,7 @@ $(document).ready(function() {
       // Closure to capture the file information.
       reader.onload = (function(theFile, index) {
         return function(e) {
-          var foundPhotoCell = document.getElementById(`photo-cell-${index}`);
+          var foundPhotoCell = document.getElementById('photo-cell-' + index);
           foundPhotoCell.innerHTML = [
               '  <span class="card-body">',
               '    <div class="row">',

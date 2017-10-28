@@ -47,7 +47,7 @@ var processProgress = function(galleryId, uploadFileCount) {
   var id = setInterval(foobar, 1000);
   function foobar() {
     $.ajax({
-      url: `/galleries/${galleryId}/count`,
+      url: '/galleries/' + galleryId + '/count',
       dataType: 'json',
       method: 'GET',
       // processData: false,
@@ -60,12 +60,12 @@ var processProgress = function(galleryId, uploadFileCount) {
           clearInterval(id);
         } else {
           width = (data.count / uploadFileCount) * 100;
-          console.log(`process progress. data.count: ${data.count}, uploadFileCount: ${uploadFileCount}, width: ${width}`);
-          processProgressBar.css('width', `${width}%`);
+          console.log('process progress. data.count: ' + data.count + ', uploadFileCount: ' + uploadFileCount + ', width: ' + width);
+          processProgressBar.css('width', width + '%');
         }
       },
       error: function(data, status, error) {
-        console.log(`process progress error, data ${data} status ${status} error ${error}`);
+        console.log('process progress error, data: ' + data + 'status: ' + status + 'error: ' + error);
       }
     });
   }
@@ -93,8 +93,8 @@ function upload() {
         if (evt.lengthComputable) {
           var percentComplete = Math.round((evt.loaded / evt.total) * 100);
           //Do something with upload progress here
-          console.log(`uploading. percentComplete: ${percentComplete}`);
-          uploadProgressBar.css('width', `${percentComplete}%`);
+          console.log('uploading. percentComplete: ' + percentComplete);
+          uploadProgressBar.css('width', percentComplete + '%');
           if (percentComplete == 100) {
             $('#upload-progress-label').html('uploaded');
           }
@@ -106,7 +106,7 @@ function upload() {
       console.log('upload progress success', data);
     },
     error: function(data, status, error) {
-      console.log(`upload progress error, data ${data} status ${status} error ${error}`);
+      console.log('upload progress error, data: ' + data + 'status: ' + status + 'error: ' + error);
     }
   });
 }
