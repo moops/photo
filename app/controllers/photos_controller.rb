@@ -46,6 +46,7 @@ class PhotosController < ApplicationController
         img: params[:photos][index],
         views: 0
       )
+      logger.info("valid? #{photo.valid?}, errors: #{photo.errors}")
       photo.save
     end
 

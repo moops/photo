@@ -15,7 +15,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "uploads/#{model.gallery.code}"
+    dir = model.gallery.code
+    dir = "uploads/#{dir}" unless Rails.env.production?
+    dir
   end
 
   version :thumb do
