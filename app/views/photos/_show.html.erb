@@ -10,13 +10,13 @@
 </div>
 <div class="row">
   <div class="col tools">
-    <%= link_to(photo_comments_path(@photo), remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: "#{@photo.comments.count} comments") do %>
+    <%= link_to(photo_comments_path(@photo), class: 'comments-link', remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: "#{@photo.comments.count} comments") do %>
       <span class="icon-comments"></span>
     <% end %> &#8226;
     <a href="#" data-toggle="tooltip", data-placement="top" title="<%= @photo.views %> views">
       <span class="icon-views"></span>
     </a> &#8226;
-    <%= link_to(photo_path(@photo, exif: true), remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: 'exif details') do %>
+    <%= link_to(photo_path(@photo, exif: true), class: 'exif-link', remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: 'exif details') do %>
       <span class="icon-exif"></span>
     <% end %> &#8226;
     <%= link_to(@photo.img_url, data: {toggle: 'tooltip', placement: 'top'}, title: 'download') do %>

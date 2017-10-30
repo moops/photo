@@ -11,6 +11,14 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag controller_name %>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83838015-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-83838015-2');
+    </script>
   </head>
   <body>
     <!-- Fixed navbar -->
@@ -21,7 +29,7 @@
         </button>
         <div id="navbar01" class="collapse navbar-collapse">
             <div class="mr-auto"></div>
-            <%= form_tag(galleries_path, method: 'get', class: 'form-inline') do %>
+            <%= form_tag(galleries_path, method: 'get', class: 'form-inline search-form') do %>
                 <%= hidden_field_tag :direction, params[:direction] %>
                 <%= hidden_field_tag :sort, params[:sort] %>
                 <%= search_field_tag(:q, params[:q], placeholder: 'find a gallery', class: 'form-control') %>

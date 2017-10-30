@@ -3,6 +3,7 @@
 //= require popper
 //= require bootstrap
 //= require datepicker
+//= require analytics
 
 document.addEventListener("DOMContentLoaded", function(event) {
   // calendars
@@ -78,7 +79,7 @@ function upload() {
   var galleryId = $('input[name=gallery_id]').val();
   // start monitoring proccessing progress
   var uploadFileCount = $('#photos-file-input input').get(0).files.length;
-  processProgress(galleryId, uploadFileCount);
+  // processProgress(galleryId, uploadFileCount);
 
   $.ajax({
     url: form.action,
