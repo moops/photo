@@ -6,11 +6,18 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   process :extract_exif
   process resize_to_fit: [800, 800]
+  process :fix_rotation
 
   def extract_exif
     manipulate! do |img|
       model.extract_exif(img)
       img
+    end
+  end
+
+  def fix_rotation
+    manipulate! do |img|
+      img.tap(&:auto_orient)
     end
   end
 

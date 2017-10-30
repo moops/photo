@@ -7,6 +7,9 @@
                 <%= link_to(edit_gallery_path(@gallery), data: {toggle: 'tooltip', placement: 'top'}, title: 'edit') do %>
                     <span class="icon-edit"></span>
                 <% end %>
+                <%= link_to(new_gallery_photo_path(@gallery), data: {toggle: 'tooltip', placement: 'top'}, title: 'add photos') do %>
+                    <span class="icon-camera"></span>
+                <% end %>
             <% end %>
         </span>
     </div> <!-- end #gallery-info -->

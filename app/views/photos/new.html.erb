@@ -7,7 +7,18 @@
 
 <div class="row">
     <div class="col">
-        <h2>add photos here</h2>
+        <h4>existing photos</h4>
+        <div class="gallery-horiz-thumbnails">
+            <% @gallery.photos.each do |p| %>
+                <%= image_tag(p.img_url(:thumb), size: '80x80', class: 'thumbnail', title: p.img.filename) unless p.img.blank? %>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <h4>add new photos here</h4>
         <%= render partial: 'add_photos' %>
     </div>
 </div>

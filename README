@@ -9,12 +9,13 @@ urls
 
 2017
 ----
-- oct 29 - reduce log level in production
+- oct 30 - create a branch that adds one photo at a time
+x oct 29 - reduce log level in production
 x oct 29 - add google analytics
-- oct 29 - deal with rotated photos
+x oct 29 - deal with rotated photos
 x oct 29 - add space at bottom so footer doesn't cover stuff up
 - oct 29 - change order of thumbnails in gallery view to match sequence or asc ids
-- oct 29 - icons not showing in production
+x oct 29 - icons not showing in production
 - oct 26 - add existing photos (thumbnails) to add photos form
 - oct 26 - add google adds
 x oct 26 - add delete icon

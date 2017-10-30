@@ -10,6 +10,9 @@
                 <%= link_to(edit_gallery_path(gallery), data: {toggle: 'tooltip', placement: 'top'}, title: 'edit') do %>
                     <span class="icon-edit text-success"></span>
                 <% end %>
+                <%= link_to(new_gallery_photo_path(gallery), data: {toggle: 'tooltip', placement: 'top'}, title: 'add photos') do %>
+                    <span class="icon-camera"></span>
+                <% end %>
             <% end %>
             <% if policy(gallery).destroy? %>
                 <%= link_to(gallery_path(gallery), method: :delete, data: {confirm: 'are you sure?', toggle: 'tooltip', placement: 'top'}, title: 'delete') do %>
