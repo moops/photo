@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   # match 'photos/update_field/:id/:field' => 'photos#update_field', :as => :caption
   post 'photos/increment'
 
+  get '/:private_key', to: 'galleries#show'
+
   root to: 'galleries#index'
 end

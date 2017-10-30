@@ -27,7 +27,11 @@ class GalleriesController < ApplicationController
   # GET /galleries/1
   # GET /galleries/1.json
   def show
-    authorize @gallery
+    unless @gallery
+      redirect_to root_path, notice: 'no gallery found'
+      return
+    end
+    authorize @gallery unless params[:private_key]
     @photos = @gallery.photos
     if @photos.blank?
       redirect_to new_gallery_photo_path(@gallery)
@@ -100,6 +104,10 @@ class GalleriesController < ApplicationController
   private
 
   def set_gallery
+    if params[:private_key]
+      @gallery = Gallery.find_by(private_key: params[:private_key])
+      return
+    end
     @gallery = Gallery.find(params[:id])
   end
 

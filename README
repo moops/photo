@@ -9,6 +9,7 @@ urls
 
 2017
 ----
+x oct 30 - make a route for sharing private galleries
 - oct 30 - create a branch that adds one photo at a time
 x oct 29 - reduce log level in production
 x oct 29 - add google analytics
