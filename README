@@ -12,7 +12,7 @@ urls
 - oct 29 - reduce log level in production
 x oct 29 - add google analytics
 - oct 29 - deal with rotated photos
-- oct 29 - add space at bottom so footer doesn't cover stuff up
+x oct 29 - add space at bottom so footer doesn't cover stuff up
 - oct 29 - change order of thumbnails in gallery view to match sequence or asc ids
 - oct 29 - icons not showing in production
 - oct 26 - add existing photos (thumbnails) to add photos form
