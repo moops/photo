@@ -9,6 +9,8 @@ urls
 
 2017
 ----
+x oct 31 - fix placement of upload button
+x oct 31 - change cancel button to link and go back
 x oct 31 - add loading overlay on photos that have started to upload
 x oct 31 - focus email input on login
 x oct 31 - add error overlay on photos that failed to upload

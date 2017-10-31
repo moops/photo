@@ -55,7 +55,7 @@ $(document).ready(function() {
       reader.readAsDataURL(f);
     }
 
-    document.getElementById('upload-buttons').classList.remove('invisible');
+    document.getElementById('upload-buttons').classList.remove('d-none');
   }
 
   var photosInput = document.querySelector('#photos-file-input input[type="file"]');

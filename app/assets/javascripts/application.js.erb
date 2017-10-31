@@ -39,6 +39,9 @@ document.addEventListener('click', function(event) {
   if (event.target && event.target.matches('#upload-photos-btn')) {
     event.preventDefault();
 
+    // disable upload btn
+    $('#upload-photos-btn').prop('disabled', true);
+
     // get all the stuff
     var files = $('#photos-file-input input').get(0).files;
     var artists = $("input[name='photo_artists[]']");
