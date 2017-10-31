@@ -30,6 +30,10 @@ class Gallery < ApplicationRecord
     photos.size
   end
 
+  def private?
+    private_key.present?
+  end
+
   def default_photo
     # return self[:default_photo] if self[:default_photo]
     # self[:default_photo_id] = photos.first.id if photos.present?

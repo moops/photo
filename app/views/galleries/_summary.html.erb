@@ -18,7 +18,10 @@
                 <%= link_to(gallery_path(gallery), method: :delete, data: {confirm: 'are you sure?', toggle: 'tooltip', placement: 'top'}, title: 'delete') do %>
                       <span class="icon-delete text-danger"></span>
                 <% end %>
-          <% end %>
+            <% end %>
+            <% if gallery.private? %>
+                sharing url: <%= link_to("#{root_url}#{gallery.private_key}", "#{root_url}#{gallery.private_key}") %>
+            <% end %>
         </div>
     </div>
 </div>
