@@ -64,13 +64,16 @@ document.addEventListener('click', function(event) {
           processData: false,
           contentType: false,
           timeout: 60000, // 1 minute
+          beforeSend: function() {
+            $('#photo-cell-' + index + ' .upload-overlay').html('<%= image_tag('boobs') %>').removeClass('d-none');
+          },
           success: function(data) {
             console.log('upload success', index, data);
-            $('#photo-cell-' + index + ' .upload-overlay').removeClass('d-none');
+            $('#photo-cell-' + index + ' .upload-overlay').html('<div>uploaded</div>').removeClass('d-none');
           },
           error: function(data, status, error) {
             console.log('upload error, data: ' + data + 'status: ' + status + 'error: ' + error);
-            $('#photo-cell-' + index + ' .upload-overlay').text('fail').addClass('bg-danger').css('opacity', '0.7').removeClass('d-none');
+            $('#photo-cell-' + index + ' .upload-overlay').html('<div>fail</div>').addClass('bg-danger').css('opacity', '0.7').removeClass('d-none');
           }
         });
       })(i);
