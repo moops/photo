@@ -15,6 +15,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     field.focus();
   }
 
+  $('#login-form').on('shown.bs.modal', function () {
+    $('.focus').focus();
+  });
+
   // tooltips
   $('[data-toggle="tooltip"]').tooltip();
 });

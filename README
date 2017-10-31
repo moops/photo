@@ -9,6 +9,7 @@ urls
 
 2017
 ----
+x oct 31 - focus email input on login
 x oct 31 - add error overlay on photos that failed to upload
 x oct 31 - add sharing url for private galleries
 x oct 31 - prevent google analytics hits in development
