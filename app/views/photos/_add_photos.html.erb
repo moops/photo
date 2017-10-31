@@ -14,8 +14,12 @@
         </div>
     </div>
 
-    <div id="upload-buttons" class="d-none form-group text-right p-2 mt-2">
-        <%= link_to('cancel', root_path) %>
-        <%= submit_tag('upload', id: 'upload-photos-btn', class: 'btn btn-primary') %>
+    <div class="row">
+        <div class="col">
+            <div id="upload-buttons" class="form-buttons d-none form-group text-right p-2 mt-2">
+                <%= link_to('cancel', root_path) %>
+                <%= submit_tag('upload', id: 'upload-photos-btn', class: 'btn btn-primary') %>
+            </div>
+        </div>
     </div>
 <% end %>
