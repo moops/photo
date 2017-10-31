@@ -35,6 +35,7 @@ $(document).ready(function() {
           var foundPhotoCell = document.getElementById('photo-cell-' + index);
           foundPhotoCell.innerHTML = [
               '  <span class="card-body">',
+              '    <div class="upload-overlay align-middle text-center d-none">uploaded</div>',
               '    <div class="row">',
               '      <div class="col-5 px-1">',
               '        <img height="120" width="120" src="', e.target.result, '" title="', escape(theFile.name), '"/>',

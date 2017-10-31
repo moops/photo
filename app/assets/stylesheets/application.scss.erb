@@ -136,14 +136,6 @@ footer {
   color: #a00;
 }
 
-.clear {
-  clear:both;
-}
-
-td.label {
-  text-align:right;
-}
-
 div.exif-label {
   width: 30%;
   float: left;
@@ -155,17 +147,28 @@ div.exif-label {
   font-style:italic;
 }
 
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  font-size: 3em;
+  padding-top: 1em;
+  z-index: 2;
+  background: rgba(39, 42, 43, 0.7);
+  border-radius: 4px;
+}
+
 /*
  ************************************************
   forms
  ************************************************
  */
-.label {
-  text-align: right;
-}
 
 label.required:after {
-    color: red;
+  color: red;
 	font-weight: bold;
 	font-size: 1.5em;
 	line-height: 50%;

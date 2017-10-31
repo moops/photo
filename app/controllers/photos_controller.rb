@@ -37,23 +37,34 @@ class PhotosController < ApplicationController
   # POST /galleries/1/photos
   # POST /galleries/1/photos.json
   def create
-    # @photo = @gallery.photos.new(create_photo_params)
-    params = create_photo_params
-    params[:photo_includes].map(&:to_i).each do |index|
-      photo = @gallery.photos.new(
-        caption: params[:photo_captions][index],
-        artist: params[:photo_artists][index],
-        img: params[:photos][index],
-        views: 0
-      )
-      logger.info("valid? #{photo.valid?}, errors: #{photo.errors.inspect}")
-      photo.save
-    end
+    @photo = @gallery.photos.new(photo_params)
 
     respond_to do |format|
-      format.json { render json: { gallery: @gallery.id, count: @gallery.photo_count } } # render :index }
-      format.js   { render :show }
+      if @photo.save
+        format.js { render :show }
+        format.json { render :show, status: :created, location: @photo }
+      else
+        format.js { render :show }
+        format.json { render json: @photo.errors, status: :unprocessable_entity }
+      end
     end
+
+    # params = create_photo_params
+    # params[:photo_includes].map(&:to_i).each do |index|
+    #   photo = @gallery.photos.new(
+    #     caption: params[:photo_captions][index],
+    #     artist: params[:photo_artists][index],
+    #     img: params[:photos][index],
+    #     views: 0
+    #   )
+    #   logger.info("valid? #{photo.valid?}, errors: #{photo.errors.inspect}")
+    #   photo.save
+    # end
+
+    # respond_to do |format|
+    #   format.json { render json: { gallery: @gallery.id, count: @gallery.photo_count } } # render :index }
+    #   format.js   { render :show }
+    # end
   end
 
   # PATCH/PUT /photos/1
@@ -114,7 +125,7 @@ class PhotosController < ApplicationController
   end
 
   def photo_params
-    params.require(:photo).permit(:artist, :caption, :views)
+    params.require(:photo).permit(:img, :artist, :caption, :views)
   end
 
   def create_photo_params

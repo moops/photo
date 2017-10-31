@@ -11,14 +11,16 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag controller_name %>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83838015-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-83838015-2');
-    </script>
+    <% if Rails.env.production? %>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-83838015-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-83838015-2');
+        </script>
+    <% end %>
   </head>
   <body>
     <!-- Fixed navbar -->

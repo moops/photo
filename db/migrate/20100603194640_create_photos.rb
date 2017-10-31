@@ -5,7 +5,7 @@ class CreatePhotos < ActiveRecord::Migration[5.1]
       t.string :artist
       t.string :caption
       t.integer :sequence
-      t.integer :views
+      t.integer :views, null: false, default: 0
       t.string :img
       # exif details
       t.datetime :photo_at

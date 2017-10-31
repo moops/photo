@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20120921193440) do
     t.string "artist"
     t.string "caption"
     t.integer "sequence"
-    t.integer "views"
+    t.integer "views", default: 0, null: false
     t.string "img"
     t.datetime "photo_at"
     t.string "shutter_speed"

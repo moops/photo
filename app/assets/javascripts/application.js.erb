@@ -1,0 +1,75 @@
+//= require rails-ujs
+//= require jquery3
+//= require popper
+//= require bootstrap
+//= require datepicker
+//= require analytics
+
+document.addEventListener("DOMContentLoaded", function(event) {
+  // calendars
+	$('#gallery-gallery-on').datepicker({ format: 'yyyy-mm-dd' });
+
+  // focus
+  field = document.querySelector('.focus');
+  if (!!field) {
+    field.focus();
+  }
+
+  // tooltips
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+function remove_field(element, item) {
+  element.up(item).remove();
+}
+
+// hide success messages after 3 seconds
+window.setTimeout(function() {
+    $('.alert-dismissible').fadeTo(500, 0).slideUp(500, function() {
+        $(this).remove();
+    });
+}, 3000);
+
+// upload photos button
+document.addEventListener('click', function(event) {
+  if (event.target && event.target.matches('#upload-photos-btn')) {
+    event.preventDefault();
+
+    // get all the stuff
+    var files = $('#photos-file-input input').get(0).files;
+    var artists = $("input[name='photo_artists[]']");
+    var captions = $("input[name='photo_captions[]']");
+    var names = $("input[name='photo_names[]']");
+    var includes = $("input[name='photo_includes[]']");
+    var authToken = $("input[name='authenticity_token']").val();
+    var galleryId = $('input[name=gallery_id]').val();
+
+    // upload each file
+    for (var i = 0; i < files.length; i++) {
+      (function(index) {
+        var formData = new FormData();
+        formData.append('authenticity_token', authToken);
+        formData.append('photo[img]', files[index]);
+        formData.append('photo[artist]', $(artists[index]).val());
+        formData.append('photo[caption]', $(captions[index]).val());
+        $.ajax({
+          url: '/galleries/' + galleryId + '/photos',
+          dataType: 'json',
+          method: 'POST',
+          data : formData,
+          processData: false,
+          contentType: false,
+          success: function(data) {
+            console.log('upload success', index, data);
+            $('#photo-cell-' + index + ' .upload-overlay').removeClass('d-none');
+          },
+          error: function(data, status, error) {
+            console.log('upload error, data: ' + data + 'status: ' + status + 'error: ' + error);
+          }
+        });
+      })(i);
+    }
+    // prevent the form submit
+    return false;
+  }
+});
