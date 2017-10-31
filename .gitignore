@@ -9,7 +9,7 @@ config/application.yml
 *.dump
 *~
 **/.DS_Store
-public/uploads
+public/uploads/**/*
 
 /node_modules
 /yarn-error.log
