@@ -9,17 +9,18 @@ urls
 
 2017
 ----
+x oct 31 - add error overlay on photos that failed to upload
 x oct 31 - add sharing url for private galleries
 x oct 31 - prevent google analytics hits in development
 x oct 30 - make a route for sharing private galleries
-- oct 30 - create a branch that adds one photo at a time
+x oct 30 - create a branch that adds one photo at a time
 x oct 29 - reduce log level in production
 x oct 29 - add google analytics
 x oct 29 - deal with rotated photos
 x oct 29 - add space at bottom so footer doesn't cover stuff up
 - oct 29 - change order of thumbnails in gallery view to match sequence or asc ids
 x oct 29 - icons not showing in production
-- oct 26 - add existing photos (thumbnails) to add photos form
+x oct 26 - add existing photos (thumbnails) to add photos form
 - oct 26 - add google adds
 x oct 26 - add delete icon
 - oct 18 - file name field on add photos action is being ignored (original_filename from the temp file is being used). how should it be used?
