@@ -32,7 +32,7 @@ class GalleriesController < ApplicationController
       return
     end
     authorize @gallery unless params[:private_key]
-    @photos = @gallery.photos
+    @photos = @gallery.photos.order(:sequence)
     if @photos.blank?
       redirect_to new_gallery_photo_path(@gallery)
       return

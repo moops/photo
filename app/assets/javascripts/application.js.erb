@@ -34,6 +34,39 @@ window.setTimeout(function() {
     });
 }, 3000);
 
+document.addEventListener('keyup', function(event) {
+  if (event.which == 37 || event.which == 39) {
+    // console.log('event: ' + event.which + ' found ' + navLinks.length + ' nav-links');
+    if ($('.photo-nav-link').length) {
+      if (event.which == 37) {
+        // console.log('left arrow');
+        var link = $('.photo-nav-link.previous');
+        // console.log('previous link:', link);
+        if (link.length) {
+          // console.log('click previous');
+          link[0].click();
+        } // else {
+        //   console.log('no previous link');
+        // }
+      }
+      if (event.which == 39) {
+        // console.log('right arrow');
+        var link = $('.photo-nav-link.next');
+        if (link.length) {
+          // console.log('click next');
+          link[0].click();
+        } // else {
+          // console.log('no next link');
+        // }
+      }
+    } // else {
+      // console.log('non nav page. ignore');
+    // }
+  } // else {
+    // console.log('wrong key');
+  // }
+});
+
 // upload photos button
 document.addEventListener('click', function(event) {
   if (event.target && event.target.matches('#upload-photos-btn')) {

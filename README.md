@@ -1,11 +1,24 @@
 urls
 ----
-- css: bootswatch bootstrap theme - http://bootswatch.com/slate
 - javascript: datepicker - http://www.eyecon.ro/bootstrap-datepicker
 - file upload/storage: carrierwave - https://github.com/jnicklas/carrierwave
-- authorization: cancan - https://github.com/ryanb/cancan
+- authorization: pundit - https://github.com/elabs/pundit
 
-- icons - made a font at https://icomoon.io with the entypo icons (download, info(exif), comments, edit, gallery, camera, ...)
+icons
+-----
+- made an icon font at https://icomoon.io with the icomoon icons (day and night are from the entypo set)
+day <span class="icon-day"></span><br>
+night <span class="icon-night"></span><br>
+edit <span class="icon-edit"></span><br>
+gallery <span class="icon-gallery"></span><br>
+camera <span class="icon-camera"></span><br>
+download <span class="icon-download"></span><br>
+comments <span class="icon-comment"></span><br>
+exif <span class="icon-exif"></span><br>
+delete <span class="icon-bin"></span><br>
+views <span class="icon-view"></span><br>
+next <span class="icon-next"></span><br>
+previous <span class="icon-previous"></span><br>
 
 2017
 ----
@@ -22,7 +35,7 @@ x oct 29 - reduce log level in production
 x oct 29 - add google analytics
 x oct 29 - deal with rotated photos
 x oct 29 - add space at bottom so footer doesn't cover stuff up
-- oct 29 - change order of thumbnails in gallery view to match sequence or asc ids
+x oct 29 - change order of thumbnails in gallery view to match sequence or asc ids
 x oct 29 - icons not showing in production
 x oct 26 - add existing photos (thumbnails) to add photos form
 - oct 26 - add google adds
@@ -32,7 +45,7 @@ x oct 18 - add progress bar for add photos action
 x oct 18 - fix date picker
 x oct 17 - adjust rubocop rules for line length, class comments, ignore schema.rb
 x oct 17 - rubocop ignore schema.rb
-- oct 17 - add keyboard shortcuts to go forward and backward through a gallery
+x oct 17 - add keyboard shortcuts to go forward and backward through a gallery
 - oct 17 - update tests
 x oct 17 - add rubocop
 - oct 17 - gallery edit needs submit button for existing photo changes form

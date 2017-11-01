@@ -16,7 +16,7 @@
             <% end %>
             <% if policy(gallery).destroy? %>
                 <%= link_to(gallery_path(gallery), method: :delete, data: {confirm: 'are you sure?', toggle: 'tooltip', placement: 'top'}, title: 'delete') do %>
-                      <span class="icon-delete text-danger"></span>
+                      <span class="icon-bin text-danger"></span>
                 <% end %>
             <% end %>
             <%= link_to('sharing url', "#{root_url}#{gallery.private_key}") if gallery.private? %>

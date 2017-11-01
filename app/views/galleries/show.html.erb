@@ -18,7 +18,7 @@
 <div class="row">
     <div class="col-3">
         <div class="d-inline-flex flex-wrap gallery-thumbnails">
-            <%= render(partial: 'thumbnails') %>
+            <%= render(partial: 'thumbnails', collection: @photos, as: :p) %>
         </div><!-- end .gallery-thumbnails -->
     </div>
     <div class="col-9 gallery-photo-container">

@@ -33,6 +33,14 @@ class Photo < ApplicationRecord
     caption.blank? ? img.file.filename : caption
   end
 
+  def next
+    gallery.photos.find_by(sequence: sequence + 1)
+  end
+
+  def previous
+    gallery.photos.find_by(sequence: sequence - 1)
+  end
+
   protected
 
   def set_defaults
