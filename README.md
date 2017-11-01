@@ -22,6 +22,8 @@ previous <span class="icon-previous"></span><br>
 
 2017
 ----
+x nov  1 - highlight active thumbnail
+- nov  1 - default photo mess
 x oct 31 - fix placement of upload button
 x oct 31 - change cancel button to link and go back
 x oct 31 - add loading overlay on photos that have started to upload
@@ -48,7 +50,7 @@ x oct 17 - rubocop ignore schema.rb
 x oct 17 - add keyboard shortcuts to go forward and backward through a gallery
 - oct 17 - update tests
 x oct 17 - add rubocop
-- oct 17 - gallery edit needs submit button for existing photo changes form
+- oct 17 - gallery edit needs submit button for existing photo changes form. style bulk edit btn if it's staying
 - oct 17 - photos form partial needs to use form helpers
 x oct 17 - create new gallery not showing add photos form (js request failing)
 x oct 17 - don't fail the home page with galleries with no default photo

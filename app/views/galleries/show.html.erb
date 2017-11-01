@@ -27,3 +27,8 @@
 </div> <!-- end row -->
 
 <div id="gallery-popup" role="dialog" class="modal fade"></div>
+
+<%= javascript_tag do %>
+    // highlight first thumbnail
+    $('img[data-sequence="<%= @photo.sequence %>"]').addClass('active');
+<% end %>

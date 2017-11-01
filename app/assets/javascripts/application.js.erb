@@ -29,42 +29,25 @@ function remove_field(element, item) {
 
 // hide success messages after 3 seconds
 window.setTimeout(function() {
-    $('.alert-dismissible').fadeTo(500, 0).slideUp(500, function() {
-        $(this).remove();
-    });
+  $('.alert-dismissible').fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+  });
 }, 3000);
 
+// arrow key shortcuts to navigate a gallery
 document.addEventListener('keyup', function(event) {
   if (event.which == 37 || event.which == 39) {
-    // console.log('event: ' + event.which + ' found ' + navLinks.length + ' nav-links');
     if ($('.photo-nav-link').length) {
-      if (event.which == 37) {
-        // console.log('left arrow');
+      if (event.which == 37) { // left
         var link = $('.photo-nav-link.previous');
-        // console.log('previous link:', link);
-        if (link.length) {
-          // console.log('click previous');
-          link[0].click();
-        } // else {
-        //   console.log('no previous link');
-        // }
+        if (link.length) { link[0].click(); }
       }
-      if (event.which == 39) {
-        // console.log('right arrow');
+      if (event.which == 39) { // right
         var link = $('.photo-nav-link.next');
-        if (link.length) {
-          // console.log('click next');
-          link[0].click();
-        } // else {
-          // console.log('no next link');
-        // }
+        if (link.length) { link[0].click(); }
       }
-    } // else {
-      // console.log('non nav page. ignore');
-    // }
-  } // else {
-    // console.log('wrong key');
-  // }
+    }
+  }
 });
 
 // upload photos button

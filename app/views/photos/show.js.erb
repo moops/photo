@@ -1,2 +1,6 @@
 jQuery('.gallery-photo-container').html("<%= escape_javascript(render partial: 'show') %>")
 $('[data-toggle="tooltip"]').tooltip();
+
+// highlight active thumbnail
+$('img.thumbnail').removeClass('active');
+$('img[data-sequence="<%= @photo.sequence %>"]').addClass('active');

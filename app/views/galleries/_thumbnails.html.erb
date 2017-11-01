@@ -1,1 +1,3 @@
-<%= link_to(image_tag(p.img_url(:thumb), size: '80x80', class: 'thumbnail', title: p.img.filename), photo_path(p), remote: true) unless p.img.blank? %>
+<%= link_to(photo_path(p), remote: true) do %>
+  <%= image_tag(p.img_url(:thumb), size: '80x80', class: 'thumbnail', title: p.img.filename, data: { sequence: p.sequence }) %>
+<% end if p.img.present? %>
