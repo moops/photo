@@ -9,15 +9,14 @@ class Gallery < ApplicationRecord
     Gallery.where('private_key is null').order('gallery_on desc').limit(6).all
   end
 
-  def self.find_public(name = nil, gallery_on = nil)
-    results = Gallery.where('private_key is null')
-    results = results.where('name like ?', "%#{name}%") if name
-    results = results.where('gallery_on = ?', gallery_on) if gallery_on
-    results
-  end
-
-  def self.find_private(key)
-    Gallery.find_by(private_key: key)
+  def self.search(q, current_user = nil, gallery_on = nil)
+    return [] if q.blank?
+    galleries = Gallery.where(private_key: q)
+    return galleries if galleries.present?
+    galleries = Gallery.where(private_key: nil).or(Gallery.where(user: current_user))
+    galleries = galleries.where('name like ?', "%#{q}%")
+    galleries = galleries.where('gallery_on = ?', gallery_on) if gallery_on
+    galleries
   end
 
   def self.new_private_key(priv = nil)
@@ -35,20 +34,6 @@ class Gallery < ApplicationRecord
   end
 
   def default_photo
-    # return self[:default_photo] if self[:default_photo]
-    # self[:default_photo_id] = photos.first.id if photos.present?
-    # save
-    # Photo.find(self[:default_photo_id])
-
     self[:default_photo] || photos.order(:id).first
   end
-
-  # def default_photo_obj
-  #   binding.pry
-  #   if default_photo_id.nil? && !photos.empty?
-  #     self.default_photo = photos.first
-  #     save
-  #   end
-  #   self.default_photo
-  # end
 end

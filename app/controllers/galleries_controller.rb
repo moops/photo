@@ -4,24 +4,13 @@ class GalleriesController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @galleries = policy_scope(Gallery).page(params[:page]).per(6)
-    if params[:q]
-      # searching
-      @gallery = Gallery.find_private(params[:q])
-      unless @gallery.nil?
-        redirect_to gallery_path(@gallery)
-        return
-      end
-      @galleries = Gallery.find_public(params[:q]).page(params[:page]).per(6) if @gallery.nil?
-    else
-      if current_user
-        @galleries = current_user.galleries.order('gallery_on desc').page(params[:page]).per(6)
-      else
-        @galleries = nil
-      end
-    end
-
+    @galleries = if params[:q] # searching
+                   Gallery.search(params[:q], current_user).page(params[:page]).per(6)
+                 else
+                   current_user ? policy_scope(Gallery).order('gallery_on desc').page(params[:page]).per(6) : []
+                 end
     @recent_galleries = Gallery.public_recent.all
+    redirect_to @galleries.first if @galleries.count == 1
   end
 
   # GET /galleries/1
@@ -31,10 +20,11 @@ class GalleriesController < ApplicationController
       redirect_to root_path, notice: 'no gallery found'
       return
     end
-    authorize @gallery unless params[:private_key]
+    # authorize @gallery unless params[:private_key]
     @photos = @gallery.photos.order(:sequence)
     if @photos.blank?
-      redirect_to new_gallery_photo_path(@gallery)
+      redirect_to policy(@gallery).update? ? new_gallery_photo_path(@gallery) : root_path,
+                  notice: "#{@gallery.name} is empty"
       return
     end
     @photo = @gallery.default_photo
