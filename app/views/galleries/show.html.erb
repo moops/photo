@@ -22,7 +22,7 @@
         </div><!-- end .gallery-thumbnails -->
     </div>
     <div class="col-9 gallery-photo-container">
-        <%= render(partial: 'photos/show') %>
+        <%= render(partial: 'photos/show', locals: { p: @gallery.def_photo }) %>
     </div> <!-- end .gallery-photo-container -->
 </div> <!-- end row -->
 
@@ -30,5 +30,5 @@
 
 <%= javascript_tag do %>
     // highlight first thumbnail
-    $('img[data-sequence="<%= @photo.sequence %>"]').addClass('active');
+    $('img[data-sequence="<%= @gallery.def_photo.sequence %>"]').addClass('active');
 <% end %>

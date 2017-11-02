@@ -1,34 +1,34 @@
 <div class="row">
   <div class="col-sm-6 photo-caption">
-    <%= @photo.caption %>
+    <%= p.caption %>
   </div>
 </div>
 <div class="row">
   <div class="col gallery-photo">
-    <%= image_tag(@photo.img.url, title: @photo.img.filename) %>
+    <%= image_tag(p.img.url, title: p.img.filename) %>
   </div>
 </div>
 <div class="row">
   <div class="col tools">
-    <%= link_to(photo_comments_path(@photo), class: 'comments-link', remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: "#{@photo.comments.count} comments") do %>
+    <%= link_to(photo_comments_path(p), class: 'comments-link', remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: "#{p.comments.count} comments") do %>
       <span class="icon-comment"></span>
     <% end %> &#8226;
-    <a href="#" data-toggle="tooltip", data-placement="top" title="<%= @photo.views %> views">
+    <a href="#" data-toggle="tooltip", data-placement="top" title="<%= p.views %> views">
       <span class="icon-view"></span>
     </a> &#8226;
-    <%= link_to(photo_path(@photo, exif: true), class: 'exif-link', remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: 'exif details') do %>
+    <%= link_to(photo_path(p, exif: true), class: 'exif-link', remote: true, data: {toggle: 'tooltip', placement: 'top'}, title: 'exif details') do %>
       <span class="icon-exif"></span>
     <% end %> &#8226;
-    <%= link_to(@photo.img_url, class: 'mr-3', data: {toggle: 'tooltip', placement: 'top'}, title: 'download') do %>
+    <%= link_to(p.img_url, class: 'mr-3', data: {toggle: 'tooltip', placement: 'top'}, title: 'download') do %>
       <span class="icon-download"></span>
     <% end %>
-    <% if @photo.previous %>
-      <%= link_to(photo_path(@photo.previous), remote: true, class: 'photo-nav-link previous', data: {toggle: 'tooltip', placement: 'top'}, title: 'previous - arrow keys') do %>
+    <% if p.previous %>
+      <%= link_to(photo_path(p.previous), remote: true, class: 'photo-nav-link previous', data: {toggle: 'tooltip', placement: 'top'}, title: 'previous - arrow keys') do %>
         <span class="icon-previous"></span>
       <% end %>
     <% end %>
-    <% if @photo.next %>
-      <%= link_to(photo_path(@photo.next), remote: true, class: 'photo-nav-link next', data: {toggle: 'tooltip', placement: 'top'}, title: 'next - arrow keys') do %>
+    <% if p.next %>
+      <%= link_to(photo_path(p.next), remote: true, class: 'photo-nav-link next', data: {toggle: 'tooltip', placement: 'top'}, title: 'next - arrow keys') do %>
         <span class="icon-next"></span>
       <% end %>
     <% end %>

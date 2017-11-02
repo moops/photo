@@ -19,10 +19,16 @@ class Gallery < ApplicationRecord
     galleries
   end
 
-  def self.new_private_key(priv = nil)
-    return nil unless '1'.eql? priv
-    chars = ('a'..'z').to_a + ('1'..'9').to_a
-    Array.new(20, '').collect { chars[rand(chars.size)] }.join
+  def update_private_key(private_key_param = nil)
+    if private_key_param == '1'
+      unless private?
+        chars = ('a'..'z').to_a + ('1'..'9').to_a
+        self.private_key = Array.new(20, '').collect { chars[rand(chars.size)] }.join
+      end
+    else
+      self.private_key = nil
+    end
+    private_key
   end
 
   def photo_count
@@ -33,7 +39,7 @@ class Gallery < ApplicationRecord
     private_key.present?
   end
 
-  def default_photo
-    self[:default_photo] || photos.order(:id).first
+  def def_photo
+    default_photo || photos.first
   end
 end

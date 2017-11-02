@@ -22,12 +22,8 @@ class GalleriesController < ApplicationController
     end
     # authorize @gallery unless params[:private_key]
     @photos = @gallery.photos.order(:sequence)
-    if @photos.blank?
-      redirect_to policy(@gallery).update? ? new_gallery_photo_path(@gallery) : root_path,
-                  notice: "#{@gallery.name} is empty"
-      return
-    end
-    @photo = @gallery.default_photo
+    target = policy(@gallery).update? ? new_gallery_photo_path(@gallery) : root_path
+    redirect_to target, notice: "#{@gallery.name} is empty" if @photos.blank?
   end
 
   # GET /posts/new
@@ -51,7 +47,7 @@ class GalleriesController < ApplicationController
   # POST /posts.json
   def create
     @gallery = Gallery.new(gallery_params)
-    @gallery.private_key = Gallery.new_private_key(gallery_params[:private_key])
+    @gallery.update_private_key(gallery_params[:private_key])
     @gallery.gallery_on = Time.zone.today if gallery_params[:gallery_on].empty?
     @gallery.user = current_user if current_user
 
@@ -70,8 +66,11 @@ class GalleriesController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+    gp = gallery_params
     respond_to do |format|
-      if @gallery.update(gallery_params)
+      if @gallery.update(gp.except(:private_key))
+        @gallery.update_private_key(gp[:private_key])
+        @gallery.save
         format.html { redirect_to @gallery, notice: 'gallery was successfully updated.' }
         format.json { render :show, status: :ok, location: @gallery }
       else

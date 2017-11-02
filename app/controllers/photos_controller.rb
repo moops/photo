@@ -11,10 +11,6 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
-    # index = @gallery.photos.index(@photo)
-    # @next = @gallery.photos[index + 1].id if index < @gallery.photos.length - 1
-    # @prev = @gallery.photos[index - 1].id if index > 0
-
     unless params[:exif]
       @photo.views += 1
       @photo.save
@@ -41,30 +37,12 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.js { render :show }
         format.json { render :show, status: :created, location: @photo }
       else
-        format.js { render :show }
         format.json { render json: @photo.errors, status: :unprocessable_entity }
       end
+      format.js { render :show }
     end
-
-    # params = create_photo_params
-    # params[:photo_includes].map(&:to_i).each do |index|
-    #   photo = @gallery.photos.new(
-    #     caption: params[:photo_captions][index],
-    #     artist: params[:photo_artists][index],
-    #     img: params[:photos][index],
-    #     views: 0
-    #   )
-    #   logger.info("valid? #{photo.valid?}, errors: #{photo.errors.inspect}")
-    #   photo.save
-    # end
-
-    # respond_to do |format|
-    #   format.json { render json: { gallery: @gallery.id, count: @gallery.photo_count } } # render :index }
-    #   format.js   { render :show }
-    # end
   end
 
   # PATCH/PUT /photos/1
