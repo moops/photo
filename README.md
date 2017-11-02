@@ -23,7 +23,7 @@ previous <span class="icon-previous"></span><br>
 2017
 ----
 x nov  1 - highlight active thumbnail
-- nov  1 - default photo mess
+x nov  1 - default photo mess
 x oct 31 - fix placement of upload button
 x oct 31 - change cancel button to link and go back
 x oct 31 - add loading overlay on photos that have started to upload
