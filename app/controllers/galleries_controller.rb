@@ -5,9 +5,9 @@ class GalleriesController < ApplicationController
   # GET /posts.json
   def index
     @galleries = if params[:q] # searching
-                   Gallery.search(params[:q], current_user).page(params[:page]).per(6)
+                   Gallery.search(params[:q], current_user).page(params[:page]).per(2)
                  else
-                   current_user ? policy_scope(Gallery).order('gallery_on desc').page(params[:page]).per(6) : []
+                   current_user ? policy_scope(Gallery).order('gallery_on desc').page(params[:page]).per(2) : []
                  end
     @recent_galleries = Gallery.public_recent.all
     redirect_to @galleries.first if @galleries.count == 1
