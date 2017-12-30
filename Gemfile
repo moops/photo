@@ -25,7 +25,7 @@ gem 'bcrypt-ruby'               # needed for has_secure_password
 gem 'pundit'                    # authorization
 
 gem 'byebug',             group: %i[development test]
-gem 'factory_girl_rails', group: %i[development test]
+gem 'factory_bot_rails',  group: %i[development test]
 gem 'rspec-rails',        group: %i[development test]
 
 group :development do

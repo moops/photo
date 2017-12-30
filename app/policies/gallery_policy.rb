@@ -1,4 +1,3 @@
-# gallery policy
 class GalleryPolicy < ApplicationPolicy
   # class scope
   class Scope < Scope
